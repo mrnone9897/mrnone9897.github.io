@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAT PG Mock Test 2026</title>
+    <style>
+        :root {
+            --color-background: #fcfcf9;
+            --color-surface: #fffffe;
+            --color-text: #13343b;
+            --color-text-secondary: #626c71;
+            --color-primary: #21808d;
+            --color-primary-hover: #1d7480;
+            --color-border: rgba(94, 82, 64, 0.2);
+            --color-error: #c0152f;
+            --color-success: #21808d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 14px;
+            background: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .header {
+            text-align: center;
+            padding: 24px;
+            background: var(--color-surface);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .header h1 { font-size: 28px; color: var(--color-primary); margin-bottom: 8px; }
+        .card {
+            background: var(--color-surface);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        input:focus, select:focus {
+            outline: 2px solid var(--color-primary);
+            border-color: var(--color-primary);
+        }
+        button {
+            background: var(--color-primary);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:hover { background: var(--color-primary-hover); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
+        .qr-container { text-align: center; padding: 24px; }
+        .qr-code {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            margin: 16px auto;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            display: block;
+        }
+        .admin-link { text-align: center; margin-top: 16px; font-size: 12px; }
+        .admin-link a { color: var(--color-text-secondary); text-decoration: none; }
+        .hidden { display: none !important; }
+        .user-card {
+            background: #f5f5f5;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-primary);
+        }
+        .btn-danger { background: var(--color-error); }
+        .btn-danger:hover { background: #a0122a; }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status-paid { background: rgba(33, 128, 141, 0.15); color: var(--color-success); }
+        .status-pending { background: rgba(230, 129, 97, 0.15); color: var(--color-error); }
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--color-surface);
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-weight: bold;
+            font-size: 16px;
+            z-index: 1000;
+        }
+        .timer.warning { background: #ff4444; color: white; }
+        
+        /* Question Display Styles */
+        .question-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .question-number {
+            color: var(--color-primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        .passage-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--color-primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .passage-box p {
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+        .question-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 20px 0;
+            color: var(--color-text);
+        }
+        .options-container {
+            margin-top: 20px;
+        }
+        .option-label {
+            display: flex;
+            align-items: flex-start;
+            padding: 16px;
+            margin-bottom: 12px;
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-label:hover {
+            border-color: var(--color-primary);
+            background: rgba(33, 128, 141, 0.05);
+        }
+        .option-label.selected {
+            border-color: var(--color-primary);
+            background: rgba(33, 128, 141, 0.1);
+        }
+        .option-label input[type="radio"] {
+            width: auto;
+            margin-right: 12px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        .option-text {
+            flex: 1;
+            line-height: 1.6;
+        }
+        
+        .question-palette {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
+            gap: 8px;
+            margin: 16px 0;
+        }
+        .palette-btn {
+            padding: 10px;
+            background: #f0f0f0;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .palette-btn:hover {
+            background: #e0e0e0;
+        }
+        .palette-btn.answered {
+            background: var(--color-success);
+            color: white;
+            border-color: var(--color-success);
+        }
+        .palette-btn.current {
+            border: 2px solid var(--color-primary);
+            background: rgba(33, 128, 141, 0.2);
+        }
+        .question-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            gap: 12px;
+        }
+        .question-nav button {
+            flex: 1;
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Screen -->
+        <div id="loginScreen" class="card">
+            <h2 style="text-align: center; margin-bottom: 24px;">🔐 Login to CLAT PG Mock Test</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" style="width: 100%;">Login</button>
+            </form>
+            <div style="text-align: center; margin-top: 16px;">
+                <a href="#" id="showRegister" style="color: var(--color-primary);">Don't have an account? Register here</a>
+            </div>
+            <div class="admin-link">
+                <a href="#" id="showAdminLogin">Admin Login</a>
+            </div>
+        </div>
+
+        <!-- Register Screen -->
+        <div id="registerScreen" class="card hidden">
+            <h2 style="text-align: center; margin-bottom: 24px;">📝 Register New Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regName" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="regPhone" required pattern="[0-9]{10}">
+                </div>
+                <div class="form-group">
+                    <label>Password (min 6 characters)</label>
+                    <input type="password" id="regPassword" required minlength="6">
+                </div>
+                <button type="submit" style="width: 100%;">Continue to Payment</button>
+            </form>
+            <div style="text-align: center; margin-top: 16px;">
+                <a href="#" id="showLogin" style="color: var(--color-primary);">Already have an account? Login here</a>
+            </div>
+        </div>
+
+        <!-- Payment Screen -->
+        <div id="paymentScreen" class="card hidden">
+            <h2 style="text-align: center; margin-bottom: 24px;">💳 Complete Payment - ₹50</h2>
+            <div class="qr-container">
+                <p style="margin-bottom: 16px; font-size: 16px; font-weight: 500;">Scan QR Code to Pay ₹50</p>
+                <img class="qr-code" src="WhatsApp-Image-2025-11-01-at-10.54.33.jpg" alt="PhonePe Payment QR Code">
+                <p style="margin-top: 16px; color: var(--color-text-secondary);">
+                    Pay ₹50 via PhonePe/UPI and enter transaction details below
+                </p>
+            </div>
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label>Transaction ID / UPI Reference Number *</label>
+                    <input type="text" id="transactionId" required placeholder="Enter 12-digit transaction ID">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Name *</label>
+                    <input type="text" id="confirmName" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Email *</label>
+                    <input type="email" id="confirmEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Phone *</label>
+                    <input type="tel" id="confirmPhone" required>
+                </div>
+                <button type="submit" style="width: 100%;">Submit & Get Access</button>
+            </form>
+        </div>
+
+        <!-- Admin Login Screen -->
+        <div id="adminLoginScreen" class="card hidden">
+            <h2 style="text-align: center; margin-bottom: 24px;">🔒 Admin Login</h2>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label>Admin Email</label>
+                    <input type="email" id="adminEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Admin Password</label>
+                    <input type="password" id="adminPassword" required>
+                </div>
+                <button type="submit" style="width: 100%;">Login as Admin</button>
+            </form>
+            <div style="text-align: center; margin-top: 16px;">
+                <a href="#" id="backToLogin" style="color: var(--color-primary);">Back to User Login</a>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="adminPanel" class="hidden">
+            <div class="header">
+                <h1>Admin Panel - User Management</h1>
+                <button id="adminLogout" style="margin-top: 16px;">Logout</button>
+            </div>
+            <div class="card">
+                <h3>Registered Users</h3>
+                <div id="userList"></div>
+            </div>
+        </div>
+
+        <!-- Main App Screen -->
+        <div id="mainScreen" class="hidden">
+            <div class="header">
+                <h1>CLAT PG Mock Test 2026</h1>
+                <p>Common Law Admission Test - Postgraduate</p>
+                <div style="margin-top: 16px;">
+                    <span id="welcomeUser"></span>
+                    <button id="logoutBtn" style="margin-left: 16px;">Logout</button>
+                </div>
+            </div>
+
+            <!-- Test Selection Screen -->
+            <div id="testSelectionScreen" class="card">
+                <h2>Select Mock Test</h2>
+                <div class="form-group">
+                    <label>Choose Test Category & Number</label>
+                    <select id="testSelector">
+                        <optgroup label="📚 Subject-Wise Tests (26 Tests)">
+                            <option value="1">Test 1: Constitutional Law - Part 1</option>
+                            <option value="2">Test 2: Constitutional Law - Part 2</option>
+                            <option value="3">Test 3: Criminal Law - Part 1</option>
+                            <option value="4">Test 4: Criminal Law - Part 2</option>
+                            <option value="5">Test 5: Contract Law - Part 1</option>
+                            <option value="6">Test 6: Contract Law - Part 2</option>
+                            <option value="7">Test 7: Tort Law - Part 1</option>
+                            <option value="8">Test 8: Tort Law - Part 2</option>
+                            <option value="9">Test 9: International Law - Part 1</option>
+                            <option value="10">Test 10: International Law - Part 2</option>
+                            <option value="11">Test 11: IPR - Part 1</option>
+                            <option value="12">Test 12: IPR - Part 2</option>
+                            <option value="13">Test 13: Jurisprudence - Part 1</option>
+                            <option value="14">Test 14: Jurisprudence - Part 2</option>
+                            <option value="15">Test 15: Administrative Law</option>
+                            <option value="16">Test 16: Family Law</option>
+                            <option value="17">Test 17: Property Law</option>
+                            <option value="18">Test 18: Company Law</option>
+                            <option value="19">Test 19: Tax Law</option>
+                            <option value="20">Test 20: Environmental Law</option>
+                            <option value="21">Test 21: Labour Law</option>
+                            <option value="22">Test 22: Evidence Act</option>
+                            <option value="23">Test 23: CPC & Limitation</option>
+                            <option value="24">Test 24: Arbitration & ADR</option>
+                            <option value="25">Test 25: Banking & Insurance Law</option>
+                            <option value="26">Test 26: Cyber Law</option>
+                        </optgroup>
+                        <optgroup label="🎯 Full Syllabus Tests (10 Tests)">
+                            <option value="27">Test 27: Full Syllabus Mock 1</option>
+                            <option value="28">Test 28: Full Syllabus Mock 2</option>
+                            <option value="29">Test 29: Full Syllabus Mock 3</option>
+                            <option value="30">Test 30: Full Syllabus Mock 4</option>
+                            <option value="31">Test 31: Full Syllabus Mock 5</option>
+                            <option value="32">Test 32: Full Syllabus Mock 6</option>
+                            <option value="33">Test 33: Full Syllabus Mock 7</option>
+                            <option value="34">Test 34: Full Syllabus Mock 8</option>
+                            <option value="35">Test 35: Full Syllabus Mock 9</option>
+                            <option value="36">Test 36: Full Syllabus Mock 10</option>
+                        </optgroup>
+                        <optgroup label="⚖️ Latest Judgments Tests (7 Tests)">
+                            <option value="37">Test 37: 2024-25 SC Judgments - Set 1</option>
+                            <option value="38">Test 38: 2024-25 SC Judgments - Set 2</option>
+                            <option value="39">Test 39: Constitutional Bench Decisions</option>
+                            <option value="40">Test 40: Criminal Law Amendments 2024</option>
+                            <option value="41">Test 41: Recent Contract & Tort Cases</option>
+                            <option value="42">Test 42: International Law Updates</option>
+                            <option value="43">Test 43: IPR & Tech Law Recent Cases</option>
+                        </optgroup>
+                        <optgroup label="🔥 Final Revision Tests (7 Tests)">
+                            <option value="44">Test 44: High-Weightage Topics</option>
+                            <option value="45">Test 45: Previous Year Pattern Mock</option>
+                            <option value="46">Test 46: Difficult Questions Mock</option>
+                            <option value="47">Test 47: Speed & Accuracy Test</option>
+                            <option value="48">Test 48: Grand Mock 1</option>
+                            <option value="49">Test 49: Grand Mock 2</option>
+                            <option value="50">Test 50: Final Grand Mock</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <button id="startTestBtn" style="width: 100%;">Start Test</button>
+            </div>
+
+            <!-- Test Screen -->
+            <div id="testScreen" class="hidden">
+                <div class="timer" id="timer">Time Left: 120:00</div>
+                
+                <div class="question-card" id="questionCard">
+                    <!-- Question content will be inserted here -->
+                </div>
+
+                <div class="question-nav">
+                    <button id="prevBtn">← Previous</button>
+                    <button id="submitTestBtn" class="btn-danger">Submit Test</button>
+                    <button id="nextBtn">Next →</button>
+                </div>
+
+                <div class="card">
+                    <h3>Question Palette</h3>
+                    <div id="questionPalette" class="question-palette"></div>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="resultsScreen" class="hidden">
+                <div class="card">
+                    <h2 style="text-align: center;">Test Results</h2>
+                    <div id="resultsContent"></div>
+                    <button id="backToTestsBtn" style="width: 100%; margin-top: 24px;">Back to Test Selection</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin credentials (SHA-256 hashed)
+        const ADMIN_EMAIL = "masi.wal@adminApr2024";
+        const ADMIN_PASSWORD_HASH = "f8a3c6c0feb8d04eec7595052a5aab4959d196eb74a4ec5275c192fb635158ba";
+        
+        let currentUser = null;
+        let currentTest = null;
+        let currentQuestion = 0;
+        let answers = {};
+        let timerInterval = null;
+        let timeRemaining = 7200; // 120 minutes
+
+        document.addEventListener('DOMContentLoaded', function() {
+            checkLoginStatus();
+            attachEventListeners();
+        });
+
+        // SHA-256 hash function
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function attachEventListeners() {
+            document.getElementById('showRegister').addEventListener('click', (e) => { e.preventDefault(); showScreen('registerScreen'); });
+            document.getElementById('showLogin').addEventListener('click', (e) => { e.preventDefault(); showScreen('loginScreen'); });
+            document.getElementById('showAdminLogin').addEventListener('click', (e) => { e.preventDefault(); showScreen('adminLoginScreen'); });
+            document.getElementById('backToLogin').addEventListener('click', (e) => { e.preventDefault(); showScreen('loginScreen'); });
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('registerForm').addEventListener('submit', handleRegister);
+            document.getElementById('paymentForm').addEventListener('submit', handlePaymentSubmission);
+            document.getElementById('adminLoginForm').addEventListener('submit', handleAdminLogin);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('adminLogout').addEventListener('click', logout);
+            document.getElementById('startTestBtn').addEventListener('click', startTest);
+            document.getElementById('submitTestBtn').addEventListener('click', submitTest);
+            document.getElementById('backToTestsBtn').addEventListener('click', backToTests);
+            document.getElementById('nextBtn').addEventListener('click', () => navigateQuestion(1));
+            document.getElementById('prevBtn').addEventListener('click', () => navigateQuestion(-1));
+        }
+
+        function showScreen(screenId) {
+            const screens = ['loginScreen', 'registerScreen', 'paymentScreen', 'adminLoginScreen', 'adminPanel', 'mainScreen'];
+            screens.forEach(screen => document.getElementById(screen).classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                if (currentUser.isAdmin) {
+                    loadAdminPanel();
+                    showScreen('adminPanel');
+                } else {
+                    document.getElementById('welcomeUser').textContent = `Welcome, ${currentUser.name}`;
+                    showScreen('mainScreen');
+                }
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const user = users[email];
+            
+            if (!user) { 
+                alert('Invalid email or password. Please register first.'); 
+                return; 
+            }
+            if (user.password !== password) { 
+                alert('Invalid email or password.'); 
+                return; 
+            }
+            if (!user.hasAccess) { 
+                alert('Your account is pending payment verification. Please contact admin.'); 
+                return; 
+            }
+            
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            document.getElementById('welcomeUser').textContent = `Welcome, ${user.name}`;
+            showScreen('mainScreen');
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const phone = document.getElementById('regPhone').value;
+            const password = document.getElementById('regPassword').value;
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            
+            if (users[email]) { 
+                alert('Email already registered. Please login.'); 
+                return; 
+            }
+            
+            const tempUser = { name, email, phone, password };
+            localStorage.setItem('tempRegistration', JSON.stringify(tempUser));
+            document.getElementById('confirmName').value = name;
+            document.getElementById('confirmEmail').value = email;
+            document.getElementById('confirmPhone').value = phone;
+            showScreen('paymentScreen');
+        }
+
+        function handlePaymentSubmission(e) {
+            e.preventDefault();
+            const transactionId = document.getElementById('transactionId').value;
+            const name = document.getElementById('confirmName').value;
+            const email = document.getElementById('confirmEmail').value;
+            const phone = document.getElementById('confirmPhone').value;
+            const tempUser = JSON.parse(localStorage.getItem('tempRegistration'));
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            
+            users[email] = {
+                name: tempUser.name,
+                email: tempUser.email,
+                phone: tempUser.phone,
+                password: tempUser.password,
+                transactionId: transactionId,
+                paymentDate: new Date().toISOString(),
+                hasAccess: true
+            };
+            
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.removeItem('tempRegistration');
+            sendEmailNotification(name, email, phone, transactionId);
+            alert('Payment details submitted! You now have access to all 50 mock tests.');
+            
+            currentUser = users[email];
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            document.getElementById('welcomeUser').textContent = `Welcome, ${name}`;
+            showScreen('mainScreen');
+        }
+
+        function sendEmailNotification(name, email, phone, transactionId) {
+            const subject = 'New Payment Submission - CLAT PG Mock Test';
+            const body = `New user payment details:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nTransaction ID: ${transactionId}\nDate: ${new Date().toLocaleString()}\n\nPlease verify in PhonePe.`;
+            const mailtoLink = `mailto:amitmasiwaloct@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.open(mailtoLink, '_blank');
+        }
+
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            const passwordHash = await sha256(password);
+            
+            if (email === ADMIN_EMAIL && passwordHash === ADMIN_PASSWORD_HASH) {
+                currentUser = { isAdmin: true, email: ADMIN_EMAIL };
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                loadAdminPanel();
+                showScreen('adminPanel');
+            } else {
+                alert('Invalid admin credentials.');
+            }
+        }
+
+        function loadAdminPanel() {
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+            
+            if (Object.keys(users).length === 0) {
+                userList.innerHTML = '<p>No users registered yet.</p>';
+                return;
+            }
+            
+            Object.values(users).forEach(user => {
+                const userCard = document.createElement('div');
+                userCard.className = 'user-card';
+                userCard.innerHTML = `
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <h4>${user.name}</h4>
+                            <p><strong>Email:</strong> ${user.email}</p>
+                            <p><strong>Phone:</strong> ${user.phone}</p>
+                            <p><strong>Transaction ID:</strong> ${user.transactionId || 'N/A'}</p>
+                            <p><strong>Date:</strong> ${user.paymentDate ? new Date(user.paymentDate).toLocaleDateString() : 'N/A'}</p>
+                            <p><strong>Status:</strong> <span class="status-badge ${user.hasAccess ? 'status-paid' : 'status-pending'}">${user.hasAccess ? 'Access Granted' : 'Access Revoked'}</span></p>
+                        </div>
+                        <div>
+                            ${user.hasAccess ? 
+                                `<button class="btn-danger" onclick="revokeAccess('${user.email}')">Revoke Access</button>` :
+                                `<button onclick="grantAccess('${user.email}')">Grant Access</button>`
+                            }
+                        </div>
+                    </div>
+                `;
+                userList.appendChild(userCard);
+            });
+        }
+
+        function revokeAccess(email) {
+            if (confirm('Revoke access for this user?')) {
+                const users = JSON.parse(localStorage.getItem('users') || '{}');
+                if (users[email]) {
+                    users[email].hasAccess = false;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    loadAdminPanel();
+                    alert('Access revoked!');
+                }
+            }
+        }
+
+        function grantAccess(email) {
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            if (users[email]) {
+                users[email].hasAccess = true;
+                localStorage.setItem('users', JSON.stringify(users));
+                loadAdminPanel();
+                alert('Access granted!');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            currentUser = null;
+            showScreen('loginScreen');
+        }
+
+        function startTest() {
+            const testId = document.getElementById('testSelector').value;
+            currentTest = generateTest(testId);
+            currentQuestion = 0;
+            answers = {};
+            timeRemaining = 7200;
+            
+            document.getElementById('testSelectionScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
+            
+            displayQuestion();
+            createQuestionPalette();
+            startTimer();
+        }
+
+        function generateTest(testId) {
+            const questions = [];
+            for (let i = 0; i < 120; i++) {
+                const passageNum = Math.floor(i / 5) + 1;
+                questions.push({
+                    id: i + 1,
+                    passage: `PASSAGE ${passageNum}\n\nIn the landmark case of State vs. Citizens Rights Forum (2024), the Supreme Court examined the constitutional validity of Section 124A of the Indian Penal Code relating to sedition. The petitioners argued that the provision was being misused to suppress legitimate dissent and free speech. The Attorney General contended that national security concerns necessitated the retention of the provision. The Court, in a 4:1 majority decision, read down the provision while laying down strict guidelines for its invocation. The Court held that mere criticism of government policies cannot constitute sedition unless it incites violence or poses a clear and present danger to public order. This judgment has significant implications for the interpretation of fundamental rights under Articles 19(1)(a) and 19(2) of the Constitution.`,
+                    question: `Question ${i + 1}: Based on the passage, which of the following statements most accurately reflects the Supreme Court's reasoning in this case?`,
+                    options: [
+                        'The Supreme Court completely struck down Section 124A as unconstitutional',
+                        'The Court upheld the provision without any modifications or guidelines',
+                        'The Court interpreted the provision narrowly while imposing strict conditions for its application',
+                        'The Court held that all forms of government criticism constitute sedition'
+                    ],
+                    correctAnswer: 2
+                });
+            }
+            return { testId, questions };
+        }
+
+        function displayQuestion() {
+            const q = currentTest.questions[currentQuestion];
+            const card = document.getElementById('questionCard');
+            
+            // Remove previous selected class from all options
+            const prevSelected = card.querySelectorAll('.option-label.selected');
+            prevSelected.forEach(el => el.classList.remove('selected'));
+            
+            card.innerHTML = `
+                <div class="question-number">Question ${q.id} of 120</div>
+                <div class="passage-box">
+                    <p>${q.passage.replace(/\n/g, '<br>')}</p>
+                </div>
+                <div class="question-text">${q.question}</div>
+                <div class="options-container">
+                    ${q.options.map((opt, idx) => `
+                        <label class="option-label ${answers[q.id] === idx ? 'selected' : ''}" data-option="${idx}">
+                            <input type="radio" name="q${q.id}" value="${idx}" ${answers[q.id] === idx ? 'checked' : ''}>
+                            <span class="option-text">${opt}</span>
+                        </label>
+                    `).join('')}
+                </div>
+            `;
+            
+            // Add click handlers to option labels
+            card.querySelectorAll('.option-label').forEach(label => {
+                label.addEventListener('click', function(e) {
+                    if (e.target.tagName !== 'INPUT') {
+                        const radio = this.querySelector('input[type="radio"]');
+                        radio.checked = true;
+                        const optionIdx = parseInt(this.dataset.option);
+                        saveAnswer(q.id, optionIdx);
+                        
+                        // Update selected class
+                        card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+                        this.classList.add('selected');
+                    }
+                });
+                
+                // Also handle radio input change
+                const radio = label.querySelector('input[type="radio"]');
+                radio.addEventListener('change', function() {
+                    const optionIdx = parseInt(this.value);
+                    saveAnswer(q.id, optionIdx);
+                    card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
+                    label.classList.add('selected');
+                });
+            });
+            
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').disabled = currentQuestion === currentTest.questions.length - 1;
+            
+            // Update palette to show current question
+            updatePalette();
+        }
+
+        function saveAnswer(questionId, answerIndex) {
+            answers[questionId] = answerIndex;
+            updatePalette();
+        }
+
+        function createQuestionPalette() {
+            const palette = document.getElementById('questionPalette');
+            palette.innerHTML = '';
+            
+            for (let i = 0; i < currentTest.questions.length; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'palette-btn';
+                btn.textContent = i + 1;
+                btn.onclick = () => {
+                    currentQuestion = i;
+                    displayQuestion();
+                };
+                palette.appendChild(btn);
+            }
+        }
+
+        function updatePalette() {
+            const buttons = document.querySelectorAll('.palette-btn');
+            buttons.forEach((btn, idx) => {
+                const questionId = idx + 1;
+                btn.classList.remove('answered', 'current');
+                
+                if (idx === currentQuestion) {
+                    btn.classList.add('current');
+                }
+                if (answers[questionId] !== undefined) {
+                    btn.classList.add('answered');
+                }
+            });
+        }
+
+        function navigateQuestion(direction) {
+            const newQuestion = currentQuestion + direction;
+            if (newQuestion >= 0 && newQuestion < currentTest.questions.length) {
+                currentQuestion = newQuestion;
+                displayQuestion();
+            }
+        }
+
+        function startTimer() {
+            const timerEl = document.getElementById('timer');
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerEl.textContent = `Time Left: ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Warning at 10 minutes
+                if (timeRemaining === 600) {
+                    timerEl.classList.add('warning');
+                    alert('⚠️ Only 10 minutes remaining!');
+                }
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up! Submitting test...');
+                    submitTest();
+                }
+            }, 1000);
+        }
+
+        function submitTest() {
+            if (!confirm('Submit test? You cannot change answers after submission.')) return;
+            
+            clearInterval(timerInterval);
+            
+            let correct = 0;
+            let incorrect = 0;
+            let unanswered = 0;
+            
+            currentTest.questions.forEach(q => {
+                if (answers[q.id] === undefined) {
+                    unanswered++;
+                } else if (answers[q.id] === q.correctAnswer) {
+                    correct++;
+                } else {
+                    incorrect++;
+                }
+            });
+            
+            const score = correct - (incorrect * 0.25);
+            const percentage = ((correct / 120) * 100).toFixed(2);
+            const timeTaken = Math.floor((7200 - timeRemaining) / 60);
+            
+            document.getElementById('resultsContent').innerHTML = `
+                <div style="text-align: center; padding: 32px;">
+                    <div style="font-size: 56px; font-weight: bold; color: var(--color-primary); margin: 24px 0;">
+                        ${score.toFixed(2)}
+                    </div>
+                    <p style="font-size: 18px; color: var(--color-text-secondary); margin-bottom: 32px;">Your Score</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 600px; margin: 0 auto 32px;">
+                        <div style="background: rgba(33, 128, 141, 0.1); padding: 20px; border-radius: 8px;">
+                            <div style="font-size: 32px; font-weight: bold; color: var(--color-success);">${correct}</div>
+                            <div style="color: var(--color-text-secondary); margin-top: 4px;">Correct</div>
+                        </div>
+                        <div style="background: rgba(192, 21, 47, 0.1); padding: 20px; border-radius: 8px;">
+                            <div style="font-size: 32px; font-weight: bold; color: var(--color-error);">${incorrect}</div>
+                            <div style="color: var(--color-text-secondary); margin-top: 4px;">Incorrect</div>
+                        </div>
+                        <div style="background: #f5f5f5; padding: 20px; border-radius: 8px;">
+                            <div style="font-size: 32px; font-weight: bold; color: var(--color-text);">${unanswered}</div>
+                            <div style="color: var(--color-text-secondary); margin-top: 4px;">Unanswered</div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 24px; border-radius: 8px; max-width: 600px; margin: 0 auto; text-align: left;">
+                        <p style="margin-bottom: 12px;"><strong>Accuracy:</strong> ${percentage}%</p>
+                        <p style="margin-bottom: 12px;"><strong>Total Questions:</strong> 120</p>
+                        <p style="margin-bottom: 12px;"><strong>Time Taken:</strong> ${timeTaken} minutes</p>
+                        <p><strong>Test:</strong> ${document.getElementById('testSelector').options[document.getElementById('testSelector').selectedIndex].text}</p>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('resultsScreen').classList.remove('hidden');
+            
+            // Save score
+            const scores = JSON.parse(localStorage.getItem('scores') || '[]');
+            scores.push({
+                user: currentUser.name,
+                email: currentUser.email,
+                test: document.getElementById('testSelector').options[document.getElementById('testSelector').selectedIndex].text,
+                score: score,
+                correct: correct,
+                percentage: percentage,
+                date: new Date().toISOString()
+            });
+            localStorage.setItem('scores', JSON.stringify(scores));
+        }
+
+        function backToTests() {
+            document.getElementById('resultsScreen').classList.add('hidden');
+            document.getElementById('testSelectionScreen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
