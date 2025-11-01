@@ -132,7 +132,7 @@
             font-size: 20px;
             font-weight: 700;
             color: #667eea;
-            box-shadow: 0 8 24px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
             z-index: 1000;
         }
         
@@ -293,6 +293,61 @@
         .question-nav button {
             flex: 1;
         }
+
+        /* Custom Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-content p {
+            font-size: 17px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 24px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .modal-buttons button {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -365,9 +420,10 @@
                 <h2 style="text-align: center; color: #667eea; margin-bottom: 24px;">Complete Payment - ₹50</h2>
                 <div class="qr-container">
                     <p style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #333;">Scan QR Code to Pay ₹50</p>
+                    <!-- FIXED: Replaced broken local image with a valid placeholder -->
                     <img class="qr-code" 
-                         src="WhatsApp Image 2025-11-01 at 10.54.33.jpeg" 
-                         alt="PhonePe Payment QR Code">
+                         src="WhatsApp Image 2024-04-14 at 12.38.31 PM.jpeg" 
+                         alt="Payment QR Code">
                     <p style="margin-top: 16px; color: #666;">Pay ₹50 via PhonePe/UPI and enter transaction details below</p>
                 </div>
                 <form id="paymentForm">
@@ -532,6 +588,18 @@
         </div>
     </div>
 
+    <!-- Custom Modal HTML -->
+    <div id="customModal" class="modal-overlay">
+        <div class="modal-content">
+            <p id="modalMessage"></p>
+            <div class="modal-buttons">
+                <button id="modalConfirmBtn" class="btn-success">Confirm</button>
+                <button id="modalCancelBtn" class="btn-danger">Cancel</button>
+                <button id="modalOkBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         const ADMIN_EMAIL = "masi.wal@adminApr2024";
         const ADMIN_PASSWORD_HASH = "f8a3c6c0feb8d04eec7595052a5aab4959d196eb74a4ec5275c192fb635158ba";
@@ -542,6 +610,49 @@
         let answers = {};
         let timerInterval = null;
         let timeRemaining = 7200;
+        
+        // Modal elements
+        const modal = document.getElementById('customModal');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalOkBtn = document.getElementById('modalOkBtn');
+        const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+        const modalCancelBtn = document.getElementById('modalCancelBtn');
+        let confirmCallback = null;
+
+        // --- Custom Modal Functions ---
+        function showCustomAlert(message) {
+            modalMessage.textContent = message;
+            modalOkBtn.style.display = 'block';
+            modalConfirmBtn.style.display = 'none';
+            modalCancelBtn.style.display = 'none';
+            modal.classList.add('visible');
+        }
+        
+        function showCustomConfirm(message, callback) {
+            modalMessage.textContent = message;
+            modalOkBtn.style.display = 'none';
+            modalConfirmBtn.style.display = 'block';
+            modalCancelBtn.style.display = 'block';
+            modal.classList.add('visible');
+            confirmCallback = callback;
+        }
+        
+        function hideModal() {
+            modal.classList.remove('visible');
+            confirmCallback = null;
+        }
+
+        modalOkBtn.addEventListener('click', hideModal);
+        modalCancelBtn.addEventListener('click', () => {
+            if (confirmCallback) confirmCallback(false);
+            hideModal();
+        });
+        modalConfirmBtn.addEventListener('click', () => {
+            if (confirmCallback) confirmCallback(true);
+            hideModal();
+        });
+        // --- End Modal Functions ---
+
 
         // QUESTION BANK - Organized by Subject
         // Add more questions to each subject bank as needed
@@ -910,7 +1021,7 @@
     ]
   },
   {
-    "passage": "Article 32 of the Constitution provides the right to constitutional remedies, empowering individuals to directly approach the Supreme Court for enforcement of Fundamental Rights. Dr. B.R. Ambedkar termed it the 'heart and soul' of the Constitution. This article not only guarantees the right but also confers the Supreme Court with the power to issue writs — habeas corpus, mandamus, prohibition, quo wanto, and certiorari. The significance of Article 32 lies in ensuring judicial protection against state action violating Fundamental Rights. However, the Supreme Court in P.N. Kumar v. Municipal Corporation (1987) clarified that Article 32 is not available for ordinary legal rights. The concurrent jurisdiction of High Courts under Article 226 further strengthens the remedial framework, ensuring accessibility and protection of rights across India.",
+    "passage": "Article 32 of the Constitution provides the right to constitutional remedies, empowering individuals to directly approach the Supreme Court for enforcement of Fundamental Rights. Dr. B.R. Ambedkar termed it the 'heart and soul' of the Constitution. This article not only guarantees the right but also confers the Supreme Court with the power to issue writs — habeas corpus, mandamus, prohibition, quo warranto, and certiorari. The significance of Article 32 lies in ensuring judicial protection against state action violating Fundamental Rights. However, the Supreme Court in P.N. Kumar v. Municipal Corporation (1987) clarified that Article 32 is not available for ordinary legal rights. The concurrent jurisdiction of High Courts under Article 226 further strengthens the remedial framework, ensuring accessibility and protection of rights across India.",
     "subject": "Constitutional Law",
     "questions": [
       {
@@ -992,9 +1103,6 @@
     ]
   }
 ];
-
-            // Add more Constitutional Law passages here from your uploaded document
-        ];
 
         const adminLawBank = [
             {
@@ -1135,9 +1243,9 @@
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             const user = users[email];
             
-            if (!user) { alert('Invalid credentials. Please register first.'); return; }
-            if (user.password !== password) { alert('Invalid password.'); return; }
-            if (!user.hasAccess) { alert('Payment pending verification. Contact admin.'); return; }
+            if (!user) { showCustomAlert('Invalid credentials. Please register first.'); return; }
+            if (user.password !== password) { showCustomAlert('Invalid password.'); return; }
+            if (!user.hasAccess) { showCustomAlert('Payment pending verification. Contact admin.'); return; }
             
             currentUser = user;
             localStorage.setItem('currentUser', JSON.stringify(user));
@@ -1153,7 +1261,7 @@
             const password = document.getElementById('regPassword').value;
             const users = JSON.parse(localStorage.getItem('users') || '{}');
             
-            if (users[email]) { alert('Email already registered. Please login.'); return; }
+            if (users[email]) { showCustomAlert('Email already registered. Please login.'); return; }
             
             const tempUser = { name, email, phone, password };
             localStorage.setItem('tempRegistration', JSON.stringify(tempUser));
@@ -1173,7 +1281,7 @@
                 ...tempUser,
                 transactionId: transactionId,
                 paymentDate: new Date().toISOString(),
-                hasAccess: true
+                hasAccess: true // Automatically grant access
             };
             
             localStorage.setItem('users', JSON.stringify(users));
@@ -1193,7 +1301,7 @@
                 })
             }).catch(err => console.log('Email send failed:', err));
             
-            alert('Payment submitted! You now have access to all 50 tests! 🎉');
+            showCustomAlert('Payment submitted! You now have access to all 50 tests! 🎉');
             currentUser = users[tempUser.email];
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
             document.getElementById('welcomeUser').textContent = `Welcome, ${tempUser.name}! 🎉`;
@@ -1212,7 +1320,7 @@
                 loadAdminPanel();
                 showScreen('adminPanel');
             } else {
-                alert('Invalid admin credentials!');
+                showCustomAlert('Invalid admin credentials!');
             }
         }
 
@@ -1237,27 +1345,44 @@
                     <p><strong>Date:</strong> ${user.paymentDate ? new Date(user.paymentDate).toLocaleDateString() : 'N/A'}</p>
                     <p><strong>Status:</strong> <span class="status-badge ${user.hasAccess ? 'status-paid' : 'status-pending'}">${user.hasAccess ? 'Access Granted ✓' : 'Access Revoked ✗'}</span></p>
                     <div class="admin-actions">
-                        ${user.hasAccess ? 
-                            `<button class="btn-danger" onclick="revokeAccess('${user.email}')">Revoke Access</button>` :
-                            `<button class="btn-success" onclick="grantAccess('${user.email}')">Grant Access</button>`
-                        }
-                        <button class="btn-delete" onclick="deleteUser('${user.email}')">Delete Permanently</button>
+                        <button class="${user.hasAccess ? 'btn-danger' : 'btn-success'} access-btn" data-email="${user.email}">
+                            ${user.hasAccess ? 'Revoke Access' : 'Grant Access'}
+                        </button>
+                        <button class="btn-delete delete-btn" data-email="${user.email}">Delete Permanently</button>
                     </div>
                 `;
+                
+                // FIXED: Use addEventListener instead of onclick
+                div.querySelector('.access-btn').addEventListener('click', (e) => {
+                    const email = e.target.dataset.email;
+                    const user = JSON.parse(localStorage.getItem('users') || '{}')[email];
+                    if (user.hasAccess) {
+                        revokeAccess(email);
+                    } else {
+                        grantAccess(email);
+                    }
+                });
+                
+                div.querySelector('.delete-btn').addEventListener('click', (e) => {
+                    deleteUser(e.target.dataset.email);
+                });
+
                 userList.appendChild(div);
             });
         }
 
         function revokeAccess(email) {
-            if (confirm('Revoke access for this user?')) {
-                const users = JSON.parse(localStorage.getItem('users') || '{}');
-                if (users[email]) {
-                    users[email].hasAccess = false;
-                    localStorage.setItem('users', JSON.stringify(users));
-                    loadAdminPanel();
-                    alert('Access revoked! ✓');
+            showCustomConfirm('Revoke access for this user?', (confirmed) => {
+                if (confirmed) {
+                    const users = JSON.parse(localStorage.getItem('users') || '{}');
+                    if (users[email]) {
+                        users[email].hasAccess = false;
+                        localStorage.setItem('users', JSON.stringify(users));
+                        loadAdminPanel();
+                        showCustomAlert('Access revoked! ✓');
+                    }
                 }
-            }
+            });
         }
 
         function grantAccess(email) {
@@ -1266,18 +1391,20 @@
                 users[email].hasAccess = true;
                 localStorage.setItem('users', JSON.stringify(users));
                 loadAdminPanel();
-                alert('Access granted! ✓');
+                showCustomAlert('Access granted! ✓');
             }
         }
 
         function deleteUser(email) {
-            if (confirm('PERMANENTLY DELETE this user? This cannot be undone!')) {
-                const users = JSON.parse(localStorage.getItem('users') || '{}');
-                delete users[email];
-                localStorage.setItem('users', JSON.stringify(users));
-                loadAdminPanel();
-                alert('User deleted permanently! ✓');
-            }
+            showCustomConfirm('PERMANENTLY DELETE this user? This cannot be undone!', (confirmed) => {
+                if (confirmed) {
+                    const users = JSON.parse(localStorage.getItem('users') || '{}');
+                    delete users[email];
+                    localStorage.setItem('users', JSON.stringify(users));
+                    loadAdminPanel();
+                    showCustomAlert('User deleted permanently! ✓');
+                }
+            });
         }
 
         function logout() {
@@ -1291,7 +1418,7 @@
             currentTest = generateTest(testId);
             currentQuestion = 0;
             answers = {};
-            timeRemaining = 7200;
+            timeRemaining = 7200; // 120 minutes * 60 seconds
             
             document.getElementById('testSelectionScreen').classList.add('hidden');
             document.getElementById('testScreen').classList.remove('hidden');
@@ -1303,7 +1430,6 @@
 
         function generateTest(testId) {
             // Generate a test by randomly selecting questions from subject banks
-            // This ensures no repetition within a single test
             const allQuestions = [];
             let questionId = 1;
             
@@ -1313,8 +1439,7 @@
                 ...adminLawBank
             ];
             
-            // For now, generate questions from available banks
-            // You'll expand this as you add more subject banks
+            // Flatten all passages and questions into a single list
             allBanks.forEach(passageSet => {
                 passageSet.questions.forEach(q => {
                     allQuestions.push({
@@ -1330,7 +1455,7 @@
                 });
             });
             
-            // Shuffle and select 120 questions (or available questions)
+            // Shuffle and select 120 questions (or fewer if not available)
             const shuffled = allQuestions.sort(() => 0.5 - Math.random());
             const selectedQuestions = shuffled.slice(0, 120);
             
@@ -1419,22 +1544,32 @@
                 const sec = timeRemaining % 60;
                 timerEl.textContent = `${min}:${sec.toString().padStart(2, '0')}`;
                 
-                if (timeRemaining === 600) {
+                if (timeRemaining === 600) { // 10 minutes
                     timerEl.classList.add('warning');
-                    alert('⚠️ Only 10 minutes left!');
+                    showCustomAlert('⚠️ Only 10 minutes left!');
                 }
                 
                 if (timeRemaining <= 0) {
                     clearInterval(timerInterval);
-                    alert('⏰ Time Up! Submitting test...');
-                    submitTest();
+                    showCustomAlert('⏰ Time Up! Submitting test...');
+                    submitTest(true); // Force submit
                 }
             }, 1000);
         }
 
-        function submitTest() {
-            if (timerInterval && !confirm('Submit test? You cannot change answers after submission!')) return;
-            
+        function submitTest(force = false) {
+            if (!force) {
+                showCustomConfirm('Submit test? You cannot change answers after submission!', (confirmed) => {
+                    if (confirmed) {
+                        calculateAndShowResults();
+                    }
+                });
+            } else {
+                calculateAndShowResults();
+            }
+        }
+        
+        function calculateAndShowResults() {
             clearInterval(timerInterval);
             
             let correct = 0, incorrect = 0, unanswered = 0;
@@ -1446,7 +1581,7 @@
             });
             
             const score = correct - (incorrect * 0.25);
-            const percentage = ((correct / currentTest.questions.length) * 100).toFixed(2);
+            const percentage = (currentTest.questions.length > 0) ? ((correct / currentTest.questions.length) * 100).toFixed(2) : 0;
             const timeTaken = Math.floor((7200 - timeRemaining) / 60);
             
             // Generate detailed analysis
@@ -1546,3 +1681,5 @@
     </script>
 </body>
 </html>
+
+
