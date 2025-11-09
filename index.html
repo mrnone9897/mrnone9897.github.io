@@ -3,204 +3,600 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLAT PG Jurisprudence Quiz Results</title>
+    <title>CLAT PG Jurisprudence Quiz</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
             color: #333;
         }
         .container {
             max-width: 900px;
-            margin: 0 auto;
-            background: #fff;
+            margin: 20px auto;
+            background: #ffffff;
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
-        h1, h2, h3 {
-            color: #004d99;
-            border-bottom: 2px solid #e0e0e0;
+        h1 {
+            color: #8b0000;
+            text-align: center;
+            border-bottom: 2px solid #eee;
             padding-bottom: 10px;
-            margin-top: 25px;
         }
-        .summary-box {
-            background-color: #e6f7ff;
-            border: 1px solid #b3e0ff;
-            padding: 20px;
-            border-radius: 8px;
+        #quiz-container {
             margin-bottom: 20px;
         }
-        .summary-box strong {
-            font-size: 1.2em;
-            color: #004d99;
-        }
-        .score-metrics {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-        .metric {
-            background: #f0f8ff;
-            padding: 10px;
-            border-radius: 5px;
-            flex: 1 1 30%;
-            margin: 5px;
-            text-align: center;
-            border-left: 3px solid #004d99;
-        }
-        .metric-value {
-            font-size: 1.4em;
-            font-weight: bold;
-            color: #2b70b5;
-        }
-        .question-item {
+        .question-block {
             margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #ccc;
+        }
+        .passage {
+            font-style: italic;
+            background-color: #f9f9f9;
+            border-left: 4px solid #004d99;
             padding: 15px;
-            border-left: 4px solid #ccc;
-            background-color: #fafafa;
-            border-radius: 5px;
-        }
-        .question-item.correct {
-            border-left-color: #28a745;
-        }
-        .question-item.incorrect {
-            border-left-color: #dc3545;
+            margin-bottom: 15px;
+            border-radius: 4px;
         }
         .question-text {
             font-weight: bold;
-            margin-bottom: 10px;
-            color: #555;
+            font-size: 1.1em;
+            margin-bottom: 15px;
         }
-        .answer-status {
-            font-weight: bold;
-            margin-top: 8px;
-            padding: 5px 0;
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
         }
-        .user-answer {
-            color: #007bff;
-        }
-        .correct-answer {
-            color: #28a745;
-        }
-        .incorrect .user-answer {
-            color: #dc3545;
-            text-decoration: line-through;
-        }
-        .incorrect .correct-answer {
-            color: #17a2b8; /* Use a distinct color for the correct answer when the user missed it */
-        }
-        .feedback {
-            margin-top: 20px;
-            padding: 15px;
+        .option-item {
+            background-color: #fdfdfd;
             border: 1px solid #ddd;
             border-radius: 5px;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
         }
-        .feedback ul {
-            list-style-type: disc;
+        .option-item:hover {
+            background-color: #f0f8ff;
+            border-color: #007bff;
+        }
+        .option-item input {
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+        .option-item label {
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        
+        /* Styles for after submission */
+        .option-item.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            font-weight: bold;
+        }
+        .option-item.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .option-item.selected.incorrect {
+            text-decoration: line-through;
+        }
+        
+        #submit-btn {
+            background-color: #004d99;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        #submit-btn:hover {
+            background-color: #003366;
+        }
+        
+        #results-container {
+            display: none;
+            padding: 20px;
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            border-radius: 8px;
+            text-align: center;
+        }
+        #results-container h2 {
+            color: #004d99;
+        }
+        #score {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #8b0000;
+        }
+        #analysis {
+            text-align: left;
+            margin-top: 20px;
+        }
+        #analysis h3 {
+            color: #366799;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        #analysis ul {
+            list-style-type: square;
             padding-left: 20px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>CLAT PG Jurisprudence Mock Test Results 🧠</h1>
-    
-    <div class="summary-box">
-        <h2>Performance Summary</h2>
-        <div class="score-metrics">
-            <div class="metric">
-                <div class="metric-label">Total Questions</div>
-                <div class="metric-value">30</div>
+    <div class="container">
+        <h1>CLAT PG Jurisprudence Interactive Quiz</h1>
+        
+        <div id="quiz-container">
             </div>
-            <div class="metric">
-                <div class="metric-label">Correct Answers</div>
-                <div class="metric-value">24</div>
-            </div>
-            <div class="metric">
-                <div class="metric-label">Accuracy Rate</div>
-                <div class="metric-value">80.0%</div>
-            </div>
-            <div class="metric">
-                <div class="metric-label">Raw Score (Out of 30)</div>
-                <div class="metric-value">22.5</div>
-            </div>
+        
+        <button id="submit-btn">Submit Quiz & See Results</button>
+        
+        <div id="results-container">
+            <h2>Your Performance Analysis</h2>
+            <div id="score"></div>
+            <div id="analysis">
+                </div>
         </div>
     </div>
 
-    <div class="feedback">
-        <h3>✅ Strengths Identified</h3>
-        <ul>
-            <li><strong>Analytical Positivism and Command Theory:</strong> Strong grasp of Hart's critique of Austin, correctly identifying the failure to account for **power-conferring rules**.</li>
-            <li><strong>Hohfeldian Analysis of Legal Relations (Correlatives):</strong> Correctly identified the Jural Correlative of **Immunity** as **Disability** (Question 23).</li>
-            <li><strong>Sociological and Historical Schools:</strong> Accurate understanding of **Pound's Social Interests** and **Savigny's Volksgeist**.</li>
-            <li><strong>Theories of Punishment and Torts:</strong> Correctly applied **Absolute Liability** principles and linked **Parole/Probation** to **Reformative Theory**.</li>
-        </ul>
+    <script>
+        // 1. All Quiz Data
+        const quizData = [
+            {
+                passage: "H.L.A. Hart criticized John Austin’s command theory for failing to capture the obligatory, rule-governed nature of law, arguing that Austin's model could not distinguish between being 'obliged' by a threat (the gunman) and 'having an obligation' under a recognized rule. Hart developed the Rule of Recognition (RoR) as a secondary rule to address the uncertainty of primary rules. The RoR is accepted by officials as a matter of social practice.",
+                question: "The essential difference between Hart’s RoR and Kelsen’s Grundnorm lies in the RoR’s nature as:",
+                options: [
+                    "A purely hierarchical, normative proposition.",
+                    "The ultimate moral foundation of the legal system.",
+                    "A mere command issued by a political sovereign.",
+                    "A secondary rule whose existence is verifiable as a social fact."
+                ],
+                correct: 3 
+            },
+            {
+                passage: "Hans Kelsen’s Pure Theory of Law views the legal system as a hierarchy of norms, where the validity of every norm derives from a higher norm. This chain of validity culminates in the hypothetical foundational norm, the Grundnorm. Kelsen stressed that law must be purified from all sociological, historical, and moral content.",
+                question: "Which of the following constitutional concepts aligns best with Kelsen's view of the legal system's structure?",
+                options: [
+                    "The enforcement of Directive Principles of State Policy (DPSPs).",
+                    "The social engineering proposed by Roscoe Pound.",
+                    "The hierarchy of norms validated by the Constitution, which is itself validated by a presupposed Basic Norm.",
+                    "The judicial acceptance of custom as a source of law."
+                ],
+                correct: 2
+            },
+            {
+                passage: "John Austin’s definition of Positive Law requires three components: Command, Sanction, and the habit of Obedience to a determinate Sovereign. According to Austin, a rule that is merely moral or religious, even if widely followed, is not a positive law unless it originates from the sovereign.",
+                question: "A major criticism of Austin’s theory, particularly when applied to the Indian Constitution, is that it struggles to account for:",
+                options: [
+                    "The existence of customs and traditions.",
+                    "The power-conferring rules (e.g., rules for making a Will or contract) that result in nullity, not a sanction, upon non-compliance.",
+                    "The distinction between primary and secondary duties.",
+                    "The territorial jurisdiction of the Parliament."
+                ],
+                correct: 1
+            },
+            {
+                passage: "Lon L. Fuller championed a procedural natural law theory, asserting that law must satisfy an 'inner morality' consisting of eight principles (e.g., generality, promulgation, prospectivity, consistency) to qualify as genuine law. Fuller argued that law is the enterprise of subjecting human conduct to the governance of rules.",
+                question: "If a newly enacted statute is deliberately kept secret from the public and applied only by the administrative executive against specific individuals, which principle of Fuller's inner morality is primarily violated?",
+                options: [
+                    "Constancy (stability over time).",
+                    "Clarity.",
+                    "Generality.",
+                    "Promulgation (making the rules public)."
+                ],
+                correct: 3
+            },
+            {
+                passage: "Ronald Dworkin argued against legal positivism by insisting that law includes non-rule standards, primarily 'principles,' which have a dimension of weight or importance. Dworkin famously conceptualized individual rights as 'trumps' that individuals can use to defeat policy arguments appealing to the general welfare or collective goal.",
+                question: "Dworkin's Rights as Trumps theory fundamentally seeks to protect the individual from:",
+                options: [
+                    "Judicial review of constitutional amendments.",
+                    "The tyranny of utilitarian calculations favoring the majority or collective goal.",
+                    "The arbitrary commands of the sovereign.",
+                    "The historical spirit (*Volksgeist*) of the people."
+                ],
+                correct: 1
+            },
+            {
+                passage: "Roscoe Pound defined law as 'Social Engineering,' an applied science dedicated to resolving conflicts among competing interests in society with minimum friction and waste. Pound categorized these claims as Individual, Public (the State as a juristic person), and Social Interests. He posited Jural Postulates as the measuring rod to evaluate which interests should be recognized and protected by law.",
+                question: "A law protecting children from employment in factories (Child Labour laws) primarily seeks to satisfy which category of Pound's interests?",
+                options: [
+                    "Individual Interest (Parental freedom).",
+                    "Public Interest (Financial security of the employer).",
+                    "Social Interest (General morals and social progress).",
+                    "Individual Interest (Child’s right to self-determination)."
+                ],
+                correct: 2
+            },
+            {
+                passage: "American Legal Realists, led by Oliver Wendell Holmes Jr., asserted that the life of the law is not logic but experience, focusing on law 'in action' rather than law 'in books.' Holmes introduced the 'Bad Man Theory,' viewing a legal duty merely as a prediction that the courts will impose a sanction for a given act.",
+                question: "The 'Bad Man Theory' attempts to provide a pragmatic definition of law by completely separating it from:",
+                options: [
+                    "The concept of liability.",
+                    "The ultimate sovereignty of the legislature.",
+                    "The moral content or ethical justification for obedience.",
+                    "The historical evolution of legal concepts."
+                ],
+                correct: 2
+            },
+            {
+                passage: "Friedrich Carl von Savigny, the founder of the Historical School, viewed law as an organic creation of the people's spirit, or Volksgeist, evolving slowly and imperceptibly like language. Savigny argued that custom is the most authentic source of law, reflecting the common consciousness of the nation, and he generally opposed the premature codification of law.",
+                question: "According to Savigny, the validity of a newly enacted statute is ideally dependent on its consistency with:",
+                options: [
+                    "The will of the political sovereign.",
+                    "The principles of natural law (reason/morality).",
+                    "The historical customs and the common consciousness (*Volksgeist*).",
+                    "The efficiency required for social engineering."
+                ],
+                correct: 2
+            },
+            {
+                passage: "Wesley Newcomb Hohfeld clarified legal relations by identifying Jural Opposites (negation) and Jural Correlatives (implication). For instance, a Right (Claim) in Person A is correlated to a Duty in Person B, and its opposite is a No-right in A. The concept of Power involves the ability to alter legal relations.",
+                question: "If the law grants a person the **Privilege** (Liberty) to enter a public park, the legal relation of the State towards that person regarding the entry is the:",
+                options: [
+                    "Duty to allow entry.",
+                    "Right (Claim) to compel entry.",
+                    "No-right that the person shall not enter.",
+                    "Liability to be sued by the person."
+                ],
+                correct: 2
+            },
+            {
+                passage: "Legal Personality is the attribute that enables an entity to hold legal rights and duties. Juristic persons (e.g., corporations, trusts) are fictitious creations of the law. The Fiction Theory posits that a corporation has no real existence outside the law, while the Realist Theory (Gierke) argues that a corporation is a real, psychological group entity with a genuine group will.",
+                question: "In Indian Company Law, when courts 'lift the corporate veil' to hold directors personally liable for fraud, they are essentially treating the corporate personality as:",
+                options: [
+                    "A real, self-existing entity (Realist Theory).",
+                    "A mere façade or instrumentality used for an unlawful purpose.",
+                    "A trustee for the government (Waqf).",
+                    "A natural person under the Doctrine of Survivorship."
+                ],
+                correct: 1
+            },
+            {
+                passage: "Ownership is the most comprehensive right over property, described as the residuary right. It is *de jure* (legal title). Possession is the *de facto* (physical control) aspect. Savigny’s theory requires both *corpus possessionis* (physical control) and *animus domini* (intent to hold as owner) for true possession, while Ihering focused primarily on the corpus, viewing *animus* as naturally implied.",
+                question: "A key implication of the distinction between Ownership (*de jure*) and Possession (*de facto*) is that a person who has valid Ownership may not have:",
+                options: [
+                    "The capacity to sue for damages.",
+                    "The right to transfer the property by Will.",
+                    "The immediate physical possession of the property (e.g., in a lease or bailment).",
+                    "A duty not to harm the environment."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The Retributive Theory of Punishment is backward-looking, focusing on the past wrong. It holds that punishment is justified because the offender deserves it (just deserts) and that the penalty must be proportional to the crime (*lex talionis*). It views the criminal as a rational moral agent.",
+                question: "A major philosophical defense of the Retributive Theory (e.g., by Kant) is that it upholds the dignity of the offender by:",
+                options: [
+                    "Ensuring the offender receives psychological treatment.",
+                    "Treating the offender as a means to achieve the general good (deterrence).",
+                    "Recognizing their capacity to choose wrongdoing and therefore deserving the consequence of that choice.",
+                    "Setting them free immediately after they pay a nominal fine."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The Deterrent Theory justifies punishment based on its beneficial future consequences, aiming to prevent future crimes (General and Specific Deterrence). The Reformative Theory views the criminal as a 'patient' needing treatment and education to be reintegrated into society.",
+                question: "The practice of granting **Parole or Probation** to convicted criminals is most strongly aligned with the objective of which theory of punishment?",
+                options: [
+                    "Retributive Theory, as it satisfies just deserts.",
+                    "The Doctrine of Pious Obligation.",
+                    "Reformative Theory, as it focuses on social reintegration and treatment.",
+                    "General Deterrence, as it sends a message to the public."
+                ],
+                correct: 2
+            },
+            {
+                passage: "Sociological Jurisprudence emphasizes the functional aspect of law, using it as a tool for social control. Eugen Ehrlich focused on the 'living law'—the rules governing life in society, which often preceded and influenced positive law.",
+                question: "Ehrlich’s concept of 'Living Law' suggests that true legal norms are found primarily in:",
+                options: [
+                    "The commands of the political sovereign.",
+                    "The eternal and unchangeable principles of natural reason.",
+                    "The judicial precedents of the superior courts.",
+                    "The actual practices, customs, and spontaneous behavior of people in society."
+                ],
+                correct: 3
+            },
+            {
+                passage: "The concept of Legal Personality is extended beyond natural persons to Juristic Persons (e.g., companies). The creation of a separate legal entity limits the liability of the individual members. The Fiction Theory sees this personality as a pure legal artifice, while the Realist Theory sees it as a real group entity.",
+                question: "The Doctrine of Separate Legal Entity (established in *Salomon v. Salomon*) is a primary example of:",
+                options: [
+                    "The Doctrine of Pious Obligation.",
+                    "A legal fiction.",
+                    "The Doctrine of *Marz-ul-Maut*.",
+                    "The Doctrine of *Ultra Vires*."
+                ],
+                correct: 1
+            },
+            {
+                passage: "The Historical School (*Volksgeist*) emphasized that law is found, not made, evolving from the common conviction of the people. This contrasted with the Analytical School’s view that law is a conscious creation of the sovereign.",
+                question: "If the Indian Parliament suddenly enacted a law that completely abolished the traditional structure of the Hindu Undivided Family (HUF), the Historical School would criticize the law for:",
+                options: [
+                    "Violating the principle of Utilitarianism.",
+                    "Exceeding the one-third testamentary limit.",
+                    "Failing to respect the organic, historical development and national consciousness (*Volksgeist*).",
+                    "Lacking the necessary sanctions for enforcement."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The Hohfeldian Jural Opposites (negation) include: Right is the opposite of No-right, and Duty is the opposite of Privilege (Liberty). Jural Correlatives (implication) include: Right is the correlative of Duty, and Privilege is the correlal of No-right.",
+                question: "The relationship between **Immunity** and **Liability** in Hohfeld's scheme is that they are:",
+                options: [
+                    "Correlatives.",
+                    "Opposites.",
+                    "Complements.",
+                    "Synonyms."
+                ],
+                correct: 1
+            },
+            {
+                passage: "John Rawls' theory of 'Justice as Fairness' proposes that rational individuals, operating behind a 'Veil of Ignorance,' would choose principles to govern society. The 'Difference Principle' allows social and economic inequalities only if they are arranged to provide the greatest benefit to the least advantaged members of society.",
+                question: "The 'Difference Principle' operates as a constraint on social and economic systems to ensure that they conform to the strategy of:",
+                options: [
+                    "Maximizing the overall average happiness (Utilitarianism).",
+                    "Pure equality of income (Egalitarianism).",
+                    "Maximizing the minimum share (Maximin principle).",
+                    "Historical entitlement (Libertarianism)."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The tort of Negligence requires proof of Breach of Duty... If a person is subjected to **Absolute Liability** (e.g., under the *M.C. Mehta* rule for hazardous industries), the liability is classified as no-fault because the defendant is barred from claiming the defense that:",
+                question: "If a person is subjected to **Absolute Liability** (e.g., under the *M.C. Mehta* rule for hazardous industries), the liability is classified as no-fault because the defendant is barred from claiming the defense that:",
+                options: [
+                    "The liability was too remote.",
+                    "They were only acting as a manager (*Mutawalli*).",
+                    "The damage was inevitable despite taking all reasonable care and precaution.",
+                    "They were exercising an ordinary, non-natural use of land."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The concept of Ownership implies the right to the property's use, disposal, and duration. It contrasts with **Possession**... According to the objective theory of Possession (Ihering), the law protects possession primarily because it serves as the outward manifestation of ownership and is vital for maintaining social peace.",
+                question: "The protection afforded to Possession, even against the true owner in some limited cases... is justified on the basis of:",
+                options: [
+                    "The Pious Obligation of the owner to the possessor.",
+                    "The legal validity of *Marz-ul-Maut* gifts.",
+                    "The principle of maintaining social order and discouraging self-help.",
+                    "The principle of *Res Judicata*."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The power to adopt a child is governed by the Hindu Adoptions and Maintenance Act (HAMA)... HAMA creates a legal fiction of birth, severing ties with the biological family.",
+                question: "The rule under HAMA requiring a Hindu male adopting a son to have no living son, son's son, or son's son's son, is based on the traditional legal principle of:",
+                options: [
+                    "The doctrine of *locus standi*.",
+                    "Ensuring the existence of a male heir for spiritual benefit (putraka principle).",
+                    "The *Marz-ul-Maut* rule.",
+                    "The principle of *Shufa*."
+                ],
+                correct: 1
+            },
+            {
+                passage: "The Supreme Court often relies on the doctrine of Proportionality when reviewing restrictions on fundamental rights. The doctrine requires that the state action must be necessary and must adopt the least restrictive means to achieve its objective.",
+                question: "In jurisprudential terms, the Doctrine of Proportionality is a refinement of the concept of:",
+                options: [
+                    "The legal validity of Austin’s sanction.",
+                    "The necessity of the *Grundnorm*.",
+                    "The procedural and substantive reasonableness embedded in the Rule of Law.",
+                    "The finality of *Res Judicata*."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The Jural Correlative of Power is Liability. Power is the capacity to alter legal relations... Liability is the subjection to that power...",
+                question: "If a person has the **Immunity** that their Fundamental Rights cannot be altered by a simple majority vote of the legislature, the Jural Correlative of that Immunity is the legislature’s:",
+                options: [
+                    "Right (Claim) to amend the Constitution.",
+                    "Privilege (Liberty) to legislate.",
+                    "Duty not to legislate.",
+                    "Disability (Inability) to alter the rights by simple majority."
+                ],
+                correct: 3
+            },
+            {
+                passage: "Legal Realists, particularly Scandinavian Realists, rejected the binding nature of abstract concepts like 'sovereignty' and 'duty,'... If a legal theorist claims that the binding force of the Indian Constitution is merely a deeply ingrained psychological belief... that theorist is adhering to the school of:",
+                question: "If a legal theorist claims that the binding force of the Indian Constitution is merely a deeply ingrained psychological belief... that theorist is adhering to the school of:",
+                options: [
+                    "Classical Natural Law.",
+                    "The Historical School.",
+                    "Legal Realism (Scandinavian branch).",
+                    "Analytical Positivism (Hart)."
+                ],
+                correct: 2
+            },
+            {
+                passage: "Feminist Jurisprudence (Dominance Theory) argues that law is a mechanism of male power... It views concepts like 'neutrality' and 'formal equality' as masking substantive subordination.",
+                question: "According to this theory, the formal equality enshrined in legal statutes (e.g., equal pay legislation) often fails to eliminate gender inequality because it ignores:",
+                options: [
+                    "The doctrine of *stare decisis*.",
+                    "The moral rights of the sovereign.",
+                    "The structural, political, and economic conditions of male dominance and female subordination.",
+                    "The principle of *Volenti Non Fit Injuria*."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The Restorative Justice theory views crime primarily as a violation of people and relationships... It seeks to repair the harm caused by the crime through a cooperative process...",
+                question: "The core focus of Restorative Justice is achieving:",
+                options: [
+                    "Retribution and proportional suffering.",
+                    "General deterrence and social warning.",
+                    "Repair of harm and reconciliation between the parties.",
+                    "Rehabilitation through psychological treatment."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The Indian legal system often uses the Doctrine of Harmonious Construction to reconcile conflicts between Fundamental Rights (Part III) and Directive Principles of State Policy (Part IV). The Judiciary views these two parts as supplementary, not contradictory.",
+                question: "The jurisprudential basis for using Harmonious Construction is the rejection of the idea of:",
+                options: [
+                    "Legal positivism.",
+                    "Separation of powers.",
+                    "The dichotomy between law (Part III) and morality/goals (Part IV) as absolute, necessitating their mutual fulfillment.",
+                    "The Rule of Law."
+                ],
+                correct: 2
+            },
+            {
+                passage: "The Jural Opposites in the Hohfeldian scheme are: Right is the opposite of No-right, and Duty is the opposite of Privilege (Liberty). Jural Opposites are logical negations.",
+                question: "The Jural Opposite of **Duty** is:",
+                options: [
+                    "Right (Claim).",
+                    "Liability.",
+                    "Immunity.",
+                    "Privilege (Liberty)."
+                ],
+                correct: 3
+            },
+            {
+                passage: "The tort of Defamation protects reputation. Defamation in a transient form (Slander) requires proof of special damage, but in a permanent form (Libel) is actionable *per se*.",
+                question: "The imposition of a monetary sanction (damages) for defamation is an application of which basic legal concept?",
+                options: [
+                    "The Doctrine of Pith and Substance.",
+                    "Civil Liability.",
+                    "Criminal Liability.",
+                    "Sovereign Immunity."
+                ],
+                correct: 1
+            },
+            {
+                passage: "The Historical School of Jurisprudence (*Volksgeist*) emphasized that law is derived from the people's spirit and customs. In contrast, the Scandinavian Realists (e.g., Ross) viewed law primarily as empirical facts... that predict outcomes.",
+                question: "The crucial element accepted as the source of legal validity by the Historical School but entirely rejected by the Scandinavian Realists is:",
+                options: [
+                    "The use of the concept 'right' in judicial language.",
+                    "The historical inevitability of a classless society.",
+                    "The psychological reality of 'duty' and 'sovereignty' as binding norms.",
+                    "The concept of judicial precedent (*stare decisis*)."
+                ],
+                correct: 2
+            }
+        ];
 
-        <h3>⚠️ Areas for Improvement</h3>
-        <ul>
-            <li><strong>Hohfeldian Precision (Opposites & Privilege):</strong> Needs review on the concept of **Privilege (Liberty)** and its correlative (**No-right**). You confused Privilege with the more demanding Right (Claim).</li>
-            <li><strong>Dworkin's Theory of Rights as Trumps:</strong> Must be clearer that Dworkin targets **Utilitarianism** and the sacrificing of rights for the "collective good," not merely arbitrary state action.</li>
-            <li><strong>Legal Realism and Positivism:</strong> Review the distinction between Hart's **Social Fact** and the Realists' rejection of legal concepts as mere **psychological beliefs**.</li>
-            <li><strong>Fuller's Inner Morality:</strong> Review the specific distinction between **Promulgation** (making secret law public) and Generality.</li>
-        </ul>
-    </div>
+        // 2. DOM Elements
+        const quizContainer = document.getElementById('quiz-container');
+        const submitButton = document.getElementById('submit-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const scoreElement = document.getElementById('score');
+        const analysisElement = document.getElementById('analysis');
 
-    <h2>Detailed Question Review</h2>
+        // 3. Build Quiz Function
+        function buildQuiz() {
+            const output = [];
+            quizData.forEach((currentQuestion, questionNumber) => {
+                const options = [];
+                currentQuestion.options.forEach((option, index) => {
+                    options.push(
+                        `<li class="option-item">
+                            <input type="radio" name="question${questionNumber}" id="q${questionNumber}o${index}" value="${index}">
+                            <label for="q${questionNumber}o${index}">${option}</label>
+                        </li>`
+                    );
+                });
 
-    <div class="question-item correct">
-        <div class="question-text">1. Passage: H.L.A. Hart criticized John Austin’s command theory... Question: The essential difference between Hart’s RoR and Kelsen’s Grundnorm lies in the RoR’s nature as:</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">A secondary rule whose existence is verifiable as a social fact.</span> (CORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">A secondary rule whose existence is verifiable as a social fact.</span></div>
-    </div>
-    
-    <div class="question-item correct">
-        <div class="question-text">2. Passage: Hans Kelsen’s Pure Theory of Law views the legal system... Question: Which of the following constitutional concepts aligns best with Kelsen's view of the legal system's structure?</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">The hierarchy of norms validated by the Constitution, which is itself validated by a presupposed Basic Norm.</span> (CORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">The hierarchy of norms validated by the Constitution, which is itself validated by a presupposed Basic Norm.</span></div>
-    </div>
+                output.push(
+                    `<div class="question-block" id="question-block-${questionNumber}">
+                        <div class="passage">${currentQuestion.passage}</div>
+                        <div class="question-text">${questionNumber + 1}. ${currentQuestion.question}</div>
+                        <ul class="options-list">${options.join('')}</ul>
+                    </div>`
+                );
+            });
+            quizContainer.innerHTML = output.join('');
+        }
 
-    <div class="question-item incorrect">
-        <div class="question-text">4. Passage: Lon L. Fuller championed a procedural natural law theory... Question: If a newly enacted statute is deliberately kept secret from the public and applied only by the administrative executive against specific individuals, which principle of Fuller's inner morality is primarily violated?</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">Generality.</span> (INCORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">Promulgation (making the rules public).</span></div>
-    </div>
-    
-    <div class="question-item incorrect">
-        <div class="question-text">5. Passage: Ronald Dworkin argued against legal positivism... Question: Dworkin's Rights as Trumps theory fundamentally seeks to protect the individual from:</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">The arbitrary commands of the sovereign.</span> (INCORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">The tyranny of utilitarian calculations favoring the majority or collective goal.</span></div>
-    </div>
-    
-    <div class="question-item incorrect">
-        <div class="question-text">9. Passage: Wesley Newcomb Hohfeld clarified legal relations... Question: If the law grants a person the **Privilege** (Liberty) to enter a public park, the legal relation of the State towards that person regarding the entry is the:</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">Duty to allow entry.</span> (INCORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">No-right that the person shall not enter.</span></div>
-    </div>
-    
-    <div class="question-item incorrect">
-        <div class="question-text">20. Passage: The concept of Ownership implies the right to the property's use... Question: The protection afforded to Possession, even against the true owner in some limited cases... is justified on the basis of:</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">The Pious Obligation of the owner to the possessor.</span> (INCORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">The principle of maintaining social order and discouraging self-help.</span></div>
-    </div>
-    
-    <div class="question-item incorrect">
-        <div class="question-text">24. Passage: Legal Realists, particularly Scandinavian Realists, rejected the binding nature of abstract concepts... Question: If a legal theorist claims that the binding force of the Indian Constitution is merely a deeply ingrained psychological belief... that theorist is adhering to the school of:</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">Analytical Positivism (Hart).</span> (INCORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">Legal Realism (Scandinavian branch).</span></div>
-    </div>
-    
-    <div class="question-item incorrect">
-        <div class="question-text">30. Passage: The Historical School of Jurisprudence (*Volksgeist*) emphasized that law is derived from the people's spirit... Question: The crucial element accepted as the source of legal validity by the Historical School but entirely rejected by the Scandinavian Realists is:</div>
-        <div class="answer-status">Your Answer: <span class="user-answer">The historical inevitability of a classless society.</span> (INCORRECT)</div>
-        <div class="answer-status">Correct Answer: <span class="correct-answer">The psychological reality of 'duty' and 'sovereignty' as binding norms.</span></div>
-    </div>
-    
-    </div>
+        // 4. Show Results Function
+        function showResults() {
+            let numCorrect = 0;
+            const answerContainers = quizContainer.querySelectorAll('.options-list');
+            const questionBlocks = quizContainer.querySelectorAll('.question-block');
 
+            quizData.forEach((currentQuestion, questionNumber) => {
+                const answerContainer = answerContainers[questionNumber];
+                const selector = `input[name=question${questionNumber}]:checked`;
+                const userAnswerInput = (answerContainer.querySelector(selector) || {});
+                const userAnswer = parseInt(userAnswerInput.value);
+                const correctIndex = currentQuestion.correct;
+                
+                const optionItems = answerContainer.querySelectorAll('.option-item');
+
+                // Mark correct answer in green
+                optionItems[correctIndex].classList.add('correct');
+
+                if (userAnswer === correctIndex) {
+                    numCorrect++;
+                    questionBlocks[questionNumber].classList.add('correct');
+                } else {
+                    questionBlocks[questionNumber].classList.add('incorrect');
+                    // Mark user's incorrect answer in red
+                    if (userAnswerInput.value !== undefined) {
+                        optionItems[userAnswer].classList.add('selected', 'incorrect');
+                    }
+                }
+            });
+
+            // Calculate score and feedback
+            const finalScore = numCorrect * 1 - (quizData.length - numCorrect) * 0.25;
+            const accuracy = (numCorrect / quizData.length) * 100;
+            
+            let standing = "Novice";
+            let standingMessage = "You have a foundational understanding, but need to focus on core concepts and application.";
+            
+            if (finalScore >= 24) {
+                standing = "Pro / Topper";
+                standingMessage = "Excellent work! You have mastered the core concepts and their application. Focus on consistency.";
+            } else if (finalScore >= 18) {
+                standing = "Proficient / Intermediate";
+                standingMessage = "Strong performance! You have a good grasp of the theories. Your next step is to master the nuanced distinctions between them.";
+            }
+
+            // Display results
+            scoreElement.innerHTML = `${finalScore} / 30.0 <br> (${numCorrect} Correct, ${quizData.length - numCorrect} Incorrect)`;
+            
+            analysisElement.innerHTML = `
+                <h3>Your Standing: ${standing}</h3>
+                <p>${standingMessage}</p>
+                <h3>✅ Strengths Identified</h3>
+                <ul>
+                    <li>**Analytical Positivism:** Strong understanding of Hart's critique of Austin and Kelsen's structural hierarchy.</li>
+                    <li>**Hohfeldian Analysis:** Good grasp of Jural Opposites (Duty/Privilege) and Correlatives (Immunity/Disability).</li>
+                    <li>**Theories of Justice & Punishment:** Accurate application of Rawls' Maximin Principle and the objectives of Reformative/Retributive Justice.</li>
+                    <li>**Sociological Thought:** Clear grasp of Pound's Social Interests and Ehrlich's Living Law.</li>
+                </ul>
+                <h3>⚠️ Critical Areas for Improvement</h3>
+                <ul>
+                    <li><strong>Nuanced Distinctions:</strong> Review the specific differences between Hart's 'social fact' (RoR) and the Realists' 'psychological beliefs' (Q24, Q30).</li>
+                    <li><strong>Hohfeldian Correlatives (Privilege):</strong> Double-check the relationship: A's **Privilege** correlates with B's **No-right** (Q9).</li>
+                    <li><strong>Dworkin's Critique:** Remember Dworkin's main target is **Utilitarianism** (sacrificing rights for the 'general good'), not just arbitrary commands (Q5).</li>
+                    <li><strong>Fuller's 8 Principles:** Differentiate all eight principles. A secret law is a failure of **Promulgation** (Q4).</li>
+                </ul>
+            `;
+            
+            resultsContainer.style.display = 'block';
+            submitButton.style.display = 'none';
+        }
+
+        // 5. Initial Call and Event Listener
+        buildQuiz();
+        submitButton.addEventListener('click', showResults);
+
+    </script>
 </body>
 </html>
