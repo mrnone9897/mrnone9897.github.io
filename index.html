@@ -3,1683 +3,204 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLAT PG Mock Test 2026</title>
+    <title>CLAT PG Jurisprudence Quiz Results</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 24px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        
-        .header {
-            text-align: center;
-            color: white;
-            margin-bottom: 32px;
-        }
-        
-        .header h1 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #333;
-        }
-        
-        input, select {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-        
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn-danger {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-        
-        .btn-success {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-        
-        .btn-delete {
-            background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
-        }
-        
-        .qr-container {
-            text-align: center;
-            padding: 24px;
-            background: #f8f9fa;
-            border-radius: 12px;
-            margin: 24px 0;
-        }
-        
-        .qr-code {
-            max-width: 350px;
-            width: 100%;
-            height: auto;
-            border: 3px solid #667eea;
-            border-radius: 12px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        .timer {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 16px 24px;
-            border-radius: 12px;
-            font-size: 20px;
-            font-weight: 700;
-            color: #667eea;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-        
-        .timer.warning {
-            background: #ff4757;
-            color: white;
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        .question-card {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 32px;
-            margin-bottom: 24px;
-        }
-        
-        .question-number {
-            color: #667eea;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .passage-box {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-            padding: 24px;
-            border-radius: 12px;
-            margin: 24px 0;
-            border-left: 5px solid #fdcb6e;
-        }
-        
-        .passage-box p {
-            line-height: 1.8;
-            color: #2d3436;
-            font-size: 16px;
-        }
-        
-        .question-text {
-            font-size: 18px;
-            font-weight: 600;
-            margin: 24px 0;
-            color: #2d3436;
-        }
-        
-        .option-label {
-            display: flex;
-            align-items: flex-start;
-            padding: 18px;
-            margin-bottom: 14px;
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .option-label:hover {
-            border-color: #667eea;
-            background: #f0f3ff;
-            transform: translateX(4px);
-        }
-        
-        .option-label.selected {
-            border-color: #667eea;
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-            border-width: 3px;
-        }
-        
-        .option-label input[type="radio"] {
-            width: 20px;
-            height: 20px;
-            margin-right: 12px;
-            cursor: pointer;
-        }
-        
-        .question-palette {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
-        }
-        
-        .palette-btn {
-            padding: 12px;
-            background: #f8f9fa;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .palette-btn:hover {
-            background: #e9ecef;
-        }
-        
-        .palette-btn.answered {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
-            border-color: #4facfe;
-        }
-        
-        .palette-btn.current {
-            border: 3px solid #667eea;
-            background: #667eea;
-            color: white;
-        }
-        
-        .user-card {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 20px;
-            margin-bottom: 16px;
-            border-radius: 12px;
-            border-left: 5px solid #667eea;
-        }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        .status-paid {
-            background: #00f2fe;
-            color: white;
-        }
-        
-        .status-pending {
-            background: #f5576c;
-            color: white;
-        }
-        
-        .admin-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-        }
-        
-        .admin-actions button {
-            flex: 1;
-        }
-        
-        .question-nav {
-            display: flex;
-            gap: 16px;
-            margin-top: 24px;
-        }
-        
-        .question-nav button {
-            flex: 1;
-        }
-
-        /* Custom Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-        
-        .modal-overlay.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 32px;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            transform: scale(0.9);
-            transition: transform 0.3s;
-        }
-        
-        .modal-overlay.visible .modal-content {
-            transform: scale(1);
-        }
-        
-        .modal-content p {
-            font-size: 17px;
+            font-family: 'Arial', sans-serif;
             line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f7f6;
             color: #333;
-            margin-bottom: 24px;
         }
-        
-        .modal-buttons {
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #004d99;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-top: 25px;
+        }
+        .summary-box {
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .summary-box strong {
+            font-size: 1.2em;
+            color: #004d99;
+        }
+        .score-metrics {
             display: flex;
-            gap: 12px;
-            justify-content: center;
+            justify-content: space-between;
+            margin-top: 15px;
+            flex-wrap: wrap;
         }
-        
-        .modal-buttons button {
-            flex: 1;
+        .metric {
+            background: #f0f8ff;
+            padding: 10px;
+            border-radius: 5px;
+            flex: 1 1 30%;
+            margin: 5px;
+            text-align: center;
+            border-left: 3px solid #004d99;
+        }
+        .metric-value {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2b70b5;
+        }
+        .question-item {
+            margin-bottom: 30px;
+            padding: 15px;
+            border-left: 4px solid #ccc;
+            background-color: #fafafa;
+            border-radius: 5px;
+        }
+        .question-item.correct {
+            border-left-color: #28a745;
+        }
+        .question-item.incorrect {
+            border-left-color: #dc3545;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .answer-status {
+            font-weight: bold;
+            margin-top: 8px;
+            padding: 5px 0;
+        }
+        .user-answer {
+            color: #007bff;
+        }
+        .correct-answer {
+            color: #28a745;
+        }
+        .incorrect .user-answer {
+            color: #dc3545;
+            text-decoration: line-through;
+        }
+        .incorrect .correct-answer {
+            color: #17a2b8; /* Use a distinct color for the correct answer when the user missed it */
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .feedback ul {
+            list-style-type: disc;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Login Screen -->
-        <div id="loginScreen">
-            <div class="header">
-                <h1>🎓 CLAT PG Mock Test 2026</h1>
-                <p style="font-size: 18px;">Common Law Admission Test - Postgraduate</p>
-            </div>
-            <div class="card">
-                <h2 style="text-align: center; margin-bottom: 24px; color: #667eea;">🔐 Login</h2>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="loginEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" id="loginPassword" required>
-                    </div>
-                    <button type="submit" style="width: 100%;">Login</button>
-                </form>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="#" id="showRegister" style="color: #667eea; font-weight: 600;">Don't have an account? Register here</a>
-                </div>
-                <div style="text-align: center; margin-top: 12px;">
-                    <a href="#" id="showAdminLogin" style="color: #999; font-size: 13px;">Admin Login</a>
-                </div>
-            </div>
-        </div>
 
-        <!-- Register Screen -->
-        <div id="registerScreen" class="hidden">
-            <div class="header">
-                <h1>📝 Register</h1>
+<div class="container">
+    <h1>CLAT PG Jurisprudence Mock Test Results 🧠</h1>
+    
+    <div class="summary-box">
+        <h2>Performance Summary</h2>
+        <div class="score-metrics">
+            <div class="metric">
+                <div class="metric-label">Total Questions</div>
+                <div class="metric-value">30</div>
             </div>
-            <div class="card">
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="regName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="regEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Phone Number</label>
-                        <input type="tel" id="regPhone" required pattern="[0-9]{10}">
-                    </div>
-                    <div class="form-group">
-                        <label>Password (min 6 characters)</label>
-                        <input type="password" id="regPassword" required minlength="6">
-                    </div>
-                    <button type="submit" style="width: 100%;">Continue to Payment</button>
-                </form>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="#" id="showLogin" style="color: #667eea; font-weight: 600;">Already have an account? Login here</a>
-                </div>
+            <div class="metric">
+                <div class="metric-label">Correct Answers</div>
+                <div class="metric-value">24</div>
             </div>
-        </div>
-
-        <!-- Payment Screen -->
-        <div id="paymentScreen" class="hidden">
-            <div class="header">
-                <h1>💳 Payment</h1>
+            <div class="metric">
+                <div class="metric-label">Accuracy Rate</div>
+                <div class="metric-value">80.0%</div>
             </div>
-            <div class="card">
-                <h2 style="text-align: center; color: #667eea; margin-bottom: 24px;">Complete Payment - ₹50</h2>
-                <div class="qr-container">
-                    <p style="font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #333;">Scan QR Code to Pay ₹50</p>
-                    <!-- FIXED: Replaced broken local image with a valid placeholder -->
-                    <img class="qr-code" 
-                         src="WhatsApp Image 2024-04-14 at 12.38.31 PM.jpeg" 
-                         alt="Payment QR Code">
-                    <p style="margin-top: 16px; color: #666;">Pay ₹50 via PhonePe/UPI and enter transaction details below</p>
-                </div>
-                <form id="paymentForm">
-                    <div class="form-group">
-                        <label>Transaction ID / UPI Reference Number *</label>
-                        <input type="text" id="transactionId" required placeholder="Enter 12-digit transaction ID">
-                    </div>
-                    <div class="form-group">
-                        <label>Confirm Name *</label>
-                        <input type="text" id="confirmName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Confirm Email *</label>
-                        <input type="email" id="confirmEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Confirm Phone *</label>
-                        <input type="tel" id="confirmPhone" required>
-                    </div>
-                    <button type="submit" style="width: 100%;">Submit & Get Access</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Admin Login Screen -->
-        <div id="adminLoginScreen" class="hidden">
-            <div class="header">
-                <h1>🔒 Admin Login</h1>
-            </div>
-            <div class="card">
-                <form id="adminLoginForm">
-                    <div class="form-group">
-                        <label>Admin Email</label>
-                        <input type="email" id="adminEmail" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Admin Password</label>
-                        <input type="password" id="adminPassword" required>
-                    </div>
-                    <button type="submit" style="width: 100%;">Login as Admin</button>
-                </form>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="#" id="backToLogin" style="color: #667eea; font-weight: 600;">Back to User Login</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Admin Panel -->
-        <div id="adminPanel" class="hidden">
-            <div class="header">
-                <h1>⚙️ Admin Panel</h1>
-                <button id="adminLogout" style="margin-top: 16px;">Logout</button>
-            </div>
-            <div class="card">
-                <h2 style="color: #667eea; margin-bottom: 24px;">User Management</h2>
-                <div id="userList"></div>
-            </div>
-        </div>
-
-        <!-- Main App Screen -->
-        <div id="mainScreen" class="hidden">
-            <div class="header">
-                <h1>CLAT PG Mock Test 2026</h1>
-                <p id="welcomeUser" style="font-size: 18px; margin-top: 8px;"></p>
-                <button id="logoutBtn" style="margin-top: 16px;">Logout</button>
-            </div>
-
-            <!-- Test Selection -->
-            <div id="testSelectionScreen" class="card">
-                <h2 style="color: #667eea; margin-bottom: 24px;">Select Mock Test</h2>
-                <div class="form-group">
-                    <select id="testSelector">
-                        <optgroup label="📚 Subject-Wise Tests (26)">
-                            <option value="1">Test 1: Constitutional Law - Part 1</option>
-                            <option value="2">Test 2: Constitutional Law - Part 2</option>
-                            <option value="3">Test 3: Criminal Law - Part 1</option>
-                            <option value="4">Test 4: Criminal Law - Part 2</option>
-                            <option value="5">Test 5: Contract Law - Part 1</option>
-                            <option value="6">Test 6: Contract Law - Part 2</option>
-                            <option value="7">Test 7: Tort Law - Part 1</option>
-                            <option value="8">Test 8: Tort Law - Part 2</option>
-                            <option value="9">Test 9: International Law - Part 1</option>
-                            <option value="10">Test 10: International Law - Part 2</option>
-                            <option value="11">Test 11: IPR - Part 1</option>
-                            <option value="12">Test 12: IPR - Part 2</option>
-                            <option value="13">Test 13: Jurisprudence - Part 1</option>
-                            <option value="14">Test 14: Jurisprudence - Part 2</option>
-                            <option value="15">Test 15: Administrative Law</option>
-                            <option value="16">Test 16: Family Law</option>
-                            <option value="17">Test 17: Property Law</option>
-                            <option value="18">Test 18: Company Law</option>
-                            <option value="19">Test 19: Tax Law</option>
-                            <option value="20">Test 20: Environmental Law</option>
-                            <option value="21">Test 21: Labour Law</option>
-                            <option value="22">Test 22: Evidence Act</option>
-                            <option value="23">Test 23: CPC & Limitation</option>
-                            <option value="24">Test 24: Arbitration & ADR</option>
-                            <option value="25">Test 25: Banking & Insurance</option>
-                            <option value="26">Test 26: Cyber Law</option>
-                        </optgroup>
-                        <optgroup label="🎯 Full Syllabus Tests (10)">
-                            <option value="27">Test 27: Full Syllabus Mock 1</option>
-                            <option value="28">Test 28: Full Syllabus Mock 2</option>
-                            <option value="29">Test 29: Full Syllabus Mock 3</option>
-                            <option value="30">Test 30: Full Syllabus Mock 4</option>
-                            <option value="31">Test 31: Full Syllabus Mock 5</option>
-                            <option value="32">Test 32: Full Syllabus Mock 6</option>
-                            <option value="33">Test 33: Full Syllabus Mock 7</option>
-                            <option value="34">Test 34: Full Syllabus Mock 8</option>
-                            <option value="35">Test 35: Full Syllabus Mock 9</option>
-                            <option value="36">Test 36: Full Syllabus Mock 10</option>
-                        </optgroup>
-                        <optgroup label="⚖️ Latest Judgments (7)">
-                            <option value="37">Test 37: 2024-25 SC Judgments 1</option>
-                            <option value="38">Test 38: 2024-25 SC Judgments 2</option>
-                            <option value="39">Test 39: Constitutional Bench</option>
-                            <option value="40">Test 40: Criminal Law Amendments</option>
-                            <option value="41">Test 41: Contract & Tort Cases</option>
-                            <option value="42">Test 42: International Law</option>
-                            <option value="43">Test 43: IPR & Tech Law</option>
-                        </optgroup>
-                        <optgroup label="🔥 Final Revision (7)">
-                            <option value="44">Test 44: High-Weightage Topics</option>
-                            <option value="45">Test 45: Previous Year Pattern</option>
-                            <option value="46">Test 46: Difficult Questions</option>
-                            <option value="47">Test 47: Speed & Accuracy</option>
-                            <option value="48">Test 48: Grand Mock 1</option>
-                            <option value="49">Test 49: Grand Mock 2</option>
-                            <option value="50">Test 50: Final Grand Mock</option>
-                        </optgroup>
-                    </select>
-                </div>
-                <button id="startTestBtn" style="width: 100%;">Start Test</button>
-            </div>
-
-            <!-- Test Screen -->
-            <div id="testScreen" class="hidden">
-                <div class="timer" id="timer">120:00</div>
-                
-                <div class="question-card" id="questionCard"></div>
-
-                <div class="question-nav">
-                    <button id="prevBtn">← Previous</button>
-                    <button id="submitTestBtn" class="btn-danger">Submit Test</button>
-                    <button id="nextBtn">Next →</button>
-                </div>
-
-                <div class="card">
-                    <h3 style="color: #667eea;">Question Palette</h3>
-                    <div id="questionPalette" class="question-palette"></div>
-                </div>
-            </div>
-
-            <!-- Results Screen -->
-            <div id="resultsScreen" class="hidden">
-                <div class="card">
-                    <h2 style="text-align: center; color: #667eea;">Test Results</h2>
-                    <div id="resultsContent"></div>
-                    <button id="backToTestsBtn" style="width: 100%; margin-top: 24px;">Back to Tests</button>
-                </div>
+            <div class="metric">
+                <div class="metric-label">Raw Score (Out of 30)</div>
+                <div class="metric-value">22.5</div>
             </div>
         </div>
     </div>
 
-    <!-- Custom Modal HTML -->
-    <div id="customModal" class="modal-overlay">
-        <div class="modal-content">
-            <p id="modalMessage"></p>
-            <div class="modal-buttons">
-                <button id="modalConfirmBtn" class="btn-success">Confirm</button>
-                <button id="modalCancelBtn" class="btn-danger">Cancel</button>
-                <button id="modalOkBtn">OK</button>
-            </div>
-        </div>
+    <div class="feedback">
+        <h3>✅ Strengths Identified</h3>
+        <ul>
+            <li><strong>Analytical Positivism and Command Theory:</strong> Strong grasp of Hart's critique of Austin, correctly identifying the failure to account for **power-conferring rules**.</li>
+            <li><strong>Hohfeldian Analysis of Legal Relations (Correlatives):</strong> Correctly identified the Jural Correlative of **Immunity** as **Disability** (Question 23).</li>
+            <li><strong>Sociological and Historical Schools:</strong> Accurate understanding of **Pound's Social Interests** and **Savigny's Volksgeist**.</li>
+            <li><strong>Theories of Punishment and Torts:</strong> Correctly applied **Absolute Liability** principles and linked **Parole/Probation** to **Reformative Theory**.</li>
+        </ul>
+
+        <h3>⚠️ Areas for Improvement</h3>
+        <ul>
+            <li><strong>Hohfeldian Precision (Opposites & Privilege):</strong> Needs review on the concept of **Privilege (Liberty)** and its correlative (**No-right**). You confused Privilege with the more demanding Right (Claim).</li>
+            <li><strong>Dworkin's Theory of Rights as Trumps:</strong> Must be clearer that Dworkin targets **Utilitarianism** and the sacrificing of rights for the "collective good," not merely arbitrary state action.</li>
+            <li><strong>Legal Realism and Positivism:</strong> Review the distinction between Hart's **Social Fact** and the Realists' rejection of legal concepts as mere **psychological beliefs**.</li>
+            <li><strong>Fuller's Inner Morality:</strong> Review the specific distinction between **Promulgation** (making secret law public) and Generality.</li>
+        </ul>
     </div>
 
-    <script>
-        const ADMIN_EMAIL = "masi.wal@adminApr2024";
-        const ADMIN_PASSWORD_HASH = "f8a3c6c0feb8d04eec7595052a5aab4959d196eb74a4ec5275c192fb635158ba";
-        
-        let currentUser = null;
-        let currentTest = null;
-        let currentQuestion = 0;
-        let answers = {};
-        let timerInterval = null;
-        let timeRemaining = 7200;
-        
-        // Modal elements
-        const modal = document.getElementById('customModal');
-        const modalMessage = document.getElementById('modalMessage');
-        const modalOkBtn = document.getElementById('modalOkBtn');
-        const modalConfirmBtn = document.getElementById('modalConfirmBtn');
-        const modalCancelBtn = document.getElementById('modalCancelBtn');
-        let confirmCallback = null;
+    <h2>Detailed Question Review</h2>
 
-        // --- Custom Modal Functions ---
-        function showCustomAlert(message) {
-            modalMessage.textContent = message;
-            modalOkBtn.style.display = 'block';
-            modalConfirmBtn.style.display = 'none';
-            modalCancelBtn.style.display = 'none';
-            modal.classList.add('visible');
-        }
-        
-        function showCustomConfirm(message, callback) {
-            modalMessage.textContent = message;
-            modalOkBtn.style.display = 'none';
-            modalConfirmBtn.style.display = 'block';
-            modalCancelBtn.style.display = 'block';
-            modal.classList.add('visible');
-            confirmCallback = callback;
-        }
-        
-        function hideModal() {
-            modal.classList.remove('visible');
-            confirmCallback = null;
-        }
+    <div class="question-item correct">
+        <div class="question-text">1. Passage: H.L.A. Hart criticized John Austin’s command theory... Question: The essential difference between Hart’s RoR and Kelsen’s Grundnorm lies in the RoR’s nature as:</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">A secondary rule whose existence is verifiable as a social fact.</span> (CORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">A secondary rule whose existence is verifiable as a social fact.</span></div>
+    </div>
+    
+    <div class="question-item correct">
+        <div class="question-text">2. Passage: Hans Kelsen’s Pure Theory of Law views the legal system... Question: Which of the following constitutional concepts aligns best with Kelsen's view of the legal system's structure?</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">The hierarchy of norms validated by the Constitution, which is itself validated by a presupposed Basic Norm.</span> (CORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">The hierarchy of norms validated by the Constitution, which is itself validated by a presupposed Basic Norm.</span></div>
+    </div>
 
-        modalOkBtn.addEventListener('click', hideModal);
-        modalCancelBtn.addEventListener('click', () => {
-            if (confirmCallback) confirmCallback(false);
-            hideModal();
-        });
-        modalConfirmBtn.addEventListener('click', () => {
-            if (confirmCallback) confirmCallback(true);
-            hideModal();
-        });
-        // --- End Modal Functions ---
+    <div class="question-item incorrect">
+        <div class="question-text">4. Passage: Lon L. Fuller championed a procedural natural law theory... Question: If a newly enacted statute is deliberately kept secret from the public and applied only by the administrative executive against specific individuals, which principle of Fuller's inner morality is primarily violated?</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">Generality.</span> (INCORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">Promulgation (making the rules public).</span></div>
+    </div>
+    
+    <div class="question-item incorrect">
+        <div class="question-text">5. Passage: Ronald Dworkin argued against legal positivism... Question: Dworkin's Rights as Trumps theory fundamentally seeks to protect the individual from:</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">The arbitrary commands of the sovereign.</span> (INCORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">The tyranny of utilitarian calculations favoring the majority or collective goal.</span></div>
+    </div>
+    
+    <div class="question-item incorrect">
+        <div class="question-text">9. Passage: Wesley Newcomb Hohfeld clarified legal relations... Question: If the law grants a person the **Privilege** (Liberty) to enter a public park, the legal relation of the State towards that person regarding the entry is the:</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">Duty to allow entry.</span> (INCORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">No-right that the person shall not enter.</span></div>
+    </div>
+    
+    <div class="question-item incorrect">
+        <div class="question-text">20. Passage: The concept of Ownership implies the right to the property's use... Question: The protection afforded to Possession, even against the true owner in some limited cases... is justified on the basis of:</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">The Pious Obligation of the owner to the possessor.</span> (INCORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">The principle of maintaining social order and discouraging self-help.</span></div>
+    </div>
+    
+    <div class="question-item incorrect">
+        <div class="question-text">24. Passage: Legal Realists, particularly Scandinavian Realists, rejected the binding nature of abstract concepts... Question: If a legal theorist claims that the binding force of the Indian Constitution is merely a deeply ingrained psychological belief... that theorist is adhering to the school of:</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">Analytical Positivism (Hart).</span> (INCORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">Legal Realism (Scandinavian branch).</span></div>
+    </div>
+    
+    <div class="question-item incorrect">
+        <div class="question-text">30. Passage: The Historical School of Jurisprudence (*Volksgeist*) emphasized that law is derived from the people's spirit... Question: The crucial element accepted as the source of legal validity by the Historical School but entirely rejected by the Scandinavian Realists is:</div>
+        <div class="answer-status">Your Answer: <span class="user-answer">The historical inevitability of a classless society.</span> (INCORRECT)</div>
+        <div class="answer-status">Correct Answer: <span class="correct-answer">The psychological reality of 'duty' and 'sovereignty' as binding norms.</span></div>
+    </div>
+    
+    </div>
 
-
-        // QUESTION BANK - Organized by Subject
-        // Add more questions to each subject bank as needed
-       const constitutionalLawBank = [
-  {
-    passage: "The Supreme Court has developed the doctrine of proportionality as a constitutional tool to scrutinize the extent of restrictions imposed on fundamental rights, particularly Article 19(1)(a), the freedom of speech and expression. The principle requires that any legislative or executive restriction must satisfy a fourfold test: (1) the restriction must serve a legitimate objective; (2) the means adopted must be suitable or rationally connected to the objective; (3) the restriction must be necessary, i.e., the least restrictive means available; and (4) a balance must be maintained between the benefits of the restriction and the detriment caused to the right-holder.",
-    subject: "Constitutional Law",
-    questions: [
-      {
-        text: "What is the first requirement of the doctrine of proportionality when applied to restrictions on fundamental rights?",
-        options: ["The restriction must be temporary.", "The restriction must have a legitimate objective.", "The restriction must be approved by the legislature twice.", "The restriction must affect all persons equally."],
-        correctAnswer: 1,
-        explanation: "The doctrine of proportionality begins by verifying that the restriction pursues a legitimate and valid objective, ensuring the law serves a bona fide purpose.",
-        difficulty: "M"
-      },
-      {
-        text: "Which article of the Indian Constitution deals with the protection of the President of India?",
-        options: ["Article 52", "Article 54", "Article 59", "Article 61"],
-        correctAnswer: 2,
-        explanation: "Article 59 provides for the conditions and privileges regarding the office of the President.",
-        difficulty: "E"
-      },
-      {
-        text: "Which of the following is NOT included in the Directive Principles of State Policy under the Indian Constitution?",
-        options: ["Right to Work", "Right to Property", "Right to Education", "Abolition of Untouchability"],
-        correctAnswer: 3,
-        explanation: "Abolition of untouchability is a Fundamental Right under Article 17; DPSPs cover socio-economic rights.",
-        difficulty: "M"
-      },
-      {
-        text: "Who was the Chairman of the Drafting Committee of the Indian Constitution?",
-        options: ["Jawaharlal Nehru", "B.R. Ambedkar", "Sardar Vallabhbhai Patel", "Rajendra Prasad"],
-        correctAnswer: 1,
-        explanation: "Dr. B.R. Ambedkar served as the Chairman of the Drafting Committee.",
-        difficulty: "E"
-      },
-      {
-        text: "The term 'Secular' was added to the Preamble of the Constitution of India by which amendment?",
-        options: ["42nd Amendment", "44th Amendment", "61st Amendment", "52nd Amendment"],
-        correctAnswer: 0,
-        explanation: "The 42nd Amendment Act of 1976 added 'Secular' and 'Socialist' to the Preamble.",
-        difficulty: "M"
-      },
-      {
-        text: "Under which article of the Indian Constitution, the President of India can promulgate ordinances?",
-        options: ["Article 123", "Article 73", "Article 368", "Article 324"],
-        correctAnswer: 0,
-        explanation: "Article 123 allows the President to promulgate ordinances during the recess of Parliament.",
-        difficulty: "M"
-      },
-      {
-        text: "Which article of the Indian Constitution gives the power to the Parliament to make laws for the whole of India?",
-        options: ["Article 245", "Article 255", "Article 323", "Article 100"],
-        correctAnswer: 0,
-        explanation: "Article 245 gives the Parliament authority to make laws for the whole or any part of India.",
-        difficulty: "M"
-      },
-      {
-        text: "The Constitution of India provides for the protection of the rights of minorities under which of the following articles?",
-        options: ["Article 25", "Article 29", "Article 30", "Article 32"],
-        correctAnswer: 2,
-        explanation: "Article 30 protects the rights of minorities to establish and administer educational institutions.",
-        difficulty: "M"
-      },
-      {
-        text: "Which Article of the Indian Constitution guarantees the right to freedom of speech and expression?",
-        options: ["Article 15", "Article 19", "Article 21", "Article 25"],
-        correctAnswer: 1,
-        explanation: "Article 19(1)(a) guarantees the right to freedom of speech and expression.",
-        difficulty: "E"
-      },
-      {
-        text: "Who among the following is authorized to promulgate ordinances during the recess of Parliament?",
-        options: ["Prime Minister", "Chief Justice of India", "President", "Speaker of Lok Sabha"],
-        correctAnswer: 2,
-        explanation: "Only the President is empowered to promulgate ordinances by Article 123.",
-        difficulty: "E"
-      }
-    ]
-  },
-  {
-    "passage": "The doctrine of basic structure, developed in Kesavananda Bharati v. State of Kerala (1973), acts as a limitation on the amending power of Parliament under Article 368. While the Constitution permits the legislature to amend almost any provision, including Fundamental Rights, such power cannot be exercised to alter the essential identity of the Constitution. The doctrine emerged as a response to the tension between parliamentary supremacy and constitutional supremacy, balancing democratic will with constitutional stability. Over the years, the Supreme Court has identified components such as rule of law, separation of powers, judicial review, and the supremacy of the Constitution as elements of the basic structure. This doctrine ensures that constitutional amendments are not misused to undermine democratic governance or civil liberties, maintaining the inviolability of India’s constitutional ethos.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Which case established the doctrine of basic structure in India?",
-        "options": ["Golak Nath v. State of Punjab", "Minerva Mills v. Union of India", "Kesavananda Bharati v. State of Kerala", "Indira Gandhi v. Raj Narain"],
-        "correctAnswer": 2,
-        "explanation": "The doctrine of basic structure was propounded in Kesavananda Bharati v. State of Kerala (1973), limiting Parliament’s amending power.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Under which Article does the Parliament derive its power to amend the Constitution?",
-        "options": ["Article 13", "Article 368", "Article 32", "Article 356"],
-        "correctAnswer": 1,
-        "explanation": "Article 368 provides the Parliament the power to amend the Constitution following prescribed procedures.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which of the following is NOT part of the basic structure doctrine?",
-        "options": ["Rule of law", "Judicial review", "Abolition of fundamental rights", "Supremacy of the Constitution"],
-        "correctAnswer": 2,
-        "explanation": "Abolition of fundamental rights would destroy the Constitution’s essence and thus cannot form part of the basic structure.",
-        "difficulty": "H"
-      },
-      {
-        "text": "What is the main objective of the basic structure doctrine?",
-        "options": ["To empower the judiciary to amend the Constitution", "To protect the essential features of the Constitution from arbitrary amendments", "To prevent judicial review", "To restrict state legislature powers only"],
-        "correctAnswer": 1,
-        "explanation": "The doctrine ensures that the core principles of the Constitution remain intact despite parliamentary amendments.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which feature of the Constitution was reaffirmed as part of the basic structure in Minerva Mills v. Union of India (1980)?",
-        "options": ["Judicial review", "Emergency provisions", "Directive Principles over Fundamental Rights", "Parliamentary Privileges"],
-        "correctAnswer": 0,
-        "explanation": "Minerva Mills reaffirmed that judicial review forms a part of the Constitution’s basic structure.",
-        "difficulty": "H"
-      }
-    ]
-  },
-  {
-    "passage": "Article 21 of the Constitution guarantees that no person shall be deprived of his life or personal liberty except according to procedure established by law. Over time, the Supreme Court has expanded the meaning of 'life' beyond mere animal existence, encompassing the right to live with dignity, privacy, livelihood, health, and a clean environment. Starting with Maneka Gandhi v. Union of India (1978), the Court adopted a substantive interpretation of 'procedure established by law,' ensuring that such procedure must be just, fair, and reasonable. This marked a shift from the earlier formalist approach of A.K. Gopalan v. State of Madras (1950), aligning Indian jurisprudence closer to the American ‘due process’ concept.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Which case expanded Article 21 to include the right to live with human dignity?",
-        "options": ["A.K. Gopalan v. State of Madras", "Maneka Gandhi v. Union of India", "ADM Jabalpur v. Shivkant Shukla", "Indra Sawhney v. Union of India"],
-        "correctAnswer": 1,
-        "explanation": "Maneka Gandhi case expanded the interpretation of life and liberty under Article 21 to include dignity and fairness.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which earlier judgment followed a narrow interpretation of Article 21?",
-        "options": ["Maneka Gandhi v. Union of India", "A.K. Gopalan v. State of Madras", "K.S. Puttaswamy v. Union of India", "Francis Coralie v. Union Territory of Delhi"],
-        "correctAnswer": 1,
-        "explanation": "A.K. Gopalan adopted a restrictive view, treating each Fundamental Right as distinct and unrelated.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which phrase in Article 21 was interpreted substantively by the Supreme Court in Maneka Gandhi?",
-        "options": ["Procedure established by law", "Due process of law", "Rule of law", "Equality before law"],
-        "correctAnswer": 0,
-        "explanation": "The Court held that 'procedure established by law' must be just, fair, and reasonable — not arbitrary.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Which of the following rights has been read into Article 21 by judicial interpretation?",
-        "options": ["Right to property", "Right to livelihood", "Right to vote", "Right to contest elections"],
-        "correctAnswer": 1,
-        "explanation": "In Olga Tellis v. Bombay Municipal Corporation, the Court included the right to livelihood within Article 21.",
-        "difficulty": "H"
-      },
-      {
-        "text": "The expansion of Article 21 marked a shift towards which constitutional philosophy?",
-        "options": ["Positivism", "Formalism", "Substantive due process", "Judicial minimalism"],
-        "correctAnswer": 2,
-        "explanation": "The interpretation moved towards substantive due process, ensuring fairness and reasonableness in state actions.",
-        "difficulty": "H"
-      }
-    ]
-  },
-  {
-    "passage": "The relationship between Fundamental Rights and Directive Principles of State Policy (DPSPs) has been one of constitutional evolution. Initially, in Champakam Dorairajan (1951), the Supreme Court held that Fundamental Rights prevail over DPSPs. However, subsequent amendments and judicial interpretations attempted to harmonize the two. In the landmark case of Minerva Mills v. Union of India (1980), the Court asserted that harmony between Parts III and IV forms part of the basic structure of the Constitution. Thus, while Fundamental Rights guarantee individual freedoms, DPSPs guide the state to achieve socio-economic justice, ensuring that liberty and equality co-exist in a balanced manner.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Which case first held that Fundamental Rights prevail over Directive Principles?",
-        "options": ["Minerva Mills v. Union of India", "State of Madras v. Champakam Dorairajan", "Kesavananda Bharati v. State of Kerala", "Golakh Nath v. State of Punjab"],
-        "correctAnswer": 1,
-        "explanation": "In Champakam Dorairajan (1951), the Court held that Directive Principles cannot override Fundamental Rights.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which constitutional amendment sought to give primacy to certain Directive Principles over Fundamental Rights?",
-        "options": ["24th Amendment", "25th Amendment", "42nd Amendment", "44th Amendment"],
-        "correctAnswer": 1,
-        "explanation": "The 25th Amendment (1971) gave precedence to DPSPs in specific areas like Article 39(b) and (c).",
-        "difficulty": "H"
-      },
-      {
-        "text": "Which case established harmony between Fundamental Rights and DPSPs as part of the basic structure?",
-        "options": ["Minerva Mills v. Union of India", "Kesavananda Bharati v. State of Kerala", "Golakh Nath v. State of Punjab", "I.R. Coelho v. State of Tamil Nadu"],
-        "correctAnswer": 0,
-        "explanation": "Minerva Mills recognized the balance between Fundamental Rights and DPSPs as integral to the basic structure.",
-        "difficulty": "H"
-      },
-      {
-        "text": "What is the chief purpose of Directive Principles of State Policy?",
-        "options": ["To enforce criminal law", "To guide the state in achieving socio-economic goals", "To limit judicial review", "To regulate foreign policy"],
-        "correctAnswer": 1,
-        "explanation": "DPSPs direct the state to implement policies ensuring social and economic justice.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which Article contains Directive Principles related to equal pay for equal work?",
-        "options": ["Article 38", "Article 39", "Article 41", "Article 43"],
-        "correctAnswer": 1,
-        "explanation": "Article 39(d) specifically mentions the principle of equal pay for equal work.",
-        "difficulty": "M"
-      }
-    ]
-  },
-  {
-    "passage": "Federalism in India is often described as ‘quasi-federal’ due to the strong centralizing tendencies embedded within the constitutional framework. While both the Union and States derive power from the Constitution, the Union holds greater authority, especially during emergencies or in areas listed under the Union List. The Supreme Court in S.R. Bommai v. Union of India (1994) affirmed that federalism is part of the basic structure, emphasizing the autonomy of states within the constitutional limits. This ensures that although India is not a classical federation like the U.S., it preserves a cooperative model where both tiers function harmoniously to uphold unity with diversity.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Which case recognized federalism as part of the basic structure?",
-        "options": ["Kesavananda Bharati v. State of Kerala", "S.R. Bommai v. Union of India", "Indira Gandhi v. Raj Narain", "Minerva Mills v. Union of India"],
-        "correctAnswer": 1,
-        "explanation": "In S.R. Bommai, the Supreme Court held that federalism forms part of the basic structure of the Constitution.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Why is India called a quasi-federal state?",
-        "options": ["Because the States can override Union laws", "Because the Constitution gives predominance to the Union over States", "Because it lacks written division of powers", "Because all powers are with the judiciary"],
-        "correctAnswer": 1,
-        "explanation": "India’s Constitution is federal in form but unitary in spirit, giving more powers to the Centre.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which Schedule of the Constitution contains the distribution of powers between the Union and States?",
-        "options": ["Fifth Schedule", "Seventh Schedule", "Tenth Schedule", "Eleventh Schedule"],
-        "correctAnswer": 1,
-        "explanation": "The Seventh Schedule enumerates Union, State, and Concurrent Lists outlining the distribution of powers.",
-        "difficulty": "M"
-      },
-      {
-        "text": "During which condition does the Union gain overriding legislative power?",
-        "options": ["During Proclamation of Emergency", "During elections", "During Presidential address", "During dissolution of State Assemblies"],
-        "correctAnswer": 0,
-        "explanation": "Under Article 353, the Union Parliament assumes wider powers during national emergencies.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Which of the following best describes Indian federalism?",
-        "options": ["Classical federalism", "Confederation", "Cooperative federalism", "Unitary federalism"],
-        "correctAnswer": 2,
-        "explanation": "Indian federalism is cooperative, ensuring coordination between the Centre and States.",
-        "difficulty": "M"
-      }
-    ]
-  },
-  {
-    "passage": "Judicial review is a cornerstone of the Indian Constitution, empowering courts to ensure that legislative and executive actions conform to constitutional principles. Rooted in Articles 13, 32, and 226, it allows the judiciary to strike down laws inconsistent with Fundamental Rights or the basic structure. While inspired by Marbury v. Madison (1803), judicial review in India extends beyond constitutionality to encompass administrative fairness. The Supreme Court in L. Chandra Kumar v. Union of India (1997) reaffirmed that judicial review of legislative and administrative actions is part of the Constitution’s basic structure. This ensures accountability, prevents abuse of power, and safeguards citizens’ rights.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Which case reaffirmed judicial review as part of the basic structure?",
-        "options": ["Kesavananda Bharati v. State of Kerala", "L. Chandra Kumar v. Union of India", "A.K. Gopalan v. State of Madras", "Indira Gandhi v. Raj Narain"],
-        "correctAnswer": 1,
-        "explanation": "In L. Chandra Kumar (1997), the Court held that judicial review is integral to the Constitution’s basic structure.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Which Articles explicitly empower courts to enforce Fundamental Rights through writs?",
-        "options": ["Articles 32 and 226", "Articles 14 and 19", "Articles 72 and 74", "Articles 356 and 360"],
-        "correctAnswer": 0,
-        "explanation": "Articles 32 and 226 grant the Supreme Court and High Courts power to issue writs for Fundamental Rights enforcement.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Judicial review in India draws inspiration from which landmark U.S. case?",
-        "options": ["Brown v. Board of Education", "Marbury v. Madison", "Roe v. Wade", "McCulloch v. Maryland"],
-        "correctAnswer": 1,
-        "explanation": "The concept originates from Marbury v. Madison (1803), establishing judicial review in the U.S.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which Article declares laws inconsistent with Fundamental Rights as void?",
-        "options": ["Article 13", "Article 19", "Article 32", "Article 368"],
-        "correctAnswer": 0,
-        "explanation": "Article 13(2) invalidates laws violating Fundamental Rights.",
-        "difficulty": "M"
-      },
-      {
-        "text": "What is the constitutional purpose of judicial review?",
-        "options": ["To replace the legislature", "To maintain checks and balances", "To execute laws", "To frame new legislation"],
-        "correctAnswer": 1,
-        "explanation": "Judicial review maintains the separation of powers and ensures that state actions remain constitutionally valid.",
-        "difficulty": "H"
-      }
-    ]
-  },
-  {
-    "passage": "Article 14 of the Indian Constitution guarantees equality before the law and equal protection of the laws within India. While these two expressions appear similar, they have distinct connotations. 'Equality before the law' is a negative concept derived from the British Constitution, implying the absence of any special privilege in favor of individuals. 'Equal protection of the laws,' borrowed from the American Constitution, is a positive concept that requires the state to treat all persons equally under similar circumstances. The Supreme Court, through cases such as E.P. Royappa v. State of Tamil Nadu (1974) and Maneka Gandhi v. Union of India (1978), interpreted Article 14 to embody the doctrine of non-arbitrariness, ensuring fairness and reasonableness in state action. Thus, Article 14 has evolved from formal equality to substantive equality, requiring not just equal treatment but equitable outcomes.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "From which country was the concept of 'Equality before the law' borrowed?",
-        "options": ["United States", "United Kingdom", "France", "Canada"],
-        "correctAnswer": 1,
-        "explanation": "The phrase 'equality before the law' originates from the British legal tradition, ensuring no one is above the law.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which case introduced the doctrine of non-arbitrariness under Article 14?",
-        "options": ["A.K. Gopalan v. State of Madras", "E.P. Royappa v. State of Tamil Nadu", "Minerva Mills v. Union of India", "Keshavananda Bharati v. State of Kerala"],
-        "correctAnswer": 1,
-        "explanation": "E.P. Royappa introduced the doctrine that arbitrariness violates equality under Article 14.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Which of the following best defines 'equal protection of the laws'?",
-        "options": ["Equal results for everyone", "Same treatment in all circumstances", "Equal treatment under similar circumstances", "Prohibition of all classifications"],
-        "correctAnswer": 2,
-        "explanation": "Equal protection means equal treatment for individuals similarly situated, allowing reasonable classification.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which case expanded Article 14 to include the idea of fairness and reasonableness?",
-        "options": ["Maneka Gandhi v. Union of India", "ADM Jabalpur v. Shivkant Shukla", "A.K. Gopalan v. State of Madras", "Indira Gandhi v. Raj Narain"],
-        "correctAnswer": 0,
-        "explanation": "In Maneka Gandhi, Article 14 was interpreted to require fairness and reasonableness in procedure.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Article 14 embodies which type of equality?",
-        "options": ["Formal equality", "Substantive equality", "Absolute equality", "Procedural equality"],
-        "correctAnswer": 1,
-        "explanation": "Through judicial interpretation, Article 14 evolved into a guarantee of substantive equality, not mere formality.",
-        "difficulty": "H"
-      }
-    ]
-  },
-  {
-    "passage": "The doctrine of separation of powers, though not explicitly mentioned in the Indian Constitution, is inherent in its structure. The Constitution divides powers among the legislature, executive, and judiciary, each performing distinct functions. However, unlike the rigid American model, India follows a flexible version allowing for coordination and overlap. For instance, the President exercises legislative powers through ordinances, and the judiciary performs quasi-legislative functions through judicial law-making. The Supreme Court in Indira Nehru Gandhi v. Raj Narain (1975) held that separation of powers is part of the basic structure, ensuring that one organ does not encroach upon the functions of another. The doctrine serves as a safeguard against concentration of power and reinforces constitutional checks and balances.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Which case held that separation of powers is part of the basic structure?",
-        "options": ["Kesavananda Bharati v. State of Kerala", "Indira Nehru Gandhi v. Raj Narain", "Minerva Mills v. Union of India", "S.R. Bommai v. Union of India"],
-        "correctAnswer": 1,
-        "explanation": "The Supreme Court in Indira Gandhi v. Raj Narain held that separation of powers is part of the Constitution’s basic structure.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which Article empowers the President to issue ordinances?",
-        "options": ["Article 72", "Article 123", "Article 324", "Article 148"],
-        "correctAnswer": 1,
-        "explanation": "Article 123 allows the President to promulgate ordinances when Parliament is not in session.",
-        "difficulty": "M"
-      },
-      {
-        "text": "India follows which model of separation of powers?",
-        "options": ["Rigid", "Flexible", "Absolute", "Unitary"],
-        "correctAnswer": 1,
-        "explanation": "India follows a flexible model allowing coordination among organs of the government.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Which function is an example of overlap between organs of government?",
-        "options": ["President’s assent to a bill", "Judiciary interpreting the Constitution", "Executive implementing laws", "Parliament passing budget"],
-        "correctAnswer": 0,
-        "explanation": "The President, part of the executive, participates in the legislative process through assent and ordinances.",
-        "difficulty": "M"
-      },
-      {
-        "text": "What is the primary objective of the separation of powers doctrine?",
-        "options": ["To increase efficiency", "To avoid overlapping of functions", "To prevent concentration of power", "To grant absolute independence to the judiciary"],
-        "correctAnswer": 2,
-        "explanation": "The doctrine ensures checks and balances by preventing excessive concentration of power in any one organ.",
-        "difficulty": "H"
-      }
-    ]
-  },
-  {
-    "passage": "Article 32 of the Constitution provides the right to constitutional remedies, empowering individuals to directly approach the Supreme Court for enforcement of Fundamental Rights. Dr. B.R. Ambedkar termed it the 'heart and soul' of the Constitution. This article not only guarantees the right but also confers the Supreme Court with the power to issue writs — habeas corpus, mandamus, prohibition, quo warranto, and certiorari. The significance of Article 32 lies in ensuring judicial protection against state action violating Fundamental Rights. However, the Supreme Court in P.N. Kumar v. Municipal Corporation (1987) clarified that Article 32 is not available for ordinary legal rights. The concurrent jurisdiction of High Courts under Article 226 further strengthens the remedial framework, ensuring accessibility and protection of rights across India.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Who called Article 32 the 'heart and soul' of the Constitution?",
-        "options": ["Jawaharlal Nehru", "Dr. B.R. Ambedkar", "Sardar Patel", "Rajendra Prasad"],
-        "correctAnswer": 1,
-        "explanation": "Dr. Ambedkar described Article 32 as the 'heart and soul' because it guarantees the enforcement of Fundamental Rights.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which writ is used to release a person unlawfully detained?",
-        "options": ["Mandamus", "Habeas Corpus", "Prohibition", "Quo Warranto"],
-        "correctAnswer": 1,
-        "explanation": "The writ of Habeas Corpus secures the release of a person unlawfully detained.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Under which Article can High Courts issue writs for enforcement of rights?",
-        "options": ["Article 32", "Article 136", "Article 226", "Article 227"],
-        "correctAnswer": 2,
-        "explanation": "Article 226 empowers High Courts to issue writs for enforcement of Fundamental and other legal rights.",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which of the following statements is true regarding Article 32?",
-        "options": ["It is available only for legal rights", "It is itself a Fundamental Right", "It can be suspended permanently", "It can be invoked against private individuals only"],
-        "correctAnswer": 1,
-        "explanation": "Article 32 is a Fundamental Right that provides a direct remedy before the Supreme Court.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Which case limited the use of Article 32 to Fundamental Rights only?",
-        "options": ["P.N. Kumar v. Municipal Corporation", "Maneka Gandhi v. Union of India", "Minerva Mills v. Union of India", "ADM Jabalpur v. Shivkant Shukla"],
-        "correctAnswer": 0,
-        "explanation": "In P.N. Kumar, the Court clarified that Article 32 cannot be invoked for ordinary legal rights.",
-        "difficulty": "H"
-      }
-    ]
-  },
-  {
-    "passage": "Article 356 of the Indian Constitution empowers the President to impose President’s Rule in a State if the constitutional machinery has failed. This provision, however, has been one of the most controversial due to its history of political misuse. In S.R. Bommai v. Union of India (1994), the Supreme Court laid down strict guidelines for its application, holding that the President’s satisfaction is subject to judicial review. The Court also emphasized that federalism and state autonomy are part of the basic structure, and Article 356 should be used sparingly. The judgment reinforced democratic accountability and curtailed arbitrary dismissal of state governments, ensuring the principle of constitutionalism remains intact.",
-    "subject": "Constitutional Law",
-    "questions": [
-      {
-        "text": "Which case laid down restrictions on the misuse of Article 356?",
-        "options": ["Indira Gandhi v. Raj Narain", "Minerva Mills v. Union of India", "S.R. Bommai v. Union of India", "State of Rajasthan v. Union of India"],
-        "correctAnswer": 2,
-        "explanation": "S.R. Bommai v. Union of India placed limits on the arbitrary use of Article 356 and upheld federalism.",
-        "difficulty": "H"
-      },
-      {
-        "text": "Under which Article can President’s Rule be imposed?",
-        "options": ["Article 352", "Article 356", "Article 360", "Article 370"],
-        "correctAnswer": 1,
-        "explanation": "Article 356 empowers the President to assume control of a State’s administration if constitutional machinery fails.",
-        "difficulty": "M"
-      },
-      {
-        "text": "What is the maximum duration for President’s Rule in a State without Parliamentary approval?",
-        "options": ["One month", "Two months", "Six months", "One year"],
-        "correctAnswer": 2,
-        "explanation": "President’s Rule must be approved by Parliament within six months under Article 356(3).",
-        "difficulty": "M"
-      },
-      {
-        "text": "Which principle did S.R. Bommai v. Union of India reinforce?",
-        "options": ["Judicial supremacy", "Federalism as part of the basic structure", "Absolute executive discretion", "Parliamentary privilege"],
-        "correctAnswer": 1,
-        "explanation": "The case reaffirmed that federalism forms part of the Constitution’s basic structure.",
-        "difficulty": "H"
-      },
-      {
-        "text": "What safeguard did the Supreme Court introduce regarding Article 356?",
-        "options": ["Complete immunity from review", "Judicial review of President’s satisfaction", "Automatic parliamentary approval", "Permanent dissolution of the Assembly"],
-        "correctAnswer": 1,
-        "explanation": "The Court held that the President’s satisfaction under Article 356 is subject to judicial scrutiny.",
-        "difficulty": "H"
-      }
-    ]
-  }
-];
-
-        const adminLawBank = [
-            {
-                passage: "Natural justice embodies fundamental procedural rights ensuring fairness in decision-making. The two core principles are audi alteram partem (the right to be heard) and nemo judex in causa sua (no one should be a judge in his own cause). Indian courts have consistently held that administrative bodies must observe these principles when actions affect individual rights or interests. Failure to provide a reasonable opportunity to be heard or presence of bias renders the decision vulnerable to judicial review.",
-                subject: "Administrative Law",
-                questions: [
-                    {
-                        text: "What does audi alteram partem mean?",
-                        options: ["No person shall be a judge in his own cause", "The right to be heard before adverse action", "The right to appeal", "The right to legal representation"],
-                        correctAnswer: 1,
-                        explanation: "Audi alteram partem ensures affected parties can present their case before decisions affecting them are made.",
-                        difficulty: "E"
-                    },
-                    {
-                        text: "What is the second principle of natural justice?",
-                        options: ["Right to appeal", "Nemo judex in causa sua", "Right to counsel", "Right to reasons"],
-                        correctAnswer: 1,
-                        explanation: "Nemo judex in causa sua means no one should be a judge in their own cause, preventing bias.",
-                        difficulty: "E"
-                    },
-                    {
-                        text: "When must administrative bodies observe principles of natural justice?",
-                        options: ["Only in criminal matters", "When actions affect individual rights or interests", "Only when statute mandates", "Never - they have absolute discretion"],
-                        correctAnswer: 1,
-                        explanation: "Courts have held that natural justice must be observed when administrative actions affect individual rights or interests.",
-                        difficulty: "M"
-                    },
-                    {
-                        text: "What is the consequence of violating natural justice principles?",
-                        options: ["Criminal liability", "Decision vulnerable to judicial review", "Automatic reversal", "No consequences"],
-                        correctAnswer: 1,
-                        explanation: "Failure to observe natural justice makes the administrative decision vulnerable to judicial review and potential invalidation.",
-                        difficulty: "M"
-                    },
-                    {
-                        text: "Which of the following is an exception to strict compliance with natural justice?",
-                        options: ["All administrative decisions", "Emergency scenarios where strict compliance is impracticable", "When the officer is busy", "When the decision favors the government"],
-                        correctAnswer: 1,
-                        explanation: "Courts recognize that in certain emergency or impracticable situations, strict compliance with natural justice may not be feasible.",
-                        difficulty: "H"
-                    },
-                    {
-                        text: "The principle of natural justice is integral to which constitutional concepts?",
-                        options: ["Federalism only", "Constitutional governance and administrative accountability", "Separation of powers only", "Judicial independence only"],
-                        correctAnswer: 1,
-                        explanation: "Natural justice is integral to constitutional governance and ensures administrative accountability.",
-                        difficulty: "M"
-                    },
-                    {
-                        text: "Can natural justice principles be completely excluded by statute?",
-                        options: ["Yes, always", "No, they are fundamental rights", "Yes, but only with express language", "Depends on the administrator's discretion"],
-                        correctAnswer: 2,
-                        explanation: "Courts have held that exclusion of natural justice requires express statutory language; implicit exclusion is not favored.",
-                        difficulty: "H"
-                    },
-                    {
-                        text: "What type of bias violates nemo judex in causa sua?",
-                        options: ["Only financial interest", "Personal, pecuniary, or official bias", "Only family relationships", "Only political affiliations"],
-                        correctAnswer: 1,
-                        explanation: "The principle covers personal, pecuniary (financial), and official bias - any situation where the decision-maker has a vested interest.",
-                        difficulty: "M"
-                    },
-                    {
-                        text: "Is a hearing always required before administrative action?",
-                        options: ["Yes, in all cases", "No, not in cases of urgency or when impracticable", "Only when requested by the affected party", "Only in judicial proceedings"],
-                        correctAnswer: 1,
-                        explanation: "While generally required, exceptions exist for urgency, impracticability, or where statute expressly excludes it.",
-                        difficulty: "M"
-                    },
-                    {
-                        text: "Which article of the Constitution is most closely associated with natural justice?",
-                        options: ["Article 14 and 21", "Article 32 only", "Article 19 only", "Article 356"],
-                        correctAnswer: 0,
-                        explanation: "Articles 14 (equality) and 21 (life and liberty) have been interpreted to include principles of natural justice.",
-                        difficulty: "M"
-                    }
-                ]
-            }
-            // Add more Administrative Law passages here from your uploaded document
-        ];
-
-        document.addEventListener('DOMContentLoaded', init);
-
-        function init() {
-            checkLoginStatus();
-            attachEventListeners();
-        }
-
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
-        function attachEventListeners() {
-            document.getElementById('showRegister').addEventListener('click', (e) => { e.preventDefault(); showScreen('registerScreen'); });
-            document.getElementById('showLogin').addEventListener('click', (e) => { e.preventDefault(); showScreen('loginScreen'); });
-            document.getElementById('showAdminLogin').addEventListener('click', (e) => { e.preventDefault(); showScreen('adminLoginScreen'); });
-            document.getElementById('backToLogin').addEventListener('click', (e) => { e.preventDefault(); showScreen('loginScreen'); });
-            document.getElementById('loginForm').addEventListener('submit', handleLogin);
-            document.getElementById('registerForm').addEventListener('submit', handleRegister);
-            document.getElementById('paymentForm').addEventListener('submit', handlePaymentSubmission);
-            document.getElementById('adminLoginForm').addEventListener('submit', handleAdminLogin);
-            document.getElementById('logoutBtn').addEventListener('click', logout);
-            document.getElementById('adminLogout').addEventListener('click', logout);
-            document.getElementById('startTestBtn').addEventListener('click', startTest);
-            document.getElementById('submitTestBtn').addEventListener('click', submitTest);
-            document.getElementById('backToTestsBtn').addEventListener('click', backToTests);
-            document.getElementById('nextBtn').addEventListener('click', () => navigateQuestion(1));
-            document.getElementById('prevBtn').addEventListener('click', () => navigateQuestion(-1));
-        }
-
-        function showScreen(screenId) {
-            const screens = ['loginScreen', 'registerScreen', 'paymentScreen', 'adminLoginScreen', 'adminPanel', 'mainScreen'];
-            screens.forEach(screen => document.getElementById(screen).classList.add('hidden'));
-            document.getElementById(screenId).classList.remove('hidden');
-        }
-
-        function checkLoginStatus() {
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                if (currentUser.isAdmin) {
-                    loadAdminPanel();
-                    showScreen('adminPanel');
-                } else {
-                    document.getElementById('welcomeUser').textContent = `Welcome, ${currentUser.name}! 🎉`;
-                    showScreen('mainScreen');
-                }
-            }
-        }
-
-        function handleLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-            const users = JSON.parse(localStorage.getItem('users') || '{}');
-            const user = users[email];
-            
-            if (!user) { showCustomAlert('Invalid credentials. Please register first.'); return; }
-            if (user.password !== password) { showCustomAlert('Invalid password.'); return; }
-            if (!user.hasAccess) { showCustomAlert('Payment pending verification. Contact admin.'); return; }
-            
-            currentUser = user;
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            document.getElementById('welcomeUser').textContent = `Welcome, ${user.name}! 🎉`;
-            showScreen('mainScreen');
-        }
-
-        function handleRegister(e) {
-            e.preventDefault();
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const phone = document.getElementById('regPhone').value;
-            const password = document.getElementById('regPassword').value;
-            const users = JSON.parse(localStorage.getItem('users') || '{}');
-            
-            if (users[email]) { showCustomAlert('Email already registered. Please login.'); return; }
-            
-            const tempUser = { name, email, phone, password };
-            localStorage.setItem('tempRegistration', JSON.stringify(tempUser));
-            document.getElementById('confirmName').value = name;
-            document.getElementById('confirmEmail').value = email;
-            document.getElementById('confirmPhone').value = phone;
-            showScreen('paymentScreen');
-        }
-
-        function handlePaymentSubmission(e) {
-            e.preventDefault();
-            const transactionId = document.getElementById('transactionId').value;
-            const tempUser = JSON.parse(localStorage.getItem('tempRegistration'));
-            const users = JSON.parse(localStorage.getItem('users') || '{}');
-            
-            users[tempUser.email] = {
-                ...tempUser,
-                transactionId: transactionId,
-                paymentDate: new Date().toISOString(),
-                hasAccess: true // Automatically grant access
-            };
-            
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.removeItem('tempRegistration');
-            
-            // Send email via Formspree
-            fetch('https://formspree.io/f/mldoolzv', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: tempUser.name,
-                    email: tempUser.email,
-                    phone: tempUser.phone,
-                    transactionId: transactionId,
-                    date: new Date().toLocaleString(),
-                    _subject: 'New Payment - CLAT PG Mock Test'
-                })
-            }).catch(err => console.log('Email send failed:', err));
-            
-            showCustomAlert('Payment submitted! You now have access to all 50 tests! 🎉');
-            currentUser = users[tempUser.email];
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            document.getElementById('welcomeUser').textContent = `Welcome, ${tempUser.name}! 🎉`;
-            showScreen('mainScreen');
-        }
-
-        async function handleAdminLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('adminEmail').value;
-            const password = document.getElementById('adminPassword').value;
-            const passwordHash = await sha256(password);
-            
-            if (email === ADMIN_EMAIL && passwordHash === ADMIN_PASSWORD_HASH) {
-                currentUser = { isAdmin: true, email: ADMIN_EMAIL };
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                loadAdminPanel();
-                showScreen('adminPanel');
-            } else {
-                showCustomAlert('Invalid admin credentials!');
-            }
-        }
-
-        function loadAdminPanel() {
-            const users = JSON.parse(localStorage.getItem('users') || '{}');
-            const userList = document.getElementById('userList');
-            userList.innerHTML = '';
-            
-            if (Object.keys(users).length === 0) {
-                userList.innerHTML = '<p style="text-align: center; color: #999;">No users registered yet.</p>';
-                return;
-            }
-            
-            Object.values(users).forEach(user => {
-                const div = document.createElement('div');
-                div.className = 'user-card';
-                div.innerHTML = `
-                    <h4 style="color: #667eea; margin-bottom: 12px;">${user.name}</h4>
-                    <p><strong>Email:</strong> ${user.email}</p>
-                    <p><strong>Phone:</strong> ${user.phone}</p>
-                    <p><strong>Transaction ID:</strong> ${user.transactionId || 'N/A'}</p>
-                    <p><strong>Date:</strong> ${user.paymentDate ? new Date(user.paymentDate).toLocaleDateString() : 'N/A'}</p>
-                    <p><strong>Status:</strong> <span class="status-badge ${user.hasAccess ? 'status-paid' : 'status-pending'}">${user.hasAccess ? 'Access Granted ✓' : 'Access Revoked ✗'}</span></p>
-                    <div class="admin-actions">
-                        <button class="${user.hasAccess ? 'btn-danger' : 'btn-success'} access-btn" data-email="${user.email}">
-                            ${user.hasAccess ? 'Revoke Access' : 'Grant Access'}
-                        </button>
-                        <button class="btn-delete delete-btn" data-email="${user.email}">Delete Permanently</button>
-                    </div>
-                `;
-                
-                // FIXED: Use addEventListener instead of onclick
-                div.querySelector('.access-btn').addEventListener('click', (e) => {
-                    const email = e.target.dataset.email;
-                    const user = JSON.parse(localStorage.getItem('users') || '{}')[email];
-                    if (user.hasAccess) {
-                        revokeAccess(email);
-                    } else {
-                        grantAccess(email);
-                    }
-                });
-                
-                div.querySelector('.delete-btn').addEventListener('click', (e) => {
-                    deleteUser(e.target.dataset.email);
-                });
-
-                userList.appendChild(div);
-            });
-        }
-
-        function revokeAccess(email) {
-            showCustomConfirm('Revoke access for this user?', (confirmed) => {
-                if (confirmed) {
-                    const users = JSON.parse(localStorage.getItem('users') || '{}');
-                    if (users[email]) {
-                        users[email].hasAccess = false;
-                        localStorage.setItem('users', JSON.stringify(users));
-                        loadAdminPanel();
-                        showCustomAlert('Access revoked! ✓');
-                    }
-                }
-            });
-        }
-
-        function grantAccess(email) {
-            const users = JSON.parse(localStorage.getItem('users') || '{}');
-            if (users[email]) {
-                users[email].hasAccess = true;
-                localStorage.setItem('users', JSON.stringify(users));
-                loadAdminPanel();
-                showCustomAlert('Access granted! ✓');
-            }
-        }
-
-        function deleteUser(email) {
-            showCustomConfirm('PERMANENTLY DELETE this user? This cannot be undone!', (confirmed) => {
-                if (confirmed) {
-                    const users = JSON.parse(localStorage.getItem('users') || '{}');
-                    delete users[email];
-                    localStorage.setItem('users', JSON.stringify(users));
-                    loadAdminPanel();
-                    showCustomAlert('User deleted permanently! ✓');
-                }
-            });
-        }
-
-        function logout() {
-            localStorage.removeItem('currentUser');
-            currentUser = null;
-            location.reload();
-        }
-
-        function startTest() {
-            const testId = document.getElementById('testSelector').value;
-            currentTest = generateTest(testId);
-            currentQuestion = 0;
-            answers = {};
-            timeRemaining = 7200; // 120 minutes * 60 seconds
-            
-            document.getElementById('testSelectionScreen').classList.add('hidden');
-            document.getElementById('testScreen').classList.remove('hidden');
-            
-            displayQuestion();
-            createQuestionPalette();
-            startTimer();
-        }
-
-        function generateTest(testId) {
-            // Generate a test by randomly selecting questions from subject banks
-            const allQuestions = [];
-            let questionId = 1;
-            
-            // Combine all banks for full syllabus tests
-            const allBanks = [
-                ...constitutionalLawBank,
-                ...adminLawBank
-            ];
-            
-            // Flatten all passages and questions into a single list
-            allBanks.forEach(passageSet => {
-                passageSet.questions.forEach(q => {
-                    allQuestions.push({
-                        id: questionId++,
-                        passage: passageSet.passage,
-                        subject: passageSet.subject,
-                        question: q.text,
-                        options: q.options,
-                        correctAnswer: q.correctAnswer,
-                        explanation: q.explanation,
-                        difficulty: q.difficulty
-                    });
-                });
-            });
-            
-            // Shuffle and select 120 questions (or fewer if not available)
-            const shuffled = allQuestions.sort(() => 0.5 - Math.random());
-            const selectedQuestions = shuffled.slice(0, 120);
-            
-            return { testId, questions: selectedQuestions };
-        }
-
-        function displayQuestion() {
-            const q = currentTest.questions[currentQuestion];
-            const card = document.getElementById('questionCard');
-            
-            card.innerHTML = `
-                <div class="question-number">Question ${currentQuestion + 1} of ${currentTest.questions.length} - ${q.subject || ''}</div>
-                <div class="passage-box">
-                    <p>${q.passage.replace(/\n/g, '<br>')}</p>
-                </div>
-                <div class="question-text">${q.question}</div>
-                <div>
-                    ${q.options.map((opt, idx) => `
-                        <label class="option-label ${answers[q.id] === idx ? 'selected' : ''}" data-option="${idx}">
-                            <input type="radio" name="q${q.id}" value="${idx}" ${answers[q.id] === idx ? 'checked' : ''}>
-                            <span>${opt}</span>
-                        </label>
-                    `).join('')}
-                </div>
-            `;
-            
-            card.querySelectorAll('.option-label').forEach(label => {
-                label.addEventListener('click', function() {
-                    const radio = this.querySelector('input[type="radio"]');
-                    radio.checked = true;
-                    const optionIdx = parseInt(this.dataset.option);
-                    saveAnswer(q.id, optionIdx);
-                    card.querySelectorAll('.option-label').forEach(l => l.classList.remove('selected'));
-                    this.classList.add('selected');
-                });
-            });
-            
-            document.getElementById('prevBtn').disabled = currentQuestion === 0;
-            document.getElementById('nextBtn').disabled = currentQuestion === currentTest.questions.length - 1;
-            updatePalette();
-        }
-
-        function saveAnswer(questionId, answerIndex) {
-            answers[questionId] = answerIndex;
-            updatePalette();
-        }
-
-        function createQuestionPalette() {
-            const palette = document.getElementById('questionPalette');
-            palette.innerHTML = '';
-            
-            for (let i = 0; i < currentTest.questions.length; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'palette-btn';
-                btn.textContent = i + 1;
-                btn.onclick = () => {
-                    currentQuestion = i;
-                    displayQuestion();
-                };
-                palette.appendChild(btn);
-            }
-        }
-
-        function updatePalette() {
-            const buttons = document.querySelectorAll('.palette-btn');
-            buttons.forEach((btn, idx) => {
-                btn.classList.remove('answered', 'current');
-                if (idx === currentQuestion) btn.classList.add('current');
-                if (answers[currentTest.questions[idx].id] !== undefined) btn.classList.add('answered');
-            });
-        }
-
-        function navigateQuestion(direction) {
-            const newQ = currentQuestion + direction;
-            if (newQ >= 0 && newQ < currentTest.questions.length) {
-                currentQuestion = newQ;
-                displayQuestion();
-            }
-        }
-
-        function startTimer() {
-            const timerEl = document.getElementById('timer');
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                const min = Math.floor(timeRemaining / 60);
-                const sec = timeRemaining % 60;
-                timerEl.textContent = `${min}:${sec.toString().padStart(2, '0')}`;
-                
-                if (timeRemaining === 600) { // 10 minutes
-                    timerEl.classList.add('warning');
-                    showCustomAlert('⚠️ Only 10 minutes left!');
-                }
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    showCustomAlert('⏰ Time Up! Submitting test...');
-                    submitTest(true); // Force submit
-                }
-            }, 1000);
-        }
-
-        function submitTest(force = false) {
-            if (!force) {
-                showCustomConfirm('Submit test? You cannot change answers after submission!', (confirmed) => {
-                    if (confirmed) {
-                        calculateAndShowResults();
-                    }
-                });
-            } else {
-                calculateAndShowResults();
-            }
-        }
-        
-        function calculateAndShowResults() {
-            clearInterval(timerInterval);
-            
-            let correct = 0, incorrect = 0, unanswered = 0;
-            
-            currentTest.questions.forEach(q => {
-                if (answers[q.id] === undefined) unanswered++;
-                else if (answers[q.id] === q.correctAnswer) correct++;
-                else incorrect++;
-            });
-            
-            const score = correct - (incorrect * 0.25);
-            const percentage = (currentTest.questions.length > 0) ? ((correct / currentTest.questions.length) * 100).toFixed(2) : 0;
-            const timeTaken = Math.floor((7200 - timeRemaining) / 60);
-            
-            // Generate detailed analysis
-            let analysisHTML = '<h3 style="color: #667eea; margin-top: 32px;">📊 Detailed Question-wise Analysis</h3>';
-            currentTest.questions.forEach((q, idx) => {
-                const userAnswer = answers[q.id];
-                const isCorrect = userAnswer === q.correctAnswer;
-                const statusColor = userAnswer === undefined ? '#ff9800' : (isCorrect ? '#4caf50' : '#f44336');
-                const statusText = userAnswer === undefined ? '⚠ Not Attempted' : (isCorrect ? '✓ Correct' : '✗ Incorrect');
-                
-                analysisHTML += `
-                    <div style="background: ${userAnswer === undefined ? '#fff3e0' : (isCorrect ? '#e8f5e9' : '#ffebee')}; padding: 20px; margin: 16px 0; border-radius: 12px; border-left: 5px solid ${statusColor};">
-                        <div style="font-weight: 700; font-size: 16px; margin-bottom: 12px; color: ${statusColor};">
-                            Question ${idx + 1}: ${statusText} ${q.difficulty ? `[${q.difficulty}]` : ''} - ${q.subject || ''}
-                        </div>
-                        <div style="margin-bottom: 12px; font-weight: 600;">${q.question}</div>
-                        ${userAnswer !== undefined ? `
-                            <div style="margin: 10px 0; padding: 12px; background: rgba(255,255,255,0.7); border-radius: 8px;">
-                                <strong>Your Answer:</strong> ${q.options[userAnswer]}
-                            </div>
-                            ${!isCorrect ? `
-                                <div style="margin: 10px 0; padding: 12px; background: rgba(76, 175, 80, 0.2); border-radius: 8px;">
-                                    <strong>Correct Answer:</strong> ${q.options[q.correctAnswer]}
-                                </div>
-                            ` : ''}
-                        ` : `
-                            <div style="margin: 10px 0; padding: 12px; background: rgba(255, 152, 0, 0.2); border-radius: 8px;">
-                                <strong>You did not attempt this question</strong>
-                            </div>
-                            <div style="margin: 10px 0; padding: 12px; background: rgba(76, 175, 80, 0.2); border-radius: 8px;">
-                                <strong>Correct Answer:</strong> ${q.options[q.correctAnswer]}
-                            </div>
-                        `}
-                        <div style="margin-top: 16px; padding: 16px; background: rgba(102, 126, 234, 0.1); border-radius: 8px; border-left: 4px solid #667eea;">
-                            <strong style="color: #667eea;">📖 Explanation:</strong><br>
-                            ${q.explanation || 'Explanation not available for this question.'}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('resultsContent').innerHTML = `
-                <div style="text-align: center; padding: 40px;">
-                    <div style="font-size: 72px; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 20px 0;">
-                        ${score.toFixed(2)}
-                    </div>
-                    <p style="font-size: 24px; color: #666; margin-bottom: 40px;">Your Score</p>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 700px; margin: 0 auto 40px;">
-                        <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 28px; border-radius: 12px; color: white; box-shadow: 0 8px 16px rgba(79, 172, 254, 0.3);">
-                            <div style="font-size: 42px; font-weight: 700;">${correct}</div>
-                            <div style="font-size: 16px; margin-top: 8px;">Correct</div>
-                        </div>
-                        <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 28px; border-radius: 12px; color: white; box-shadow: 0 8px 16px rgba(245, 87, 108, 0.3);">
-                            <div style="font-size: 42px; font-weight: 700;">${incorrect}</div>
-                            <div style="font-size: 16px; margin-top: 8px;">Incorrect</div>
-                        </div>
-                        <div style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%); padding: 28px; border-radius: 12px; color: #2d3436; box-shadow: 0 8px 16px rgba(253, 203, 110, 0.3);">
-                            <div style="font-size: 42px; font-weight: 700;">${unanswered}</div>
-                            <div style="font-size: 16px; margin-top: 8px;">Unanswered</div>
-                        </div>
-                    </div>
-                    
-                    <div style="background: #f8f9fa; padding: 32px; border-radius: 12px; max-width: 700px; margin: 0 auto; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                        <p style="margin: 16px 0; font-size: 18px;"><strong>Accuracy:</strong> <span style="color: #667eea; font-weight: 700;">${percentage}%</span></p>
-                        <p style="margin: 16px 0; font-size: 18px;"><strong>Total Questions:</strong> ${currentTest.questions.length}</p>
-                        <p style="margin: 16px 0; font-size: 18px;"><strong>Time Taken:</strong> ${timeTaken} minutes</p>
-                        <p style="margin: 16px 0; font-size: 18px;"><strong>Test:</strong> ${document.getElementById('testSelector').options[document.getElementById('testSelector').selectedIndex].text}</p>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 48px; max-height: 800px; overflow-y: auto; padding: 0 16px;">
-                    ${analysisHTML}
-                </div>
-            `;
-            
-            document.getElementById('testScreen').classList.add('hidden');
-            document.getElementById('resultsScreen').classList.remove('hidden');
-            
-            const scores = JSON.parse(localStorage.getItem('scores') || '[]');
-            scores.push({
-                user: currentUser.name,
-                email: currentUser.email,
-                test: document.getElementById('testSelector').options[document.getElementById('testSelector').selectedIndex].text,
-                score: score,
-                correct: correct,
-                percentage: percentage,
-                date: new Date().toISOString()
-            });
-            localStorage.setItem('scores', JSON.stringify(scores));
-        }
-
-        function backToTests() {
-            document.getElementById('resultsScreen').classList.add('hidden');
-            document.getElementById('testSelectionScreen').classList.remove('hidden');
-        }
-    </script>
 </body>
 </html>
-
-
