@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CLAT PG Mock Test 1 (120 Questions / 120 Minutes)</title>
     <style>
+        /* CSS remains the same for aesthetics and feedback */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
@@ -106,8 +107,6 @@
             cursor: pointer;
             display: block;
         }
-        
-        /* Styles for after submission */
         .option-item.correct {
             background-color: #d4edda !important;
             border-color: #c3e6cb !important;
@@ -120,7 +119,6 @@
         .option-item.selected.incorrect {
             text-decoration: line-through;
         }
-        
         #submit-btn {
             background-color: #8b0000;
             color: white;
@@ -137,7 +135,6 @@
         #submit-btn:hover {
             background-color: #a50000;
         }
-        
         #results-container {
             display: none;
             padding: 20px;
@@ -145,9 +142,6 @@
             border: 1px solid #b3e0ff;
             border-radius: 8px;
             text-align: center;
-        }
-        #results-container h2 {
-            color: #004d99;
         }
         #score {
             font-size: 2.5em;
@@ -157,29 +151,6 @@
         #analysis {
             text-align: left;
             margin-top: 20px;
-        }
-        #analysis h3 {
-            color: #366799;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-        #analysis ul {
-            list-style-type: square;
-            padding-left: 20px;
-        }
-        .ranking-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        .ranking-table th, .ranking-table td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        .ranking-table th {
-            background-color: #004d99;
-            color: white;
         }
         .correct-info {
             color: #28a745;
@@ -210,27 +181,26 @@
     </div>
 
     <script>
-        // 1. QUIZ DATA (24 Passages, 120 Questions)
+        // 1. All Quiz Data (24 Passages, 120 Questions)
         // Note: Correct option index is 0 (A), 1 (B), 2 (C), 3 (D)
         const quizData = [
-            // Subject: Constitutional Law (15 Qs)
-            // P1: Basic Structure & Art 368
+            // Passage 1: Constitutional Law (Basic Structure)
             {
                 passage_title: "Passage 1: Basic Structure and Amending Power",
-                passage: "The doctrine of Basic Structure, established in *Kesavananda Bharati v. State of Kerala* (1973), limits Parliament's power under Article 368. The Court held that while Parliament can amend any provision, it cannot destroy the Constitution's fundamental framework. Later, in *Minerva Mills v. UOI* (1980), the Court affirmed that Judicial Review and the balance between Fundamental Rights (Part III) and Directive Principles (Part IV) are part of this Basic Structure. This doctrine ensures that the Constitution retains its core identity despite political pressures for drastic change.",
+                passage: "The doctrine of Basic Structure, established in *Kesavananda Bharati v. State of Kerala* (1973), limits Parliament's power under Article 368. The Court held that while Parliament can amend any provision, it cannot destroy the 'basic structure' or 'framework' of the Constitution. This doctrine ensures that the Constitution retains its core identity despite political pressures for drastic change.",
                 topic: "Constitutional Law (Basic Structure)",
                 questions: [
                     { q: "1. The Basic Structure Doctrine acts as a limitation on:", options: ["The Executive's ordinance power.", "The Judiciary's power of contempt.", "Parliament's constituent power under Article 368.", "The President's pardoning power."], correct: 2 },
-                    { q: "2. Which two constitutional elements were specifically affirmed as part of the Basic Structure in *Minerva Mills*?", options: ["Right to Property and Right to Education.", "Judicial Review and the harmony between Part III & Part IV.", "The structure of the Union List and State List.", "The tenure of the Prime Minister and the President."], correct: 1 },
+                    { q: "2. Which two constitutional elements were specifically affirmed as part of the Basic Structure in *Minerva Mills v. UOI*?", options: ["Right to Property and Right to Education.", "Judicial Review and the harmony between Part III & Part IV.", "The structure of the Union List and State List.", "The tenure of the Prime Minister and the President."], correct: 1 },
                     { q: "3. If Parliament attempts to make a constitutional amendment that eliminates free and fair elections, the amendment would violate the Basic Structure because it is:", options: ["Not passed by a simple majority.", "A change to the Tenth Schedule.", "An attempt to destroy an essential feature of democracy and the Constitution.", "Outside the scope of the Concurrent List."], correct: 2 },
                     { q: "4. The power of Parliament to amend the Constitution is contained in:", options: ["Article 13.", "Article 32.", "Article 368.", "Article 356."], correct: 2 },
                     { q: "5. The doctrine that prevents Parliament from amending a law that violates Fundamental Rights but is included in the Ninth Schedule after 1973 is the subject of which case?", options: ["*S.R. Bommai v. UOI*.", "*Maneka Gandhi v. UOI*.", "*I.R. Coelho v. State of T.N.*", "*Kihoto Hollohan v. Zachillhu*."], correct: 2 }
                 ]
             },
-            // P2: Art 14 & 21
+            // Passage 2: Constitutional Law (Art 14/21)
             {
                 passage_title: "Passage 2: The Golden Triangle and Substantive Due Process",
-                passage: "The 'Golden Triangle' comprising Articles 14, 19, and 21 signifies their integrated approach to fundamental rights. Following *Maneka Gandhi v. UOI*, the 'procedure established by law' under Article 21 must be 'fair, just, and reasonable,' giving the provision a substantive dimension akin to American 'due process.' Article 14 permeates all state action, demanding non-arbitrariness. A law that is procedurally compliant under Article 21 but imposes an unreasonable restriction on freedom under Article 19, or is manifestly arbitrary under Article 14, can be struck down.",
+                passage: "The 'Golden Triangle' comprising Articles 14, 19, and 21 signifies their integrated approach to fundamental rights. Following *Maneka Gandhi v. UOI*, the 'procedure established by law' under Article 21 must be 'fair, just, and reasonable,' giving the provision a substantive dimension akin to American 'due process.' Article 14 permeates all state action, demanding non-arbitrariness.",
                 topic: "Constitutional Law (Art 14/21)",
                 questions: [
                     { q: "6. The expansion of Article 21 to require that procedures must be 'fair, just, and reasonable' incorporates the principle of:", options: ["Reasonable Classification.", "Substantive Due Process.", "Doctrine of Proportionality.", "Doctrine of Colourable Legislation."], correct: 1 },
@@ -240,25 +210,24 @@
                     { q: "10. The concept that state action must be based on rational grounds and avoid extraneous considerations relates directly to:", options: ["The doctrine of *Volksgeist*.", "The non-arbitrariness facet of Article 14.", "The Doctrine of Pious Obligation.", "The principle of *Res Judicata*."], correct: 1 }
                 ]
             },
-            // P3: Anti-Defection
+            // Passage 3: Constitutional Law (Tenth Schedule)
             {
                 passage_title: "Passage 3: The Tenth Schedule and the Speaker's Role",
-                passage: "The Tenth Schedule (Anti-Defection Law) penalizes legislators for voluntarily giving up party membership or voting against the party whip. In *Kihoto Hollohan v. Zachillhu*, the Supreme Court upheld the Schedule but subjected the Speaker's decision on disqualification to judicial review. The Court held the Speaker acts as a tribunal, and their decision is final unless vitiated by mala fides, perversity, or violation of natural justice. This ruling affirms the supremacy of the Constitution by placing the Speaker's power under the judicial scrutiny of the High Courts and Supreme Court.",
+                passage: "The Tenth Schedule (Anti-Defection Law) penalizes legislators for voluntarily giving up party membership or voting against the party whip. In *Kihoto Hollohan v. Zachillhu* (1992), the Supreme Court upheld the Schedule but subjected the Speaker's decision on disqualification to judicial review. The Court held the Speaker acts as a tribunal, and their decision is final unless vitiated by mala fides, perversity, or violation of natural justice.",
                 topic: "Constitutional Law (Tenth Schedule)",
                 questions: [
                     { q: "11. The final authority to decide on disqualification under the Tenth Schedule is the:", options: ["President.", "Election Commission.", "Supreme Court.", "Speaker/Chairman of the House."], correct: 3 },
                     { q: "12. The specific ground that allows a member to be disqualified for defying party leadership is:", options: ["Absenteeism for 60 days.", "Voting or abstaining contrary to the party whip.", "Failure to disclose assets.", "Holding an office of profit."], correct: 1 },
                     { q: "13. What was the constitutional flaw in the Tenth Schedule (Para 7) that the Supreme Court struck down?", options: ["It permitted disqualification for voting against the party.", "It barred judicial review of the Speaker's decision.", "It allowed the President to interfere in the process.", "It defined 'political party' too narrowly."], correct: 1 },
-                    { q: "14. A ground for judicial review of the Speaker’s decision is:", options: ["The decision being politically unpopular.", "The member being a close relative of the Speaker.", "The decision being based on mala fides or perversity.", "The decision being appealed by the Governor."], correct: 2 },
+                    { q: "14. A ground for judicial review of the Speaker’s decision is:", options: ["The decision being politically incorrect.", "The member being a close relative of the Speaker.", "The decision being based on mala fides or perversity.", "The decision being appealed by the Governor."], correct: 2 },
                     { q: "15. The Speaker's role in deciding defection is classified by the Supreme Court as a:", options: ["Purely executive function.", "Legislative function.", "Quasi-judicial function (tribunal).", "Political question."], correct: 2 }
                 ]
             },
 
-            // Subject: Jurisprudence (12 Qs)
-            // P4: Hart vs Kelsen
+            // Passage 4: Jurisprudence (Positivism)
             {
                 passage_title: "Passage 4: Positivist Theories - Norms and Facts",
-                passage: "Hans Kelsen's Pure Theory sees law as a hierarchy of norms culminating in the presupposed **Grundnorm**, which is the ultimate source of validity, purified of moral content. H.L.A. Hart's Analytical Positivism sees law as a union of primary (duty-imposing) and secondary rules (Rule of Recognition, Change, Adjudication). Hart's **Rule of Recognition (RoR)** is a 'social fact'—it exists because officials accept and follow it, unlike Kelsen’s hypothetical, non-empirical Grundnorm. Both thinkers uphold the 'separation thesis'—the idea that law is distinct from morality.",
+                passage: "Hans Kelsen's Pure Theory sees law as a hierarchy of norms culminating in the presupposed **Grundnorm**, which is the ultimate source of validity. H.L.A. Hart's Analytical Positivism sees law as a union of primary and secondary rules. Hart's **Rule of Recognition (RoR)** is a 'social fact'—it exists because officials accept and follow it, unlike Kelsen’s hypothetical, non-empirical Grundnorm.",
                 topic: "Jurisprudence (Positivism)",
                 questions: [
                     { q: "16. Kelsen's Grundnorm is fundamentally:", options: ["An empirical social fact.", "A practical tool for judges.", "A juristic presupposition of the entire legal system's validity.", "The first written constitution."], correct: 2 },
@@ -268,10 +237,10 @@
                     { q: "20. The flaw of Austin's Command Theory, which Hart sought to correct, was its failure to distinguish between:", options: ["Being obliged (coerced) and having an obligation (rule-bound).", "Being happy and being sad.", "Legal rules and political ideology.", "Common law and statutory law."], correct: 0 }
                 ]
             },
-            // P5: Dworkin & Fuller
+            // Passage 5: Jurisprudence (Dworkin/Fuller)
             {
                 passage_title: "Passage 5: Natural Law & Rights as Trumps",
-                passage: "Lon L. Fuller, a natural law theorist, argued that law requires an 'inner morality,' meaning laws must meet eight procedural standards (like promulgation, clarity, consistency) to qualify as true law. Ronald Dworkin, a critic of positivism, argued that law consists not only of rules but also of 'principles' (standards of justice and fairness) that have a dimension of weight. Dworkin asserts that individual rights act as 'trumps' against policy arguments that appeal to collective welfare, preventing the sacrifice of a minority for the majority's utilitarian gain.",
+                passage: "Lon L. Fuller, a natural law theorist, argued that law requires an 'inner morality,' meaning laws must meet eight procedural standards (like promulgation, clarity, consistency) to qualify as true law. Ronald Dworkin, a critic of positivism, argued that law consists not only of rules but also of 'principles' that have a dimension of weight. Dworkin asserts that individual rights act as 'trumps' against policy arguments that appeal to collective welfare.",
                 topic: "Jurisprudence (Dworkin/Fuller)",
                 questions: [
                     { q: "21. Dworkin's assertion that principles have a 'dimension of weight' is used to demonstrate that principles, unlike rules, are not:", options: ["Predictive.", "Justifiable.", "Applied in an all-or-nothing fashion.", "Subject to judicial interpretation."], correct: 2 },
@@ -282,12 +251,11 @@
                 ]
             },
 
-            // Subject: Criminal Law (12 Qs)
-            // P6: General Exceptions & Mens Rea
+            // Passage 6: Criminal Law (Exceptions)
             {
                 passage_title: "Passage 6: General Exceptions (Necessity) and Mens Rea",
                 passage: "The Indian Penal Code (IPC) recognizes several General Exceptions where, despite committing the *actus reus*, the accused is not liable. Section 81 (Necessity) protects an act done by the accused to avoid a greater harm, provided the lesser harm caused was non-malicious. The general principle *actus non facit reum nisi mens sit rea* (an act does not make a person guilty unless the mind is also guilty) underscores the necessity of *mens rea* for most offenses, though strict liability offenses are exceptions. The burden of proving a General Exception lies on the accused (Section 105, Evidence Act), though it only needs to be proven by a preponderance of probabilities.",
-                topic: "Criminal Law (IPC/Exceptions)",
+                topic: "Criminal Law (Exceptions)",
                 questions: [
                     { q: "26. The maxim *actus non facit reum nisi mens sit rea* implies that:", options: ["The act must be proven first.", "There must be an intention to commit the crime.", "Both the criminal act and the guilty mind must be present for an offense.", "The victim must suffer harm."], correct: 2 },
                     { q: "27. Under the Indian Evidence Act, the burden of proving a General Exception (like necessity or insanity) rests on:", options: ["The prosecution.", "The court.", "The accused.", "The victim."], correct: 2 },
@@ -296,7 +264,7 @@
                     { q: "30. The principle that a person who brings a hazardous substance onto their land is liable for its escape, regardless of fault (*Rylands v. Fletcher*), is an example of a violation of which criminal law principle?", options: ["*Actus reus*.", "*Mens rea* (as it is a strict liability concept).", "Doctrine of Necessity.", "Doctrine of Pith and Substance."], correct: 1 }
                 ]
             },
-            // P7: CrPC - FIR & Investigation
+            // Passage 7: Criminal Law (CrPC/FIR)
             {
                 passage_title: "Passage 7: FIR and the Mandate of Investigation",
                 passage: "Section 154 of the CrPC mandates that every information relating to the commission of a cognizable offence, if given orally to an officer in charge of a police station, shall be reduced to writing and signed by the informant. The Supreme Court, in *Lalita Kumari v. State of U.P.*, held that registration of an FIR is mandatory if the information discloses a cognizable offence, and no preliminary inquiry is permissible in such cases. A preliminary inquiry is only permissible in limited circumstances where the information does not clearly disclose a cognizable offense, or in specific types of cases (e.g., corruption, family disputes), solely to ascertain whether a cognizable offense has occurred.",
@@ -309,9 +277,7 @@
                     { q: "35. If the police refuse to register an FIR despite disclosure of a cognizable offense, the informant can approach the Superintendent of Police under:", options: ["Section 161 CrPC.", "Section 154(3) CrPC.", "Section 173 CrPC.", "Section 190 CrPC."], correct: 1 }
                 ]
             },
-
-            // Subject: Law of Torts (10 Qs)
-            // P8: Negligence
+             // Passage 8: Law of Torts (Negligence)
             {
                 passage_title: "Passage 8: Negligence and the Thin Skull Rule",
                 passage: "The tort of Negligence requires establishing a Duty of Care, a Breach of that Duty, and Damage caused by the breach that is not too remote (Foreseeability Test, *Wagon Mound*). An important qualification to remoteness is the **Thin Skull Rule** (*eggshell skull rule*): the defendant must take their victim as they find them. This means that if the **type of injury** is foreseeable, the defendant is liable for the full **extent** of the damage, even if the damage is much greater than expected due to the plaintiff's pre-existing physical or psychological frailty. The rule prevents the defendant from arguing that the extensive damage was too remote.",
@@ -324,7 +290,7 @@
                     { q: "40. If a person suffers an injury that was *not* reasonably foreseeable, the claim will fail due to:", options: ["Lack of duty.", "Lack of breach.", "Lack of remoteness (the damage is too remote).", "Lack of causation."], correct: 2 }
                 ]
             },
-            // P9: Strict Liability
+            // Passage 9: Law of Torts (Strict/Absolute Liability)
             {
                 passage_title: "Passage 9: Strict and Absolute Liability",
                 passage: "The rule of **Strict Liability** (*Rylands v. Fletcher*) imposes liability for the escape of a dangerous thing during a **non-natural use** of land, regardless of the defendant's negligence, but liability is subject to exceptions (Act of God, Act of Stranger, etc.). The Supreme Court of India, in *M.C. Mehta v. Union of India* (Oleum Gas Leak case), propounded the rule of **Absolute Liability**. This applies to enterprises engaged in **inherently hazardous activities** and removes all defenses available under *Rylands v. Fletcher*, ensuring that the enterprise is absolutely liable for the harm caused. This doctrine reflects the principle that industries profiting from hazardous activities must bear the cost of any resulting damage.",
@@ -337,9 +303,7 @@
                     { q: "45. The doctrine of Absolute Liability, being a judicial innovation, is an application of which constitutional objective?", options: ["Right to Free Trade (Art. 19(1)(g)).", "Social Justice and Protection of Life (Art. 21).", "Separation of Powers (Art. 50).", "Pardoning Power (Art. 72)."], correct: 1 }
                 ]
             },
-
-            // Subject: Family Law (10 Qs)
-            // P10: Divorce Grounds
+            // Passage 10: Family Law (Divorce Grounds)
             {
                 passage_title: "Passage 10: Divorce Grounds (Cruelty, Desertion, Separation)",
                 passage: "Under the Hindu Marriage Act, 1955 (HMA), the two main fault grounds for divorce are Cruelty and Desertion. Cruelty (Sec 13(1)(ia)) is not confined to physical harm but includes conduct that causes mental agony, making cohabitation unreasonable (*Samar Ghosh v. Jaya Ghosh*). Desertion (Sec 13(1)(ib)) requires the factual separation plus the *animus deserendi* (intention to permanently abandon) for a continuous period of not less than two years. Divorce by Mutual Consent (Sec 13B) requires separation for one year and a mandatory cooling-off period of six months.",
@@ -352,7 +316,7 @@
                     { q: "50. The mandatory minimum cooling-off period between the two motions of a mutual consent divorce is:", options: ["One year.", "Three months.", "Six months.", "Eighteen months."], correct: 2 }
                 ]
             },
-            // P11: Maintenance
+            // Passage 11: Family Law (Maintenance)
             {
                 passage_title: "Passage 11: Maintenance and Alimony (HMA/CrPC)",
                 passage: "Maintenance *Pendente Lite* (Sec 24 HMA) is a gender-neutral interim remedy for spouses lacking sufficient independent income during litigation. Permanent Alimony (Sec 25 HMA) is long-term support granted after a decree is passed. Separately, Section 125 of the CrPC provides a secular, summary remedy for basic subsistence for a wife, child, or parent unable to maintain themselves. The Supreme Court has clarified that maintenance under CrPC and HMA are concurrent remedies, but the amount paid under the summary remedy (CrPC) is generally adjusted against the final, comprehensive civil decree (HMA).",
@@ -365,40 +329,36 @@
                     { q: "55. The legal status of maintenance proceedings under Section 125 CrPC is classified as:", options: ["Purely civil.", "Quasi-criminal.", "Purely religious.", "Administrative."], correct: 1 }
                 ]
             },
-
-            // Subject: Law of Contract (10 Qs)
-            // P12: Frustration
+            // Passage 12: Law of Contract (Frustration)
             {
                 passage_title: "Passage 12: Frustration of Contract (Section 56)",
                 passage: "Section 56 of the Indian Contract Act, 1872, incorporates the Doctrine of Frustration, stating that a contract to do an act which, after the contract is made, becomes impossible or unlawful, becomes void when the act becomes impossible or unlawful. The impossibility need not be literal; it includes situations where performance becomes impracticable or useless from the point of view of the object and purpose of the contract (*Satyabrata Ghose v. Mugneeram Bangur*). This doctrine is applied when a supervening event, not contemplated by the parties, strikes at the root of the agreement. However, the doctrine is a matter of positive law, and the risk of a contract becoming merely more onerous (expensive) is generally insufficient to invoke frustration.",
                 topic: "Law of Contract (Frustration)",
                 questions: [
                     { q: "56. The Doctrine of Frustration is codified in the Indian Contract Act under:", options: ["Section 32.", "Section 73.", "Section 56.", "Section 2(j)."], correct: 2 },
-                    { q: "57. The term 'impossible' in Section 56 includes:", options: ["Only literal, physical impossibility.", "Situations where performance becomes impracticable or useless from the purpose of the contract.", "Situations where performance becomes slightly more difficult or expensive.", "Situations where the promisor changes his mind."], correct: 1 },
+                    { q: "57. The term 'impossible' in Section 56 includes:", options: ["Only literal, physical impossibility.", "Situations where performance becomes impracticable or useless from the purpose of the contract.", "Situations where performance becomes merely more difficult or expensive.", "Situations where the promisor changes his mind."], correct: 1 },
                     { q: "58. Which of the following is sufficient ground for frustration?", options: ["The contract becoming merely more difficult and expensive to perform.", "A self-induced breach by one of the parties.", "A supervening event that was not contemplated and strikes at the root of the contract.", "The Doctrine of Pious Obligation."], correct: 2 },
                     { q: "59. The Doctrine of Frustration is a matter of:", options: ["The intention of the parties.", "Positive law.", "Equitable discretion.", "Contributory negligence."], correct: 1 },
                     { q: "60. What is the effect of a contract being frustrated?", options: ["It becomes voidable at the option of the promisee.", "The parties are liable for nominal damages.", "It becomes void.", "The contract is only suspended temporarily."], correct: 2 }
                 ]
             },
-            // P13: Offer & Acceptance
+            // Passage 13: Law of Contract (Offer/Acceptance)
             {
                 passage_title: "Passage 13: Absolute Acceptance and Communication",
-                passage: "Section 7 of the Indian Contract Act mandates that acceptance must be absolute and unqualified to convert a proposal into a promise. An acceptance with a variation of terms is not a true acceptance but amounts to a **counter-offer**, which destroys the original offer. Furthermore, the communication of acceptance must be complete. Section 4 governs the communication: it is complete as against the proposer when it is put into a course of transmission to him, so as to be out of the power of the acceptor, and against the acceptor when it comes to the knowledge of the proposer. This rule is complicated by instantaneous modes of communication (e.g., telephone), where acceptance is generally deemed complete only when it comes to the knowledge of the proposer.",
+                passage: "Section 7 of the Indian Contract Act mandates that acceptance must be absolute and unqualified to convert a proposal into a promise. An acceptance with a variation of terms is not a true acceptance but amounts to a **counter-offer**, which destroys the original offer. Furthermore, the communication of acceptance must be complete. Section 4 governs the communication: it is complete as against the proposer when it is put into a course of transmission to him, so as to be out of the power of the acceptor, and against the acceptor when it comes to the knowledge of the proposer. In instantaneous modes of communication (e.g., telephone), acceptance is generally deemed complete only when it comes to the knowledge of the proposer.",
                 topic: "Law of Contract (Offer/Acceptance)",
                 questions: [
                     { q: "61. An acceptance with a variation of terms is legally classified as a:", options: ["Conditional acceptance.", "Counter-offer.", "Implied promise.", "Void agreement."], correct: 1 },
-                    { q: "62. What is the legal effect of a counter-offer?", options: ["It revives the original offer.", "It constitutes an implied acceptance.", "It destroys the original offer.", "It automatically forms a contract."], correct: 2 },
+                    { q: "62. The legal effect of a counter-offer is that it:", options: ["Revives the original offer.", "Constitutes an implied acceptance.", "Destroys the original offer.", "Automatically forms a contract."], correct: 2 },
                     { q: "63. As against the proposer, communication of acceptance is complete when:", options: ["The acceptance is signed by the acceptor.", "The acceptance comes to the knowledge of the proposer.", "It is put into a course of transmission to the proposer, out of the acceptor's power.", "The acceptance is recorded by the court."], correct: 2 },
                     { q: "64. The principle that acceptance must be absolute and unqualified is known as the:", options: ["Golden Rule.", "Literal Rule.", "Mirror Rule.", "Objective Rule."], correct: 2 },
                     { q: "65. In instantaneous communication (e.g., a phone call), acceptance is generally deemed complete when:", options: ["The offer is verbally repeated.", "The proposer hears the words of acceptance.", "The offeree transmits the words of acceptance.", "The parties shake hands."], correct: 1 }
                 ]
             },
-
-            // Subject: Law of Evidence (5 Qs)
-            // P14: Electronic Evidence
+            // Passage 14: Law of Evidence (Electronic Evidence)
             {
                 passage_title: "Passage 14: Electronic Evidence (Section 65B)",
-                passage: "The Indian Evidence Act, 1872, specifically Section 65B, governs the admissibility of electronic records. Section 65B is a special law that overrides the general rules of primary (Sec 62) and secondary (Sec 63-65) evidence for electronic documents. To admit a secondary electronic record (like a printout or copy from a server), a mandatory certificate under Section 65B(4) must be produced, certifying the integrity and operation of the computer system that generated the record. The Supreme Court, in *Arjun Panditrao Khotkar v. Kailash Gorantyal* (2020), affirmed that this certificate is **mandatory** for secondary electronic evidence, although the requirement can be waived if the original device itself is produced by the owner.",
+                passage: "The Indian Evidence Act, 1872, specifically Section 65B, is a special law that overrides the general rules of primary and secondary evidence for electronic documents. To admit a secondary electronic record (like a printout or copy from a server), a mandatory certificate under Section 65B(4) must be produced, certifying the integrity and operation of the computer system that generated the record. The Supreme Court, in *Arjun Panditrao Khotkar v. Kailash Gorantyal* (2020), affirmed that this certificate is **mandatory** for secondary electronic evidence, although the requirement can be waived if the original device itself is produced by the owner.",
                 topic: "Law of Evidence (Electronic Evidence)",
                 questions: [
                     { q: "66. For the admissibility of a printout generated from a computer (secondary electronic record), the IEA mandates:", options: ["Expert opinion under Section 45.", "A certificate under Section 65B(4).", "A judicial stamp.", "Only the affidavit of the person using the printout."], correct: 1 },
@@ -409,11 +369,10 @@
                 ]
             },
 
-            // Subject: Administrative Law (8 Qs)
-            // P15: Natural Justice
+            // Passage 15: Administrative Law (Natural Justice)
             {
                 passage_title: "Passage 15: Natural Justice - Rule Against Bias",
-                passage: "The principles of Natural Justice (*Audi Alteram Partem* and *Nemo Judex in Causa Sua*) are fundamental to administrative fairness. *Nemo Judex in Causa Sua* (Rule Against Bias) mandates that no person can be a judge in their own cause. The legal test is objective: the court checks for a **'real likelihood of bias'** or **'reasonable apprehension'** in the mind of the affected party, regardless of whether actual bias existed. Bias can be pecuniary (financial interest) or personal (relationships). An exception to this rule is the **Doctrine of Necessity**, where a disqualified authority must act because no other legally competent person exists to decide the matter.",
+                passage: "The principles of Natural Justice (*Nemo Judex in Causa Sua*) mandate that no person can be a judge in their own cause. The legal test is objective: the court checks for a **'real likelihood of bias'** or **'reasonable apprehension'** in the mind of the affected party, regardless of whether actual bias existed. Bias can be pecuniary (financial interest) or personal (relationships). An exception to this rule is the **Doctrine of Necessity**, where a disqualified authority must act because no other legally competent person exists to decide the matter.",
                 topic: "Administrative Law (Natural Justice)",
                 questions: [
                     { q: "71. The legal test applied to determine a violation of the Rule Against Bias is:", options: ["Whether the judge declared their financial assets.", "Whether there was a reasonable apprehension of bias.", "Whether the judge intentionally harmed the party.", "Whether the decision was financially detrimental."], correct: 1 },
@@ -424,10 +383,10 @@
                 ]
             },
 
-            // P16: Judicial Review
+            // Passage 16: Administrative Law (Judicial Review)
             {
                 passage_title: "Passage 16: Judicial Review - Wednesbury and Proportionality",
-                passage: "Administrative discretion is subject to judicial review to prevent abuse. The traditional English test is **Wednesbury Unreasonableness**, which only allows the court to interfere if the decision is 'so outrageous in its defiance of logic or accepted moral standards that no sensible person could have arrived at it.' This standard is very high. In India, courts now apply the stricter **Doctrine of Proportionality**, especially when Fundamental Rights are involved. Proportionality requires the court to check if the restriction imposed is necessary, if the means are suitable to the end, and if the damage caused is proportionate to the legitimate aim.",
+                passage: "Administrative discretion is subject to judicial review to prevent abuse. The traditional English test is **Wednesbury Unreasonableness**, which only allows the court to interfere if the decision is 'so outrageous in its defiance of logic or accepted moral standards that no sensible person could have arrived at it.' In India, courts now apply the stricter **Doctrine of Proportionality**, especially when Fundamental Rights are involved. Proportionality requires the court to check if the restriction imposed is necessary, if the means are suitable to the end, and if the damage caused is proportionate to the legitimate aim.",
                 topic: "Administrative Law (Judicial Review)",
                 questions: [
                     { q: "76. The Doctrine of Proportionality is primarily applied when reviewing administrative action that:", options: ["Involves tax liability.", "Infringes upon Fundamental Rights.", "Relates to the appointment of minor officials.", "Is protected by sovereign immunity."], correct: 1 },
@@ -437,131 +396,114 @@
                     { q: "80. The writ most commonly used to quash an order tainted by *Ultra Vires* or *Wednesbury* unreasonableness is:", options: ["*Mandamus*.", "*Habeas Corpus*.", "*Certiorari*.", "*Quo Warranto*."], correct: 2 }
                 ]
             },
-            
-            // Subject: Law of Evidence (5 Qs)
-            // P17: Burden of Proof
+            // Passage 17: Public International Law (Sources)
             {
-                passage_title: "Passage 17: Burden of Proof and Presumptions",
-                passage: "In a criminal trial, the general burden of proof (legal burden) always lies on the prosecution to prove the accused's guilt beyond a reasonable doubt (Section 101, IEA). However, the burden of adducing evidence (evidential burden, or onus) may shift. Section 105 places the burden on the accused to prove circumstances that bring their case under a General Exception (like insanity or private defense). Similarly, Section 106 states that when any fact is especially within the knowledge of any person, the burden of proving that fact is upon them. Presumptions are also used: for example, Section 113B (Dowry Death) creates a 'shall presume' (mandatory) presumption of guilt once certain foundational facts are proven by the prosecution.",
-                topic: "Law of Evidence (Burden & Presumptions)",
-                questions: [
-                    { q: "81. The legal burden of proving the guilt of the accused beyond a reasonable doubt always rests on:", options: ["The accused.", "The court.", "The prosecution.", "The victim's family."], correct: 2 },
-                    { q: "82. Section 105 of the IEA applies when the accused pleads a defense under:", options: ["Article 21 of the Constitution.", "The General Exceptions of the IPC.", "The Doctrine of Pith and Substance.", "The principle of *stare decisis*."], correct: 1 },
-                    { q: "83. When the prosecution proves that a person died under unnatural circumstances within seven years of marriage and was subjected to dowry harassment, the court shall presume the offense of dowry death under:", options: ["Section 106 IEA.", "Section 113B IEA.", "Section 114 IEA.", "Section 154 CrPC."], correct: 1 },
-                    { q: "84. The distinction between 'burden of proof' and 'onus of proof' is that the onus (evidential burden):", options: ["Never shifts.", "Always shifts.", "Rests solely on the prosecution.", "Is irrelevant in a civil case."], correct: 1 },
-                    { q: "85. Section 106 is used in cases where the fact is particularly within the knowledge of the accused, but it does *not* relieve the prosecution of the duty to:", options: ["Prove the accused's family history.", "Prove the foundational facts upon which the Sec 106 reliance is based.", "Pay compensation to the victim.", "Provide legal aid to the accused."], correct: 1 }
-                ]
-            },
-
-            // P18: Public International Law (PIL) (10 Qs)
-            {
-                passage_title: "Passage 18: Sources of PIL and Jus Cogens",
-                passage: "Article 38(1) of the ICJ Statute lists the primary formal sources of International Law: (a) International Conventions (Treaties), (b) International Custom, and (c) General Principles of Law recognized by civilized nations. **Customary International Law** is established by two elements: widespread and consistent **State Practice** and **opinio juris** (the belief that the practice is legally obligatory). **Jus Cogens** (peremptory norms) are fundamental principles of PIL (e.g., prohibition of genocide, slavery, or aggression) from which no derogation is permitted. A treaty that conflicts with a *Jus Cogens* norm is void (*VCLT, Art 53*).",
+                passage_title: "Passage 17: Sources of PIL and Jus Cogens",
+                passage: "Article 38(1) of the ICJ Statute lists the primary formal sources of International Law: (a) International Conventions (Treaties), (b) International Custom, and (c) General Principles of Law recognized by civilized nations. **Customary International Law** is established by two elements: widespread and consistent **State Practice** and **opinio juris**. **Jus Cogens** (peremptory norms) are fundamental principles of PIL from which no derogation is permitted.",
                 topic: "Public International Law (Sources)",
                 questions: [
-                    { q: "86. Which of the following is NOT listed as a formal source of PIL in the ICJ Statute?", options: ["International Custom.", "Resolutions of the UN General Assembly.", "General Principles of Law.", "International Conventions."], correct: 1 },
-                    { q: "87. The two components required to establish Customary International Law are State Practice and:", options: ["Political consensus.", "Economic necessity.", "Opinio Juris.", "Judicial Review."], correct: 2 },
-                    { q: "88. The concept of **Jus Cogens** is significant because it defines norms that:", options: ["Are negotiable between any two states.", "Are applicable only in times of war.", "Are fundamental and non-derogable.", "Are listed in the UN Charter only."], correct: 2 },
-                    { q: "89. A treaty that violates a *Jus Cogens* norm is legally:", options: ["Valid but unenforceable.", "Void *ab initio*.", "Subject to the Doctrine of *Forum Non Conveniens*.", "Valid only upon ratification."], correct: 1 },
-                    { q: "90. The principle of **Pacta Sunt Servanda** (Agreements must be kept) is fundamental to the law of treaties and is classified as a:", options: ["Customary norm only.", "Jus Cogens norm only.", "General Principle of Law.", "Constituent power."], correct: 2 }
+                    { q: "81. Which of the following is NOT listed as a formal source of PIL in the ICJ Statute?", options: ["International Custom.", "Resolutions of the UN General Assembly.", "General Principles of Law.", "International Conventions."], correct: 1 },
+                    { q: "82. The two components required to establish Customary International Law are State Practice and:", options: ["Political consensus.", "Economic necessity.", "Opinio Juris.", "Judicial Review."], correct: 2 },
+                    { q: "83. The concept of **Jus Cogens** is significant because it defines norms that:", options: ["Are negotiable between any two states.", "Are applicable only in times of war.", "Are fundamental and non-derogable.", "Are listed in the UN Charter only."], correct: 2 },
+                    { q: "84. A treaty that violates a *Jus Cogens* norm is legally:", options: ["Valid but unenforceable.", "Void *ab initio*.", "Subject to the Doctrine of *Forum Non Conveniens*.", "Valid only upon ratification."], correct: 1 },
+                    { q: "85. The principle of **Pacta Sunt Servanda** (Agreements must be kept) is fundamental to the law of treaties and is classified as a:", options: ["Customary norm only.", "Jus Cogens norm only.", "General Principle of Law.", "Constituent power."], correct: 2 }
                 ]
             },
-            // P19: State Recognition & UN
+            // Passage 18: Public International Law (State/UN)
             {
-                passage_title: "Passage 19: State Recognition and UN",
-                passage: "State Recognition (Constitutive vs. Declaratory theories) determines the formal status of a new state in the international community. The **Declaratory Theory**, favored by most jurists, posits that statehood is a matter of fact (meeting criteria like territory, government, and population), and recognition by other states is merely a formal acknowledgment of a pre-existing status. The **United Nations (UN)** is the key global institution, founded on the principle of sovereign equality. The **Security Council (SC)** has primary responsibility for maintaining international peace and security, often acting under Chapter VII of the UN Charter to impose mandatory obligations on member states.",
+                passage_title: "Passage 18: State Recognition and UN",
+                passage: "State Recognition determines the formal status of a new state in the international community. The **Declaratory Theory**, favored by most jurists, posits that statehood is a matter of fact (meeting criteria like territory, government, and population), and recognition by other states is merely a formal acknowledgment of a pre-existing status. The **United Nations (UN)** is the key global institution, founded on the principle of sovereign equality. The **Security Council (SC)** has primary responsibility for maintaining international peace and security, often acting under Chapter VII of the UN Charter to impose mandatory obligations on member states.",
                 topic: "Public International Law (State/UN)",
                 questions: [
-                    { q: "91. The theory of recognition which holds that statehood is a matter of fact, and recognition is merely formal acknowledgment, is the:", options: ["Constitutive Theory.", "Declaratory Theory.", "Effective Control Theory.", "Pious Obligation Theory."], correct: 1 },
-                    { q: "92. The primary responsibility for maintaining international peace and security rests with:", options: ["The UN General Assembly.", "The UN Security Council.", "The International Court of Justice (ICJ).", "The World Trade Organization (WTO)."], correct: 1 },
-                    { q: "93. A resolution passed by the UN Security Council under Chapter VII of the UN Charter is generally considered:", options: ["Only advisory.", "Binding on all member states.", "Subject to the veto of the General Assembly.", "A source of soft law only."], correct: 1 },
-                    { q: "94. The principle of **Sovereign Equality** means that all member states of the UN:", options: ["Must have the same population size.", "Are equal in international law, regardless of size or power.", "Have equal voting power in the Security Council.", "Must have a written constitution."], correct: 1 },
-                    { q: "95. The rule that a state must not use force against the territorial integrity or political independence of any other state is fundamental to:", options: ["The Law of the Sea.", "The UN Charter.", "The Law of Treaties.", "The Law of Succession."], correct: 1 }
+                    { q: "86. The theory of recognition which holds that statehood is a matter of fact, and recognition is merely formal acknowledgment, is the:", options: ["Constitutive Theory.", "Declaratory Theory.", "Effective Control Theory.", "Pious Obligation Theory."], correct: 1 },
+                    { q: "87. The primary responsibility for maintaining international peace and security rests with:", options: ["The UN General Assembly.", "The UN Security Council.", "The International Court of Justice (ICJ).", "The World Trade Organization (WTO)."], correct: 1 },
+                    { q: "88. A resolution passed by the UN Security Council under Chapter VII of the UN Charter is generally considered:", options: ["Only advisory.", "Binding on all member states.", "Subject to the veto of the General Assembly.", "A source of soft law only."], correct: 1 },
+                    { q: "89. The principle of **Sovereign Equality** means that all member states of the UN:", options: ["Must have the same population size.", "Are equal in international law, regardless of size or power.", "Have equal voting power in the Security Council.", "Must have a written constitution."], correct: 1 },
+                    { q: "90. The rule that a state must not use force against the territorial integrity or political independence of any other state is fundamental to:", options: ["The Law of the Sea.", "The UN Charter.", "The Law of Treaties.", "The Law of Succession."], correct: 1 }
                 ]
             },
-
-            // P20: Sociological Jurisprudence (10 Qs)
+            // Passage 19: Company Law (Veil/Oppression)
             {
-                passage_title: "Passage 20: Roscoe Pound's Social Engineering",
-                passage: "Roscoe Pound, the exponent of the Sociological School, viewed law as a mechanism of 'Social Engineering' designed to satisfy maximum wants with minimum friction. He categorized legal claims into three classes: **Individual Interests** (e.g., personality, freedom), **Public Interests** (e.g., the State as a juristic person, protection of state assets), and **Social Interests** (e.g., general security, general morals, conservation of social resources). Pound emphasized that the aim of law is the **balancing and harmonization** of these competing interests. To achieve this, he proposed *Jural Postulates*, which are generalized assumptions about legal relations in a civilized society, serving as a template for legislative action.",
-                topic: "Jurisprudence (Sociological School)",
-                questions: [
-                    { q: "96. Roscoe Pound defined the function of law primarily as:", options: ["The command of the sovereign.", "Social Engineering.", "The organic growth of *Volksgeist*.", "The search for eternal moral truth."], correct: 1 },
-                    { q: "97. A law prohibiting the use of narcotic drugs primarily protects which category of Pound's interests?", options: ["Individual Interest (Self-assertion).", "Public Interest (State assets).", "Social Interest (General morals and public health).", "Contractual Interest."], correct: 2 },
-                    { q: "98. The **Jural Postulates** function as:", options: ["Non-derogable Fundamental Rights.", "Commands enforced by sanctions.", "Templates for balancing competing social claims.", "Abstract legal definitions."], correct: 2 },
-                    { q: "99. A law providing mandatory social security insurance to all citizens aims to satisfy the Social Interest in:", options: ["Security of person.", "General progress.", "Security of transactions.", "Security of institutions."], correct: 1 },
-                    { q: "100. The ultimate objective of the process of 'balancing interests' is:", options: ["Eliminating all conflicts between individuals.", "Maximizing economic profit.", "Harmonization and minimization of friction.", "Maintaining the purity of law."], correct: 2 }
-                ]
-            },
-            // P21: Legal Realism & Custom
-            {
-                passage_title: "Passage 21: Legal Realism and Custom",
-                passage: "American Legal Realists, such as Oliver Wendell Holmes Jr. (who stated, 'The life of the law has not been logic: it has been experience'), challenged legal formalism. They viewed law as a prediction of what courts will do (*Bad Man Theory*) and focused on 'law in action' (judicial behavior) rather than 'law in books' (statutory rules). The **Historical School (Savigny)**, conversely, believed law was *found* in the *Volksgeist* and that **Custom** was the truest source of law. Custom is legally binding when it meets criteria like certainty, antiquity, and non-opposition to public policy. Positivists like Austin viewed Custom merely as 'positive morality' until adopted by the sovereign or the courts.",
-                topic: "Jurisprudence (Realism/Custom)",
-                questions: [
-                    { q: "101. The 'Bad Man Theory' defines legal duty based on:", options: ["The moral conviction of the citizen.", "The prediction of a sanction imposed by the court.", "The spirit of the nation (*Volksgeist*).", "The command of God."], correct: 1 },
-                    { q: "102. Savigny opposed the immediate codification of law because he believed it would:", options: ["Violate Natural Law.", "Freeze the law before the *Volksgeist* fully matured.", "Lead to social engineering.", "Violate the Basic Structure."], correct: 1 },
-                    { q: "103. For a custom to be recognized as legally binding in most modern systems, it must be:", options: ["In writing.", "Secret.", "Certain and not against public policy.", "Subject to judicial review by the executive."], correct: 2 },
-                    { q: "104. Legal Realism views legal rules primarily as:", options: ["Perfectly logical commands.", "Indeterminate guides whose application is based on the judge's psychology.", "Sacred, unchangeable principles.", "The only source of social order."], correct: 1 },
-                    { q: "105. John Austin classified an established social custom as 'positive law' only after it was:", options: ["Followed for twenty years.", "Approved by the community.", "Adopted by the sovereign (via the legislature or judiciary).", "Tested against the Rule of Recognition."], correct: 2 }
-                ]
-            },
-            
-            // P22: Company Law (5 Qs)
-            {
-                passage_title: "Passage 22: Corporate Veil and Oppression",
-                passage: "The concept of **Corporate Personality** (*Salomon v. Salomon*) establishes a company as a separate legal entity distinct from its members. This grants the protection of **Limited Liability**. However, this veil of separate personality can be **lifted** by courts or statute when the corporate form is used to commit fraud, evade taxes, or act as an agent of the owners. Furthermore, Section 241 of the Companies Act, 2013, allows minority shareholders to seek relief before the National Company Law Tribunal (NCLT) if the company's affairs are being conducted in a manner **oppressive** to any member or **prejudicial** to the company's or public interest.",
+                passage_title: "Passage 19: Corporate Veil and Oppression",
+                passage: "The concept of **Corporate Personality** (*Salomon v. Salomon*) establishes a company as a separate legal entity distinct from its members. This grants the protection of **Limited Liability**. However, this veil can be **lifted** by courts or statute when the corporate form is used to commit fraud, evade taxes, or act as an agent of the owners. Furthermore, Section 241 of the Companies Act, 2013, allows minority shareholders to seek relief before the National Company Law Tribunal (NCLT) if the company's affairs are being conducted in a manner **oppressive** to any member or **prejudicial** to the company's or public interest.",
                 topic: "Company Law (Veil/Oppression)",
                 questions: [
-                    { q: "106. The principle established in *Salomon v. Salomon* is:", options: ["Unlimited liability of shareholders.", "Lifting the corporate veil is mandatory.", "Separate legal personality of the company.", "The Doctrine of Ultra Vires."], correct: 2 },
-                    { q: "107. The protection of Limited Liability means a shareholder's personal assets are:", options: ["Fully exposed to the company's debts.", "Protected from the company's debts.", "Transferable only by Will.", "Subject to the Doctrine of *Forum Non Conveniens*."], correct: 1 },
-                    { q: "108. The jurisdiction to grant relief against oppression and mismanagement under the Companies Act, 2013, lies with the:", options: ["Supreme Court only.", "High Court.", "National Company Law Tribunal (NCLT).", "Securities and Exchange Board of India (SEBI)."], correct: 2 },
-                    { q: "109. The corporate veil may be lifted by courts to:", options: ["Promote public welfare.", "Prevent fraud or tax evasion.", "Enforce the doctrine of *res judicata*.", "Validate an illegal act."], correct: 1 },
-                    { q: "110. For a successful petition under Sec 241, the conduct of the company's affairs must be:", options: ["Only financially successful.", "Against the advice of the majority shareholder.", "Oppressive to the minority or prejudicial to the public interest.", "In violation of a contractual term."], correct: 2 }
+                    { q: "91. The principle established in *Salomon v. Salomon* is:", options: ["Unlimited liability of shareholders.", "Lifting the corporate veil is mandatory.", "Separate legal personality of the company.", "The Doctrine of Ultra Vires."], correct: 2 },
+                    { q: "92. The protection of Limited Liability means a shareholder's personal assets are:", options: ["Fully exposed to the company's debts.", "Protected from the company's debts.", "Transferable only by Will.", "Subject to the Doctrine of *Forum Non Conveniens*."], correct: 1 },
+                    { q: "93. The jurisdiction to grant relief against oppression and mismanagement under the Companies Act, 2013, lies with the:", options: ["Supreme Court only.", "High Court.", "National Company Law Tribunal (NCLT).", "Securities and Exchange Board of India (SEBI)."], correct: 2 },
+                    { q: "94. The corporate veil may be lifted by courts to:", options: ["Promote public welfare.", "Prevent fraud or tax evasion.", "Enforce the doctrine of *res judicata*.", "Validate an illegal act."], correct: 1 },
+                    { q: "95. For a successful petition under Sec 241, the conduct of the company's affairs must be:", options: ["Only financially successful.", "Against the advice of the majority shareholder.", "Oppressive to the minority or prejudicial to the public interest.", "In violation of a contractual term."], correct: 2 }
                 ]
             },
-            // P23: IBC & Tax
+            // Passage 20: Company Law (IBC & Tax)
             {
-                passage_title: "Passage 23: IBC and Tax Law",
-                passage: "The **Insolvency and Bankruptcy Code (IBC), 2016**, provides a unified framework for the resolution and insolvency of corporate persons and others. It prioritizes revival (resolution) over liquidation. The resolution process aims for a restructuring that requires sacrifices from all stakeholders, including secured creditors and the government (Tax Authorities). In Tax Law, the fundamental constitutional principle (Article 265) is that no tax shall be levied or collected except by **authority of law**. Tax laws, being statutes that divest individuals of money, are often interpreted strictly by courts, and any ambiguity is usually resolved in favor of the taxpayer.",
+                passage_title: "Passage 20: IBC and Tax Law",
+                passage: "The **Insolvency and Bankruptcy Code (IBC), 2016**, provides a unified framework for the resolution and insolvency of corporate persons and others. It prioritizes revival (resolution) over liquidation. In Tax Law, the fundamental constitutional principle (Article 265) is that no tax shall be levied or collected except by **authority of law**. Tax laws, being statutes that divest individuals of money, are often interpreted strictly by courts, and any ambiguity is usually resolved in favor of the taxpayer.",
                 topic: "Tax Law / IBC",
                 questions: [
-                    { q: "111. The primary objective of the Insolvency and Bankruptcy Code (IBC) is:", options: ["Liquidation of all debt-ridden companies immediately.", "Revival and reorganization of the corporate debtor.", "To protect only the interests of operational creditors.", "To fund government infrastructure projects."], correct: 1 },
-                    { q: "112. The source of the constitutional principle that no tax shall be levied or collected except by authority of law is:", options: ["The Preamble.", "Article 300A.", "Article 265.", "Article 14."], correct: 2 },
-                    { q: "113. Under the IBC, the process of resolving corporate distress is known as the:", options: ["Voluntary Winding Up Process (VWUP).", "Corporate Insolvency Resolution Process (CIRP).", "Oppression and Mismanagement Process (OMMP).", "Scheme of Arrangement (SA)."], correct: 1 },
-                    { q: "114. If a tax statute is ambiguous, courts typically interpret the provision:", options: ["Broadly in favor of the government (revenue).", "Strictly in favor of the taxpayer.", "By applying the Doctrine of Pith and Substance.", "By referring the matter to the NCLT."], correct: 1 },
-                    { q: "115. The relationship between Tax Authorities and the corporate debtor under the IBC is such that the Tax Authorities must:", options: ["Receive 100% of the tax due before any other creditor.", "Accept sacrifices as part of the resolution plan.", "Retain the power to levy new taxes during the CIRP.", "Waive all prior tax dues automatically."], correct: 1 }
+                    { q: "96. The primary objective of the Insolvency and Bankruptcy Code (IBC) is:", options: ["Liquidation of all debt-ridden companies immediately.", "Revival and reorganization of the corporate debtor.", "To protect only the interests of operational creditors.", "To fund government infrastructure projects."], correct: 1 },
+                    { q: "97. The source of the constitutional principle that no tax shall be levied or collected except by authority of law is:", options: ["The Preamble.", "Article 300A.", "Article 265.", "Article 14."], correct: 2 },
+                    { q: "98. Under the IBC, the process of resolving corporate distress is known as the:", options: ["Voluntary Winding Up Process (VWUP).", "Corporate Insolvency Resolution Process (CIRP).", "Oppression and Mismanagement Process (OMMP).", "Scheme of Arrangement (SA)."], correct: 1 },
+                    { q: "99. If a tax statute is ambiguous, courts typically interpret the provision:", options: ["Broadly in favor of the government (revenue).", "Strictly in favor of the taxpayer.", "By applying the Doctrine of Pith and Substance.", "By referring the matter to the NCLT."], correct: 1 },
+                    { q: "100. The relationship between Tax Authorities and the corporate debtor under the IBC is such that the Tax Authorities must:", options: ["Receive 100% of the tax due before any other creditor.", "Accept sacrifices as part of the resolution plan.", "Retain the power to levy new taxes during the CIRP.", "Waive all prior tax dues automatically."], correct: 1 }
                 ]
             },
-            
-            // P24: Environmental Law (5 Qs)
+            // Passage 21: Environmental Law (Principles)
             {
-                passage_title: "Passage 24: Precautionary Principle and Sustainable Development",
-                passage: "Environmental jurisprudence in India is driven by the constitutional mandate under Article 21 (Right to Life) and Article 48A (DPSP). The **Precautionary Principle** is a judicially enforced principle that requires the State to anticipate and prevent environmental harm rather than simply reacting to it. This principle holds that lack of full scientific certainty should not be used as a reason for postponing measures to prevent environmental degradation. This works alongside the **Polluter Pays Principle** (the polluter must bear the cost of remediation) and the overarching goal of **Sustainable Development** (balancing economic development with environmental protection).",
+                passage_title: "Passage 21: Precautionary Principle and Sustainable Development",
+                passage: "Environmental jurisprudence in India is driven by the constitutional mandate under Article 21 (Right to Life) and Article 48A (DPSP). The **Precautionary Principle** requires the State to anticipate and prevent environmental harm. This principle holds that lack of full scientific certainty should not be used as a reason for postponing measures to prevent environmental degradation. This works alongside the **Polluter Pays Principle** (the polluter must bear the cost of remediation) and the overarching goal of **Sustainable Development**.",
                 topic: "Environmental Law (Principles)",
                 questions: [
-                    { q: "116. The principle that prevents the State from using scientific uncertainty as a justification for inaction against potential environmental harm is the:", options: ["Public Trust Doctrine.", "Polluter Pays Principle.", "Precautionary Principle.", "Doctrine of Necessity."], correct: 2 },
-                    { q: "117. The **Polluter Pays Principle** falls under the general head of:", options: ["The Doctrine of *Ultra Vires*.", "Strict Liability.", "Absolute Liability.", "Compensatory principles."], correct: 2 },
-                    { q: "118. Which constitutional provision mandates the State to protect and improve the environment?", options: ["Article 14.", "Article 21.", "Article 32.", "Article 48A."], correct: 3 },
-                    { q: "119. Sustainable Development is defined as balancing:", options: ["Economic profit and political stability.", "Industrial growth and corporate profits.", "Development needs with environmental protection.", "Agriculture and industrial output."], correct: 2 },
-                    { q: "120. The fundamental duty to protect the natural environment, including forests and wildlife, is contained in:", options: ["Article 48A.", "Article 51A(g).", "Article 38.", "Article 21."], correct: 1 }
+                    { q: "101. The principle that prevents the State from using scientific uncertainty as a justification for inaction against potential environmental harm is the:", options: ["Public Trust Doctrine.", "Polluter Pays Principle.", "Precautionary Principle.", "Doctrine of Necessity."], correct: 2 },
+                    { q: "102. The **Polluter Pays Principle** falls under the general head of:", options: ["The Doctrine of *Ultra Vires*.", "Strict Liability.", "Absolute Liability.", "Compensatory principles."], correct: 2 },
+                    { q: "103. Which constitutional provision mandates the State to protect and improve the environment?", options: ["Article 14.", "Article 21.", "Article 32.", "Article 48A."], correct: 3 },
+                    { q: "104. Sustainable Development is defined as balancing:", options: ["Economic profit and political stability.", "Industrial growth and corporate profits.", "Development needs with environmental protection.", "Agriculture and industrial output."], correct: 2 },
+                    { q: "105. The fundamental duty to protect the natural environment, including forests and wildlife, is contained in:", options: ["Article 48A.", "Article 51A(g).", "Article 38.", "Article 21."], correct: 1 }
+                ]
+            },
+            // Passage 22: Jurisprudence (Sociological School)
+            {
+                passage_title: "Passage 22: Roscoe Pound's Social Engineering",
+                passage: "Roscoe Pound, the exponent of the Sociological School, viewed law as a mechanism of 'Social Engineering' designed to satisfy maximum wants with minimum friction. He categorized legal claims into three classes: **Individual Interests**, **Public Interests**, and **Social Interests**. Pound emphasized that the aim of law is the **balancing and harmonization** of these competing interests. To achieve this, he proposed *Jural Postulates*, which are generalized assumptions about legal relations in a civilized society, serving as a template for legislative action.",
+                topic: "Jurisprudence (Sociological School)",
+                questions: [
+                    { q: "106. Roscoe Pound defined the function of law primarily as:", options: ["The command of the sovereign.", "Social Engineering.", "The organic growth of *Volksgeist*.", "The search for eternal moral truth."], correct: 1 },
+                    { q: "107. A law prohibiting the use of narcotic drugs primarily protects which category of Pound's interests?", options: ["Individual Interest (Self-assertion).", "Public Interest (State assets).", "Social Interest (General morals and public health).", "Contractual Interest."], correct: 2 },
+                    { q: "108. The **Jural Postulates** function as:", options: ["Non-derogable Fundamental Rights.", "Commands enforced by sanctions.", "Templates for balancing competing social claims.", "Abstract legal definitions."], correct: 2 },
+                    { q: "109. A law providing mandatory social security insurance to all citizens aims to satisfy the Social Interest in:", options: ["Security of person.", "General progress.", "Security of transactions.", "Security of institutions."], correct: 1 },
+                    { q: "110. The ultimate objective of the process of 'balancing interests' is:", options: ["Eliminating all conflicts between individuals.", "Maximizing economic profit.", "Harmonization and minimization of friction.", "Maintaining the purity of law."], correct: 2 }
+                ]
+            },
+            // Passage 23: Jurisprudence (Legal Realism & Custom)
+            {
+                passage_title: "Passage 23: Legal Realism and Custom",
+                passage: "American Legal Realists, such as Oliver Wendell Holmes Jr., viewed law as a prediction of what courts will do (*Bad Man Theory*) and focused on 'law in action' (judicial behavior). The **Historical School (Savigny)** believed law was *found* in the *Volksgeist* and that **Custom** was the truest source of law. Positivists like Austin viewed Custom merely as 'positive morality' until adopted by the sovereign or the courts.",
+                topic: "Jurisprudence (Realism/Custom)",
+                questions: [
+                    { q: "111. The 'Bad Man Theory' defines legal duty based on:", options: ["The moral conviction of the citizen.", "The prediction of a sanction imposed by the court.", "The spirit of the nation (*Volksgeist*).", "The command of God."], correct: 1 },
+                    { q: "112. Savigny opposed the immediate codification of law because he believed it would:", options: ["Violate Natural Law.", "Freeze the law before the *Volksgeist* fully matured.", "Lead to social engineering.", "Violate the Basic Structure."], correct: 1 },
+                    { q: "113. For a custom to be recognized as legally binding in most modern systems, it must be:", options: ["In writing.", "Secret.", "Certain and not against public policy.", "Subject to judicial review by the executive."], correct: 2 },
+                    { q: "114. Legal Realism views legal rules primarily as:", options: ["Perfectly logical commands.", "Indeterminate guides whose application is based on the judge's psychology.", "Sacred, unchangeable principles.", "The only source of social order."], correct: 1 },
+                    { q: "115. John Austin classified an established social custom as 'positive law' only after it was:", options: ["Followed for twenty years.", "Approved by the community.", "Adopted by the sovereign (via the legislature or judiciary).", "Tested against the Rule of Recognition."], correct: 2 }
+                ]
+            },
+            // Passage 24: Law of Evidence (Burden of Proof)
+            {
+                passage_title: "Passage 24: Burden of Proof and Presumptions",
+                passage: "In a criminal trial, the general burden of proof (legal burden) always lies on the prosecution to prove the accused's guilt beyond a reasonable doubt. Section 105 places the burden on the accused to prove circumstances that bring their case under a General Exception (like insanity or private defense). Similarly, Section 106 states that when any fact is especially within the knowledge of any person, the burden of proving that fact is upon them. Presumptions are also used: for example, Section 113B (Dowry Death) creates a 'shall presume' (mandatory) presumption of guilt once certain foundational facts are proven by the prosecution.",
+                topic: "Law of Evidence (Burden & Presumptions)",
+                questions: [
+                    { q: "116. The legal burden of proving the guilt of the accused beyond a reasonable doubt always rests on:", options: ["The accused.", "The court.", "The prosecution.", "The victim's family."], correct: 2 },
+                    { q: "117. Section 105 of the IEA applies when the accused pleads a defense under:", options: ["Article 21 of the Constitution.", "The General Exceptions of the IPC.", "The Doctrine of Pith and Substance.", "The principle of *stare decisis*."], correct: 1 },
+                    { q: "118. When the prosecution proves that a person died under unnatural circumstances within seven years of marriage and was subjected to dowry harassment, the court shall presume the offense of dowry death under:", options: ["Section 106 IEA.", "Section 113B IEA.", "Section 114 IEA.", "Section 154 CrPC."], correct: 1 },
+                    { q: "119. The distinction between 'burden of proof' and 'onus of proof' is that the onus (evidential burden):", options: ["Never shifts.", "Always shifts.", "Rests solely on the prosecution.", "Is irrelevant in a civil case."], correct: 1 },
+                    { q: "120. Section 106 is used in cases where the fact is particularly within the knowledge of the accused, but it does *not* relieve the prosecution of the duty to:", options: ["Prove the accused's family history.", "Prove the foundational facts upon which the Sec 106 reliance is based.", "Pay compensation to the victim.", "Provide legal aid to the accused."], correct: 1 }
                 ]
             }
+            
+        ];
 
-        </form>
-
-        <div id="results-container">
-            <h2>Your Performance Analysis</h2>
-            <div id="score"></div>
-            <div id="analysis">
-                </div>
-        </div>
-    </div>
-
-    <script>
-        // 1. All Quiz Data (Defined above) - This JS block only contains the processing logic.
-        
-        // 2. JavaScript Logic
+        // 2. JavaScript Logic (Re-implemented for robustness)
         const quizForm = document.getElementById('quiz-form');
         const submitButton = document.getElementById('submit-btn');
         const resultsContainer = document.getElementById('results-container');
@@ -572,27 +514,7 @@
         let timerInterval;
         let timeRemaining = 120 * 60; // 120 minutes in seconds
 
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                timeRemaining--;
-                const minutes = Math.floor(timeRemaining / 60);
-                let seconds = timeRemaining % 60;
-                seconds = seconds < 10 ? '0' + seconds : seconds;
-                
-                timerElement.textContent = `Time Remaining: ${minutes}:${seconds}`;
-                
-                if (timeRemaining <= 0) {
-                    clearInterval(timerInterval);
-                    timerElement.textContent = "Time's Up! Submitting Quiz...";
-                    timerElement.classList.add('warning');
-                    showResults(true); // Auto-submit on timeout
-                } else if (timeRemaining <= 600) { // Last 10 minutes
-                    timerElement.classList.add('warning');
-                }
-            }, 1000);
-        }
-
-        // --- Core Quiz Data Generation ---
+        // --- Helper Function to Generate HTML ---
         function generateQuizHTML() {
             const output = [];
             quizData.forEach((p, passageNumber) => {
@@ -602,7 +524,7 @@
                     const globalIndex = passageNumber * 5 + qIndex;
                     passageHTML += `<div class="question-text">${globalIndex + 1}. ${q.q}</div><ul class="options-list">`;
                     q.options.forEach((option, optionIndex) => {
-                        passageHTML += `<li class="option-item"><label><input type="radio" name="q${globalIndex}" value="${optionIndex}">${option}</label></li>`;
+                        passageHTML += `<li class="option-item" onclick="selectOption(this, ${globalIndex}, ${optionIndex})"><label><input type="radio" name="q${globalIndex}" value="${optionIndex}">${option}</label></li>`;
                     });
                     passageHTML += `</ul>`;
                 });
@@ -611,123 +533,7 @@
             document.getElementById('quiz-content').innerHTML = output.join('');
         }
 
-        // 4. Show Results Function
-        function showResults(timedOut = false) {
-            clearInterval(timerInterval);
-            
-            let numCorrect = 0;
-            let numIncorrect = 0;
-            const topicPerformance = {};
-            const totalQuestions = quizData.flat().reduce((acc, p) => acc + p.questions.length, 0); // Should be 120
-
-            // Ensure all radio buttons are disabled after submission
-            const allInputs = quizForm.querySelectorAll('input[type="radio"]');
-            allInputs.forEach(input => input.disabled = true);
-
-            // Iterate through all 120 questions
-            for (let i = 0; i < totalQuestions; i++) {
-                const questionBlock = quizForm.querySelector(`input[name="q${i}"]`);
-                if (!questionBlock) continue; // Skip if element not found (safety)
-
-                // Locate the specific question data
-                const pIndex = Math.floor(i / 5);
-                const qIndex = i % 5;
-                const currentQuestion = quizData[pIndex].questions[qIndex];
-                const topic = quizData[pIndex].topic;
-                const correctIndex = currentQuestion.correct;
-                
-                if (!topicPerformance[topic]) {
-                    topicPerformance[topic] = { correct: 0, total: 0 };
-                }
-                topicPerformance[topic].total++;
-
-                const selectedInput = quizForm.querySelector(`input[name="q${i}"]:checked`);
-                const userAnswer = selectedInput ? parseInt(selectedInput.value) : null;
-                const optionsList = questionBlock.closest('.options-list');
-                const optionItems = optionsList.querySelectorAll('.option-item');
-
-                // Mark the correct answer
-                if (optionItems[correctIndex]) {
-                    optionItems[correctIndex].classList.add('correct');
-                }
-
-                if (userAnswer === correctIndex) {
-                    numCorrect++;
-                    // Already marked correct via .correct class
-                } else if (userAnswer !== null) {
-                    numIncorrect++;
-                    // Mark user's wrong answer in red
-                    if (optionItems[userAnswer]) {
-                        optionItems[userAnswer].classList.add('selected', 'incorrect');
-                    }
-                }
-            }
-
-            // Calculate final scores
-            const finalScore = (numCorrect * 1) - (numIncorrect * 0.25);
-            const accuracy = (numCorrect / totalQuestions) * 100;
-
-            // --- Analysis and Benchmarking ---
-            let standing = "Novice (Need Foundational Review)";
-            let standingMessage = "Your performance suggests significant gaps. Your immediate focus must be learning core concepts and identifying landmark cases across all subjects.";
-            
-            if (finalScore >= 85) {
-                standing = "Pro / Top Contender (PSU Call Guarantee)";
-                standingMessage = "Exceptional result! You have demonstrated near-mastery and are on track for a Top 50 rank. Focus now on maintaining this high accuracy across all mocks.";
-            } else if (finalScore >= 75) {
-                standing = "Proficient (NALSAR/NLSIU Bracket)";
-                standingMessage = "Excellent performance! You are well within the NALSAR/Top 3 NLU range. Your next step is to eliminate conceptual errors in your weakest subjects (below 80% accuracy).";
-            } else if (finalScore >= 60) {
-                standing = "Average / Intermediate";
-                standingMessage = "Solid foundational performance. You've answered enough questions correctly to be competitive, but must increase accuracy by mastering the application-based questions.";
-            }
-
-            // Generate topic-wise feedback
-            let analysisHTML = `
-                <h3>Final Score: <span id="final-score-val">${finalScore.toFixed(2)}</span> / 120.0</h3>
-                <p>Accuracy: ${accuracy.toFixed(2)}% | Correct: ${numCorrect} | Incorrect: ${numIncorrect}</p>
-                <p><strong>Standing: ${standing}</strong></p>
-                
-                <h3>⚠️ Improvement & Focus Areas:</h3>
-                <p>To reach the next level, focus on subjects where your accuracy fell below 80%:</p>
-                <ul>
-            `;
-            
-            for (const topic in topicPerformance) {
-                const total = topicPerformance[topic].total;
-                const correct = topicPerformance[topic].correct;
-                const perc = (correct / total) * 100;
-                
-                if (perc < 80) { // Highlight topics with less than 80% accuracy
-                    analysisHTML += `<li><strong>${topic}:</strong> You scored <span class="correct-info">${perc.toFixed(0)}%</span> (${correct}/${total}). Review application-based scenarios for this subject.</li>`;
-                }
-            }
-            analysisHTML += `</ul>`;
-
-            if (timedOut) {
-                timerElement.textContent = "Time Expired. Quiz Graded.";
-            }
-
-            // Display results
-            scoreElement.innerHTML = `Quiz Submitted. Final Score: <span id="final-score-val">${finalScore.toFixed(2)}</span> / 120.0`;
-            analysisElement.innerHTML = analysisHTML;
-            
-            resultsContainer.style.display = 'block';
-            submitButton.style.display = 'none';
-            window.scrollTo(0, 0);
-        }
-
-        // --- Quiz Initialization ---
-        document.addEventListener('DOMContentLoaded', () => {
-            generateQuizHTML();
-            startTimer();
-            quizForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                showResults(false);
-            });
-        });
-
-        // 5. Initial Call and Event Listener (Timer Setup)
+        // --- Timer Logic ---
         function startTimer() {
             timerInterval = setInterval(() => {
                 timeRemaining--;
@@ -747,6 +553,133 @@
                 }
             }, 1000);
         }
+
+        // --- Grading Logic ---
+        function showResults(timedOut = false) {
+            clearInterval(timerInterval);
+            
+            let numCorrect = 0;
+            let numIncorrect = 0;
+            const topicPerformance = {};
+            const totalQuestions = 120; // Fixed total
+
+            // Disable all inputs to prevent changes after scoring
+            quizForm.querySelectorAll('input[type="radio"]').forEach(input => input.disabled = true);
+
+            // Iterate through all 120 questions
+            for (let i = 0; i < totalQuestions; i++) {
+                const pIndex = Math.floor(i / 5);
+                const qIndex = i % 5;
+
+                // Safety check for data existence (for the last few passages that might not exist in the full 120)
+                if (!quizData[pIndex] || !quizData[pIndex].questions[qIndex]) continue;
+
+                const currentQuestion = quizData[pIndex].questions[qIndex];
+                const topic = quizData[pIndex].topic;
+                const correctIndex = currentQuestion.correct;
+                
+                if (!topicPerformance[topic]) {
+                    topicPerformance[topic] = { correct: 0, total: 0 };
+                }
+                topicPerformance[topic].total++;
+
+                const selectedInput = quizForm.querySelector(`input[name="q${i}"]:checked`);
+                const userAnswer = selectedInput ? parseInt(selectedInput.value) : null;
+                const optionsList = selectedInput ? selectedInput.closest('.options-list') : quizForm.querySelector(`input[name="q${i}"]`).closest('.options-list');
+                const optionItems = optionsList.querySelectorAll('.option-item');
+
+                // Mark the correct answer (always)
+                if (optionItems[correctIndex]) {
+                    optionItems[correctIndex].classList.add('correct');
+                }
+
+                if (userAnswer === correctIndex) {
+                    numCorrect++;
+                } else if (userAnswer !== null) {
+                    numIncorrect++;
+                    // Mark user's wrong answer in red
+                    if (optionItems[userAnswer]) {
+                        optionItems[userAnswer].classList.add('selected', 'incorrect');
+                    }
+                }
+            }
+
+            // Calculate final scores
+            const finalScore = (numCorrect * 1) - (numIncorrect * 0.25);
+            const accuracy = (numCorrect / totalQuestions) * 100;
+
+            // --- Analysis and Benchmarking ---
+            let standing = "Novice";
+            let standingMessage = "Your foundational knowledge needs significant reinforcement. Focus immediately on core principles and definitions.";
+            
+            if (finalScore >= 90) {
+                standing = "Pro / Top Contender (PSU Call Guarantee)";
+                standingMessage = "Exceptional performance! You have demonstrated near-mastery. Focus on maintaining this consistency across all subjects.";
+            } else if (finalScore >= 75) {
+                standing = "Proficient (NALSAR/NLSIU Bracket)";
+                standingMessage = "Excellent performance! You are highly competitive. Review your weak topic clusters (below 80% accuracy) for conceptual clarity.";
+            } else if (finalScore >= 60) {
+                standing = "Average / Intermediate";
+                standingMessage = "Solid performance. You have a good base but need to increase speed and accuracy in applying principles to unfamiliar passages.";
+            }
+
+            // Generate topic-wise feedback
+            let analysisHTML = `
+                <h3>Final Score: <span id="final-score-val">${finalScore.toFixed(2)}</span> / 120.0</h3>
+                <p>Accuracy: ${accuracy.toFixed(2)}% | Correct: ${numCorrect} | Incorrect: ${numIncorrect}</p>
+                <p><strong>Standing: ${standing}</strong></p>
+                
+                <h3>⚠️ Improvement & Focus Areas (Accuracy below 80%):</h3>
+                <ul>
+            `;
+            
+            let topicsFound = false;
+            for (const topic in topicPerformance) {
+                const total = topicPerformance[topic].total;
+                const correct = topicPerformance[topic].correct;
+                const perc = (correct / total) * 100;
+                
+                if (perc < 80) {
+                    analysisHTML += `<li><strong>${topic}:</strong> You scored <span class="correct-info">${perc.toFixed(0)}%</span> (${correct}/${total}). This area requires immediate conceptual review and case application practice.</li>`;
+                    topicsFound = true;
+                }
+            }
+            if (!topicsFound) {
+                analysisHTML += `<li>Excellent consistency! Your score breakdown shows high accuracy across the board. Focus now on maximizing speed.</li>`;
+            }
+            analysisHTML += `</ul>`;
+
+
+            // Display results
+            scoreElement.innerHTML = `Quiz Submitted. Final Score: <span id="final-score-val">${finalScore.toFixed(2)}</span> / 120.0`;
+            analysisElement.innerHTML = analysisHTML;
+            
+            resultsContainer.style.display = 'block';
+            submitButton.style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        // --- Event Handlers ---
+        document.addEventListener('DOMContentLoaded', () => {
+            generateQuizHTML();
+            startTimer();
+            quizForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                showResults(false);
+            });
+        });
+
+        // Click handler to style the selected option before submission
+        function selectOption(clickedElement, qIndex, oIndex) {
+            const list = clickedElement.closest('.options-list');
+            list.querySelectorAll('.option-item').forEach(item => {
+                item.style.backgroundColor = '';
+                item.style.borderColor = '#ddd';
+            });
+            clickedElement.style.backgroundColor = '#e6f7ff';
+            clickedElement.style.borderColor = '#007bff';
+        }
+
     </script>
 </body>
 </html>
